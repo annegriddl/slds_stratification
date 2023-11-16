@@ -89,3 +89,31 @@ def evaluate_rf(model, X_train, X_test, y_train, y_test, cv_rs=True):
             'test r2': test_r2, 
             'train mse': train_mse,
             'test mse': test_mse}
+
+
+
+def fold_visualizer(data, fold_idxs, seed_num):
+    fig, axs = plt.subplots(len(fold_idxs)//2, 2, figsize=(10,(len(fold_idxs)//2)*2))
+    fig.suptitle("Seed: " + str(seed_num), fontsize=10)
+    for fold_id, (train_ids, val_ids) in enumerate(fold_idxs):
+        sns.histplot(data=data[train_ids],
+                     kde=True,
+                     stat="density",
+                     alpha=0.15,
+                     label="Train Set",
+                     bins=30,
+                     line_kws={"linewidth":1},
+                     ax=axs[fold_id%(len(fold_idxs)//2), fold_id//(len(fold_idxs)//2)])
+        sns.histplot(data=data[val_ids],
+                     kde=True,
+                     stat="density", 
+                     color="darkorange",
+                     alpha=0.15,
+                     label="Validation Set",
+                     bins=30,
+                     line_kws={"linewidth":1},
+                     ax=axs[fold_id%(len(fold_idxs)//2), fold_id//(len(fold_idxs)//2)])
+        axs[fold_id%(len(fold_idxs)//2), fold_id//(len(fold_idxs)//2)].legend()
+        axs[fold_id%(len(fold_idxs)//2), fold_id//(len(fold_idxs)//2)].set_title("Split " + str(fold_id+1))
+    plt.show()
+    
