@@ -117,3 +117,16 @@ def fold_visualizer(data, fold_idxs, seed_num):
         axs[fold_id%(len(fold_idxs)//2), fold_id//(len(fold_idxs)//2)].set_title("Split " + str(fold_id+1))
     plt.show()
     
+
+    def evaluate_rf(model, X_train, X_test, y_train, y_test, cv_rs=True):
+        if cv_rs:
+            model=model.best_estimator_
+        train_r2, test_r2=model.score(X_train, y_train), model.score(X_test, y_test)
+        y_train_pred, y_test_pred = model.predict(X_train), model.predict(X_test)
+        train_mse, test_mse=mean_squared_error(y_train, y_train_pred), mean_squared_error(y_test, y_test_pred)
+        #print(f"Train Set R^2 Score: {train_r2:.4f} \nTest Set R^2 Score: {test_r2:.4f}", "\n",
+        #      f"Train Set MSE Score: {train_mse:.4f} \nTest Set MSE Score: {test_mse:.4f}")
+        return {'train r2': train_r2, 
+                'test r2': test_r2, 
+                'train mse': train_mse,
+                'test mse': test_mse}
