@@ -9,6 +9,7 @@ import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 from sklearn.metrics import mean_squared_error
 from sklearn.utils import shuffle
+from sklearn.model_selection import StratifiedKFold
 
 def generate_friedman1(n_samples=10000, n_features=5, noise=0.0, random_state=42):
     '''
@@ -64,17 +65,15 @@ def plot_data_3D(df, axes=['X1', 'X2', 'X3']):
 
 
 def train_test_stratified(df, n_quantiles=20, train_size=0.8, seed=42):
-    # Step 1: Sort the DataFrame based on the target variable
-    #df_sorted = df.sort_values(by='y')
-    # Step 2: Divide the sorted DataFrame into deciles
+    # Step 1: Divide the DataFrame into quantiles
     quantiles = pd.qcut(df['y'], q=n_quantiles, labels=False)
-    # Step 3: Randomly sample 80% of the data from each decile for training
+    # Step 2: Randomly sample 80% of the data from each quantile for training
     train_data = pd.concat([group.sample(frac=train_size, random_state=seed) for _, group in df.groupby(quantiles)])
     # The remaining 20% will be used for testing
     test_data = df.drop(train_data.index)
     train_data = shuffle(train_data)
     test_data = shuffle(test_data)
-    # Step 4: Already divide by features and target variables
+    # Step 3: Already divide by features and target variables
     X_train, y_train = train_data.drop(columns=['y']), train_data['y']
     X_test, y_test = test_data.drop(columns=['y']), test_data['y']
     return X_train, X_test, y_train, y_test
@@ -86,9 +85,31 @@ def evaluate_rf(model, X_train, X_test, y_train, y_test, cv_rs=True):
     train_r2, test_r2=model.score(X_train, y_train), model.score(X_test, y_test)
     y_train_pred, y_test_pred = model.predict(X_train), model.predict(X_test)
     train_mse, test_mse=mean_squared_error(y_train, y_train_pred), mean_squared_error(y_test, y_test_pred)
-    #print(f"Train Set R^2 Score: {train_r2:.4f} \nTest Set R^2 Score: {test_r2:.4f}", "\n",
-    #      f"Train Set MSE Score: {train_mse:.4f} \nTest Set MSE Score: {test_mse:.4f}")
     return {'train r2': train_r2, 
             'test r2': test_r2, 
             'train mse': train_mse,
             'test mse': test_mse}
+
+def create_cont_folds(y, n_folds=5, n_groups=5, seed=1):
+    # create StratifiedKFold like for classification
+    skf = StratifiedKFold(n_splits=n_folds, shuffle=True, random_state=seed)
+
+    # create groups in y with pd.qcut: quantile-based discretization 
+    y_grouped = pd.qcut(y, n_groups, labels=False)
+
+    # create fold numbers    
+    fold_nums = np.zeros(len(y))
+    #split(X, y[, groups]): Generate indices to split data into training and test set
+    for fold_no, (t, v) in enumerate(skf.split(y_grouped, y_grouped)): #@Nadja: unabhängig von n_folds? n_folds = fol_no, test_data_size = N/n_folds
+        fold_nums[v] = fold_no
+  
+
+    cv_splits = []
+
+    # iterate over folds and creat train and test indices for each fold
+    for i in range(n_folds):
+        test_indices = np.argwhere(fold_nums==i).flatten()
+        train_indices = list(set(range(len(y_grouped))) - set(test_indices))
+        cv_splits.append((train_indices, test_indices))
+
+    return cv_splits
