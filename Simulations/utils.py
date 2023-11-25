@@ -7,7 +7,7 @@ from sklearn.datasets import make_friedman1
 import seaborn as sns
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
-from sklearn.metrics import mean_squared_error
+from sklearn.metrics import mean_squared_error, mean_absolute_error
 from sklearn.utils import shuffle
 from sklearn.model_selection import StratifiedKFold
 
@@ -85,10 +85,14 @@ def evaluate_rf(model, X_train, X_test, y_train, y_test, cv_rs=True):
     train_r2, test_r2=model.score(X_train, y_train), model.score(X_test, y_test)
     y_train_pred, y_test_pred = model.predict(X_train), model.predict(X_test)
     train_mse, test_mse=mean_squared_error(y_train, y_train_pred), mean_squared_error(y_test, y_test_pred)
+    train_mae, test_mae=mean_absolute_error(y_train, y_train_pred), mean_absolute_error(y_test, y_test_pred)
     return {'train r2': train_r2, 
             'test r2': test_r2, 
             'train mse': train_mse,
-            'test mse': test_mse}
+            'test mse': test_mse,
+            'train mae': train_mae,
+            'test mae': test_mae}
+
 
 def create_cont_folds(y, n_folds=5, n_groups=5, seed=1):
     # create StratifiedKFold like for classification

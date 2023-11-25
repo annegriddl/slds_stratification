@@ -7,7 +7,7 @@ from sklearn.datasets import make_friedman1
 import seaborn as sns
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
-from sklearn.metrics import mean_squared_error
+from sklearn.metrics import mean_squared_error, mean_absolute_error
 
 def generate_friedman1(n_samples=10000, n_features=5, noise=0.0, random_state=42):
     '''
@@ -77,21 +77,6 @@ def train_test_stratified(df, n_quantiles=20, train_size=0.8, seed=42):
     return X_train, X_test, y_train, y_test
 
 
-def evaluate_rf(model, X_train, X_test, y_train, y_test, cv_rs=True):
-    if cv_rs:
-        model=model.best_estimator_
-    train_r2, test_r2=model.score(X_train, y_train), model.score(X_test, y_test)
-    y_train_pred, y_test_pred = model.predict(X_train), model.predict(X_test)
-    train_mse, test_mse=mean_squared_error(y_train, y_train_pred), mean_squared_error(y_test, y_test_pred)
-    print(f"Train Set R^2 Score: {train_r2:.4f} \nTest Set R^2 Score: {test_r2:.4f}", "\n",
-          f"Train Set MSE Score: {train_mse:.4f} \nTest Set MSE Score: {test_mse:.4f}")
-    return {'train r2': train_r2, 
-            'test r2': test_r2, 
-            'train mse': train_mse,
-            'test mse': test_mse}
-
-
-
 def fold_visualizer(data, fold_idxs, seed_num):
     fig, axs = plt.subplots(len(fold_idxs)//2, 2, figsize=(10,(len(fold_idxs)//2)*2))
     fig.suptitle("Seed: " + str(seed_num), fontsize=10)
@@ -124,9 +109,10 @@ def fold_visualizer(data, fold_idxs, seed_num):
         train_r2, test_r2=model.score(X_train, y_train), model.score(X_test, y_test)
         y_train_pred, y_test_pred = model.predict(X_train), model.predict(X_test)
         train_mse, test_mse=mean_squared_error(y_train, y_train_pred), mean_squared_error(y_test, y_test_pred)
-        #print(f"Train Set R^2 Score: {train_r2:.4f} \nTest Set R^2 Score: {test_r2:.4f}", "\n",
-        #      f"Train Set MSE Score: {train_mse:.4f} \nTest Set MSE Score: {test_mse:.4f}")
+        train_mae, test_mae=mean_absolute_error(y_train, y_train_pred), mean_absolute_error(y_test, y_test_pred)
         return {'train r2': train_r2, 
                 'test r2': test_r2, 
                 'train mse': train_mse,
-                'test mse': test_mse}
+                'test mse': test_mse,
+                'train mae': train_mae,
+                'test mae': test_mae}
