@@ -1,0 +1,536 @@
+[
+    [
+        {
+            "model": "RandomForestRegressor",
+            "transformation": "identity",
+            "random_state": 42,
+            "n_folds": 5,
+            "n_groups": 20,
+            "n_samples": 1000
+        },
+        {
+            "unstratified_params": {
+                "n_estimators": 661,
+                "min_samples_split": 6,
+                "min_samples_leaf": 8,
+                "max_features": 2
+            }
+        },
+        {
+            "stratified_params": {
+                "n_estimators": 882,
+                "min_samples_split": 14,
+                "min_samples_leaf": 8,
+                "max_features": 4
+            }
+        },
+        {
+            "unstratified_results": {
+                "train r2": 0.9173,
+                "test r2": 0.8627,
+                "train mse": 1.9305,
+                "test mse": 3.259,
+                "train mae": 1.0948,
+                "test mae": 1.4257
+            }
+        },
+        {
+            "stratified_results": {
+                "train r2": 0.9215,
+                "test r2": 0.856,
+                "train mse": 1.8324,
+                "test mse": 3.4183,
+                "train mae": 1.0607,
+                "test mae": 1.463
+            }
+        }
+    ],
+    [
+        {
+            "model": "DummyRegressor",
+            "transformation": "identity",
+            "random_state": 42,
+            "n_folds": 5,
+            "n_groups": 20,
+            "n_samples": 1000
+        },
+        {
+            "unstratified_params": {}
+        },
+        {
+            "stratified_params": {}
+        },
+        {
+            "unstratified_results": {
+                "train r2": 0.0,
+                "test r2": -0.0013,
+                "train mse": 23.3415,
+                "test mse": 23.762,
+                "train mae": 3.9503,
+                "test mae": 3.9714
+            }
+        },
+        {
+            "stratified_results": {
+                "train r2": 0.0,
+                "test r2": -0.0013,
+                "train mse": 23.3415,
+                "test mse": 23.762,
+                "train mae": 3.9503,
+                "test mae": 3.9714
+            }
+        }
+    ],
+    [
+        {
+            "model": "RandomForestRegressor",
+            "transformation": "log",
+            "random_state": 42,
+            "n_folds": 5,
+            "n_groups": 20,
+            "n_samples": 1000
+        },
+        {
+            "unstratified_params": {
+                "n_estimators": 882,
+                "min_samples_split": 14,
+                "min_samples_leaf": 8,
+                "max_features": 4
+            }
+        },
+        {
+            "stratified_params": {
+                "n_estimators": 882,
+                "min_samples_split": 14,
+                "min_samples_leaf": 8,
+                "max_features": 4
+            }
+        },
+        {
+            "unstratified_results": {
+                "train r2": 0.9032,
+                "test r2": 0.8387,
+                "train mse": 0.0156,
+                "test mse": 0.0257,
+                "train mae": 0.0865,
+                "test mae": 0.1163
+            }
+        },
+        {
+            "stratified_results": {
+                "train r2": 0.9032,
+                "test r2": 0.8387,
+                "train mse": 0.0156,
+                "test mse": 0.0257,
+                "train mae": 0.0865,
+                "test mae": 0.1163
+            }
+        }
+    ],
+    [
+        {
+            "model": "RandomForestRegressor",
+            "transformation": "sqrt",
+            "random_state": 42,
+            "n_folds": 5,
+            "n_groups": 20,
+            "n_samples": 1000
+        },
+        {
+            "unstratified_params": {
+                "n_estimators": 661,
+                "min_samples_split": 6,
+                "min_samples_leaf": 8,
+                "max_features": 2
+            }
+        },
+        {
+            "stratified_params": {
+                "n_estimators": 882,
+                "min_samples_split": 14,
+                "min_samples_leaf": 8,
+                "max_features": 4
+            }
+        },
+        {
+            "unstratified_results": {
+                "train r2": 0.9128,
+                "test r2": 0.8599,
+                "train mse": 0.0397,
+                "test mse": 0.0641,
+                "train mae": 0.1519,
+                "test mae": 0.196
+            }
+        },
+        {
+            "stratified_results": {
+                "train r2": 0.9177,
+                "test r2": 0.8536,
+                "train mse": 0.0375,
+                "test mse": 0.0669,
+                "train mae": 0.1482,
+                "test mae": 0.2022
+            }
+        }
+    ],
+    [
+        {
+            "model": "RandomForestRegressor",
+            "transformation": "identity",
+            "random_state": 42,
+            "n_folds": 5,
+            "n_groups": 20,
+            "n_samples": 500
+        },
+        {
+            "unstratified_params": {
+                "n_estimators": 882,
+                "min_samples_split": 14,
+                "min_samples_leaf": 8,
+                "max_features": 4
+            }
+        },
+        {
+            "stratified_params": {
+                "n_estimators": 882,
+                "min_samples_split": 14,
+                "min_samples_leaf": 8,
+                "max_features": 4
+            }
+        },
+        {
+            "unstratified_results": {
+                "train r2": 0.9048,
+                "test r2": 0.8327,
+                "train mse": 2.3639,
+                "test mse": 3.9691,
+                "train mae": 1.2025,
+                "test mae": 1.5858
+            }
+        },
+        {
+            "stratified_results": {
+                "train r2": 0.9048,
+                "test r2": 0.8327,
+                "train mse": 2.3639,
+                "test mse": 3.9691,
+                "train mae": 1.2025,
+                "test mae": 1.5858
+            }
+        }
+    ],
+    [
+        {
+            "model": "DummyRegressor",
+            "transformation": "identity",
+            "random_state": 42,
+            "n_folds": 5,
+            "n_groups": 20,
+            "n_samples": 500
+        },
+        {
+            "unstratified_params": {}
+        },
+        {
+            "stratified_params": {}
+        },
+        {
+            "unstratified_results": {
+                "train r2": 0.0,
+                "test r2": -0.0015,
+                "train mse": 24.8217,
+                "test mse": 23.7678,
+                "train mae": 4.0646,
+                "test mae": 3.9719
+            }
+        },
+        {
+            "stratified_results": {
+                "train r2": 0.0,
+                "test r2": -0.0015,
+                "train mse": 24.8217,
+                "test mse": 23.7678,
+                "train mae": 4.0646,
+                "test mae": 3.9719
+            }
+        }
+    ],
+    [
+        {
+            "model": "RandomForestRegressor",
+            "transformation": "log",
+            "random_state": 42,
+            "n_folds": 5,
+            "n_groups": 20,
+            "n_samples": 500
+        },
+        {
+            "unstratified_params": {
+                "n_estimators": 882,
+                "min_samples_split": 14,
+                "min_samples_leaf": 8,
+                "max_features": 4
+            }
+        },
+        {
+            "stratified_params": {
+                "n_estimators": 882,
+                "min_samples_split": 14,
+                "min_samples_leaf": 8,
+                "max_features": 4
+            }
+        },
+        {
+            "unstratified_results": {
+                "train r2": 0.8702,
+                "test r2": 0.8093,
+                "train mse": 0.0234,
+                "test mse": 0.0303,
+                "train mae": 0.1011,
+                "test mae": 0.1268
+            }
+        },
+        {
+            "stratified_results": {
+                "train r2": 0.8702,
+                "test r2": 0.8093,
+                "train mse": 0.0234,
+                "test mse": 0.0303,
+                "train mae": 0.1011,
+                "test mae": 0.1268
+            }
+        }
+    ],
+    [
+        {
+            "model": "RandomForestRegressor",
+            "transformation": "sqrt",
+            "random_state": 42,
+            "n_folds": 5,
+            "n_groups": 20,
+            "n_samples": 500
+        },
+        {
+            "unstratified_params": {
+                "n_estimators": 882,
+                "min_samples_split": 14,
+                "min_samples_leaf": 8,
+                "max_features": 4
+            }
+        },
+        {
+            "stratified_params": {
+                "n_estimators": 882,
+                "min_samples_split": 14,
+                "min_samples_leaf": 8,
+                "max_features": 4
+            }
+        },
+        {
+            "unstratified_results": {
+                "train r2": 0.8987,
+                "test r2": 0.8294,
+                "train mse": 0.0498,
+                "test mse": 0.078,
+                "train mae": 0.1683,
+                "test mae": 0.2188
+            }
+        },
+        {
+            "stratified_results": {
+                "train r2": 0.8987,
+                "test r2": 0.8294,
+                "train mse": 0.0498,
+                "test mse": 0.078,
+                "train mae": 0.1683,
+                "test mae": 0.2188
+            }
+        }
+    ],
+    [
+        {
+            "model": "RandomForestRegressor",
+            "transformation": "identity",
+            "random_state": 42,
+            "n_folds": 5,
+            "n_groups": 20,
+            "n_samples": 200
+        },
+        {
+            "unstratified_params": {
+                "n_estimators": 882,
+                "min_samples_split": 14,
+                "min_samples_leaf": 8,
+                "max_features": 4
+            }
+        },
+        {
+            "stratified_params": {
+                "n_estimators": 882,
+                "min_samples_split": 14,
+                "min_samples_leaf": 8,
+                "max_features": 4
+            }
+        },
+        {
+            "unstratified_results": {
+                "train r2": 0.8464,
+                "test r2": 0.7585,
+                "train mse": 3.9367,
+                "test mse": 5.731,
+                "train mae": 1.5798,
+                "test mae": 1.9262
+            }
+        },
+        {
+            "stratified_results": {
+                "train r2": 0.8464,
+                "test r2": 0.7585,
+                "train mse": 3.9367,
+                "test mse": 5.731,
+                "train mae": 1.5798,
+                "test mae": 1.9262
+            }
+        }
+    ],
+    [
+        {
+            "model": "DummyRegressor",
+            "transformation": "identity",
+            "random_state": 42,
+            "n_folds": 5,
+            "n_groups": 20,
+            "n_samples": 200
+        },
+        {
+            "unstratified_params": {}
+        },
+        {
+            "stratified_params": {}
+        },
+        {
+            "unstratified_results": {
+                "train r2": 0.0,
+                "test r2": -0.0019,
+                "train mse": 25.6285,
+                "test mse": 23.7758,
+                "train mae": 4.1124,
+                "test mae": 3.9725
+            }
+        },
+        {
+            "stratified_results": {
+                "train r2": 0.0,
+                "test r2": -0.0019,
+                "train mse": 25.6285,
+                "test mse": 23.7758,
+                "train mae": 4.1124,
+                "test mae": 3.9725
+            }
+        }
+    ],
+    [
+        {
+            "model": "RandomForestRegressor",
+            "transformation": "log",
+            "random_state": 42,
+            "n_folds": 5,
+            "n_groups": 20,
+            "n_samples": 200
+        },
+        {
+            "unstratified_params": {
+                "n_estimators": 882,
+                "min_samples_split": 14,
+                "min_samples_leaf": 8,
+                "max_features": 4
+            }
+        },
+        {
+            "stratified_params": {
+                "n_estimators": 882,
+                "min_samples_split": 14,
+                "min_samples_leaf": 8,
+                "max_features": 4
+            }
+        },
+        {
+            "unstratified_results": {
+                "train r2": 0.775,
+                "test r2": 0.7329,
+                "train mse": 0.048,
+                "test mse": 0.0425,
+                "train mae": 0.136,
+                "test mae": 0.1544
+            }
+        },
+        {
+            "stratified_results": {
+                "train r2": 0.775,
+                "test r2": 0.7329,
+                "train mse": 0.048,
+                "test mse": 0.0425,
+                "train mae": 0.136,
+                "test mae": 0.1544
+            }
+        }
+    ],
+    [
+        {
+            "model": "RandomForestRegressor",
+            "transformation": "sqrt",
+            "random_state": 42,
+            "n_folds": 5,
+            "n_groups": 20,
+            "n_samples": 200
+        },
+        {
+            "unstratified_params": {
+                "n_estimators": 882,
+                "min_samples_split": 14,
+                "min_samples_leaf": 8,
+                "max_features": 4
+            }
+        },
+        {
+            "stratified_params": {
+                "n_estimators": 882,
+                "min_samples_split": 14,
+                "min_samples_leaf": 8,
+                "max_features": 4
+            }
+        },
+        {
+            "unstratified_results": {
+                "train r2": 0.8315,
+                "test r2": 0.7581,
+                "train mse": 0.0896,
+                "test mse": 0.1106,
+                "train mae": 0.2222,
+                "test mae": 0.2639
+            }
+        },
+        {
+            "stratified_results": {
+                "train r2": 0.8315,
+                "test r2": 0.7581,
+                "train mse": 0.0896,
+                "test mse": 0.1106,
+                "train mae": 0.2222,
+                "test mae": 0.2639
+            }
+        }
+    ],
+    [
+        {
+            "model": "RandomForestRegressor",
+            "transformation": "identity",
+            "random_state": 42,
+            "n_folds": 5,
+            "n_groups": 20,
+            "n_iter": 10,
+            "n_samples": 200
+        },
+        {
+            "unstratified_params": {
+                "n_estimators": 
