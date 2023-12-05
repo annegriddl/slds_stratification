@@ -1,7 +1,7 @@
 [
     [
         {
-            "model": "RandomForestRegressor",
+            "model": "Nadja_RandomForestRegressor",
             "transformation": "identity",
             "random_state": 42,
             "n_folds": 5,
