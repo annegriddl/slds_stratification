@@ -92,7 +92,7 @@ def create_cont_folds(y,
     return cv_splits
 
 
-def fold_visualizer(data, fold_idxs, seed_num):
+def fold_visualizer(data, fold_idxs, seed_num, ):
     '''
     Function to visualize the folds.
     Inputs:
@@ -321,8 +321,8 @@ class ModelOptimizer:
         
         
         # Save results and parameters to a file
-        results = [
-            {   
+        results = {
+            'model_info': {
                 'model': self.model.__class__.__name__,
                 'transformation': transformation,
                 'random_state': self.random_state,
@@ -331,21 +331,24 @@ class ModelOptimizer:
                 'n_iter': n_iter,
                 'n_samples': X_train.shape[0]
             },
-            {'unstratified_params': self._convert_numpy_types(unstratified_params)},
-            {'stratified_params': self._convert_numpy_types(stratified_params)},
-            {'unstratified_results': unstratified_results},
-            {'stratified_results': stratified_results}
-        ]
-        # IMPORTANT: Create a new file if it does not exist yet 
-        # called optimization_results.json with an empty list as content
+            'unstratified_params': self._convert_numpy_types(unstratified_params),
+            'stratified_params': self._convert_numpy_types(stratified_params),
+            'unstratified_results': unstratified_results,
+            'stratified_results': stratified_results
+        }
+
+        # Load existing data or create an empty list
         with open(ROOT_PATH+"optimization_results.json", 'r') as file:
             existing_data = json.load(file)
+
+        # Append the new results dictionary to the existing data
         existing_data.append(results)
 
-        
-        # Step 4: Write the updated data back to the JSON file
+        # Write the updated data back to the JSON file
         with open(ROOT_PATH+"optimization_results.json", 'w') as file:
-            json.dump(existing_data, file, indent=4, default=self._convert_numpy_types)
+            #json.dump(existing_data, file, indent=4, default=self._convert_numpy_types)
+            json.dump(existing_data, file, indent=4, default=lambda x: x.tolist() if isinstance(x, np.ndarray) else None)
+
 
 
         return unstratified_results, stratified_results
