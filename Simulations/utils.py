@@ -331,11 +331,12 @@ class ModelOptimizer:
                 'n_iter': n_iter,
                 'n_samples': X_train.shape[0]
             },
-            'unstratified_params': self._convert_numpy_types(unstratified_params),
-            'stratified_params': self._convert_numpy_types(stratified_params),
+            'unstratified_params': unstratified_params,
+            'stratified_params': stratified_params,
             'unstratified_results': unstratified_results,
             'stratified_results': stratified_results
         }
+        #print('self._convert_numpy_types(unstratified_params)', self._convert_numpy_types(unstratified_params))
 
         # Load existing data or create an empty list
         with open(ROOT_PATH+"optimization_results.json", 'r') as file:
@@ -347,9 +348,8 @@ class ModelOptimizer:
         # Write the updated data back to the JSON file
         with open(ROOT_PATH+"optimization_results.json", 'w') as file:
             #json.dump(existing_data, file, indent=4, default=self._convert_numpy_types)
-            json.dump(existing_data, file, indent=4, default=lambda x: x.tolist() if isinstance(x, np.ndarray) else None)
-
-
+            #json.dump(existing_data, file, indent=4, default=lambda x: x.tolist() if isinstance(x, np.ndarray) else {key: self._convert_numpy_types(value) for key, value in x})
+            json.dump(existing_data, file, indent=4, default=self._convert_numpy_types)
 
         return unstratified_results, stratified_results
     
@@ -419,21 +419,12 @@ class ModelOptimizer:
                 'train mae': train_mae,
                 'test mae': test_mae}
         
+     
     def _convert_numpy_types(self, obj):
-        # otherwise I got errors when saving the results to a json file
-        '''
-        Function to convert numpy types.
-        Inputs:
-            obj: the object to be converted
-        Outputs:
-            the converted object
-        '''
         if isinstance(obj, np.ndarray):
             return obj.tolist()
-        elif isinstance(obj, np.int32):
+        elif isinstance(obj, np.int64):
             return int(obj)
-        elif isinstance(obj, (list, tuple)):
-            return [self._convert_numpy_types(item) for item in obj]
         elif isinstance(obj, dict):
             return {key: self._convert_numpy_types(value) for key, value in obj.items()}
         else:
