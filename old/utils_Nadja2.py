@@ -77,9 +77,15 @@ def train_test_stratified(df, n_quantiles=20, train_size=0.8, seed=42):
     return X_train, X_test, y_train, y_test
 
 
-def fold_visualizer(data, fold_idxs, seed_num):
+def fold_visualizer(data, fold_idxs, seed_num, stratified=False):
+    # for plotting title
+    if stratified:
+        stratified_title = "Stratified Split"
+    else:
+        stratified_title = "Random Split"
+
     fig, axs = plt.subplots(len(fold_idxs)//2, 2, figsize=(10,(len(fold_idxs)//2)*2))
-    fig.suptitle("Seed: " + str(seed_num), fontsize=10)
+    fig.suptitle(stratified_title + " with seed: " + str(seed_num), fontsize=10)
     for fold_id, (train_ids, val_ids) in enumerate(fold_idxs):
         sns.histplot(data=data[train_ids],
                      kde=True,

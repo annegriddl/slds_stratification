@@ -324,7 +324,10 @@ class ModelOptimizer:
                                                         n_jobs, 
                                                         n_iter, 
                                                         stratified=True)
-       
+        if unstratified_params == stratified_params:
+            hyperparameters_same = True
+        else:
+            hyperparameters_same = False
         
         # Save results and parameters to a file
         results = {
@@ -337,6 +340,7 @@ class ModelOptimizer:
                 'n_iter': n_iter,
                 'n_samples': X_train.shape[0]
             },
+            'hyperparameters_same:': hyperparameters_same,
             'unstratified_params': unstratified_params,
             'stratified_params': stratified_params,
             'unstratified_results': unstratified_results,
@@ -345,14 +349,14 @@ class ModelOptimizer:
         #print('self._convert_numpy_types(unstratified_params)', self._convert_numpy_types(unstratified_params))
 
         # Load existing data or create an empty list
-        with open(ROOT_PATH+"optimization_results.json", 'r') as file:
+        with open(ROOT_PATH, 'r') as file:
             existing_data = json.load(file)
 
         # Append the new results dictionary to the existing data
         existing_data.append(results)
 
         # Write the updated data back to the JSON file
-        with open(ROOT_PATH+"optimization_results.json", 'w') as file:
+        with open(ROOT_PATH, 'w') as file:
             #json.dump(existing_data, file, indent=4, default=self._convert_numpy_types)
             #json.dump(existing_data, file, indent=4, default=lambda x: x.tolist() if isinstance(x, np.ndarray) else {key: self._convert_numpy_types(value) for key, value in x})
             json.dump(existing_data, file, indent=4, default=self._convert_numpy_types)
@@ -382,8 +386,10 @@ class ModelOptimizer:
         '''
         if stratified:
             cv_splits = self.create_cont_folds(y_train, n_folds=cv, n_groups=n_groups)
+            output_text = 'Stratified Split Cross-validation'
         else:
             cv_splits = cv
+            output_text = 'Random Split Cross-validation'
 
         random_search = RandomizedSearchCV(estimator=self.model,
                                            param_distributions=self.param_grid,
@@ -397,7 +403,8 @@ class ModelOptimizer:
 
         # Evaluate the model
         evaluation_results = self.evaluate_rf(random_search, X_train, X_test, y_train, y_test)
-
+        print("Evaluation Results of", output_text, ': ', evaluation_results)
+        
         return evaluation_results, random_search.best_params_
 
 
