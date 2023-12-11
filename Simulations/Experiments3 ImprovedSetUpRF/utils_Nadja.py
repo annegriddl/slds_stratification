@@ -277,13 +277,7 @@ class ModelOptimizer:
                  y_train, 
                  X_test,
                  y_test,
-                 cv=5, 
-                 n_groups=10, 
-                 scoring='neg_mean_squared_error', 
-                 n_jobs=-1, 
-                 n_iter=10,
-                 ROOT_PATH='./',
-                 transformation='identity'):
+                 params):
         '''
         Function to optimize the model.
         Inputs:
@@ -300,13 +294,24 @@ class ModelOptimizer:
             stratified_results: the results of the stratified cross-validation
         Important: The results are stored in a JSON file. Initialize a new file with an empty list as content.
         '''
+
+        # get parameters from params dictionary
+        n_folds= params['n_folds']
+        n_groups = params['n_groups']
+        scoring = params['scoring']
+        n_jobs = params['n_jobs']
+        n_iter = params['n_iter']
+        json_file = params['json_file']
+        print("In the following RandomizesdSearchCV is don with n_folds =",
+              n_folds, ", ngroups: ", n_groups, ", scoring: ",scoring, ", n_jobs: ",n_jobs,
+               ", n_iter: ", n_iter, " and save to  ", json_file)
         
         # Perform optimization with unstratified cross-validation
         unstratified_results, unstratified_params = self._perform_optimization(X_train, 
                                                           y_train, 
                                                           X_test,
                                                           y_test,
-                                                          cv, 
+                                                          n_folds, 
                                                           n_groups,
                                                           scoring, 
                                                           n_jobs, 
@@ -318,12 +323,14 @@ class ModelOptimizer:
                                                         y_train, 
                                                         X_test,
                                                         y_test,
-                                                        cv, 
+                                                        n_folds, 
                                                         n_groups, 
                                                         scoring, 
                                                         n_jobs, 
                                                         n_iter, 
                                                         stratified=True)
+       
+
         if unstratified_params == stratified_params:
             hyperparameters_same = True
         else:
@@ -331,15 +338,7 @@ class ModelOptimizer:
         
         # Save results and parameters to a file
         results = {
-            'model_info': {
-                'model': self.model.__class__.__name__,
-                'transformation': transformation,
-                'random_state': self.random_state,
-                'n_folds': cv,
-                'n_groups': n_groups,
-                'n_iter': n_iter,
-                'n_samples': X_train.shape[0]
-            },
+            'model_info': params,
             'hyperparameters_same:': hyperparameters_same,
             'unstratified_params': unstratified_params,
             'stratified_params': stratified_params,
@@ -349,14 +348,14 @@ class ModelOptimizer:
         #print('self._convert_numpy_types(unstratified_params)', self._convert_numpy_types(unstratified_params))
 
         # Load existing data or create an empty list
-        with open(ROOT_PATH, 'r') as file:
+        with open(json_file, 'r') as file:
             existing_data = json.load(file)
 
         # Append the new results dictionary to the existing data
         existing_data.append(results)
 
         # Write the updated data back to the JSON file
-        with open(ROOT_PATH, 'w') as file:
+        with open(json_file, 'w') as file:
             #json.dump(existing_data, file, indent=4, default=self._convert_numpy_types)
             #json.dump(existing_data, file, indent=4, default=lambda x: x.tolist() if isinstance(x, np.ndarray) else {key: self._convert_numpy_types(value) for key, value in x})
             json.dump(existing_data, file, indent=4, default=self._convert_numpy_types)
