@@ -247,5 +247,51 @@
             "train mae": 0.0729,
             "test mae": 0.1865
         }
+    },
+    {
+        "model_info": {
+            "model": "RandomForestRegressor",
+            "n_train": 1000,
+            "n_test": 100000,
+            "n_features": 10,
+            "FD_noise": 0.5,
+            "transformation": "sqrt",
+            "n_groups": 10,
+            "n_folds": 10,
+            "n_iter": 200,
+            "n_repetitions": 200,
+            "scoring": "neg_mean_squared_error",
+            "n_jobs": -1,
+            "json_file": "./RF_results.json"
+        },
+        "hyperparameters_same:": true,
+        "unstratified_params": {
+            "n_estimators": 875,
+            "min_samples_split": 4,
+            "min_samples_leaf": 1,
+            "max_features": 6
+        },
+        "stratified_params": {
+            "n_estimators": 875,
+            "min_samples_split": 4,
+            "min_samples_leaf": 1,
+            "max_features": 6
+        },
+        "unstratified_results": {
+            "train r2": 0.9787,
+            "test r2": 0.8748,
+            "train mse": 0.0091,
+            "test mse": 0.0581,
+            "train mae": 0.0729,
+            "test mae": 0.1865
+        },
+        "stratified_results": {
+            "train r2": 0.9787,
+            "test r2": 0.8748,
+            "train mse": 0.0091,
+            "test mse": 0.0581,
+            "train mae": 0.0729,
+            "test mae": 0.1865
+        }
     }
 ]
