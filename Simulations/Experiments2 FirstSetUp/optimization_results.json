@@ -7,35 +7,35 @@
             "n_folds": 5,
             "n_groups": 20,
             "n_iter": 10,
-            "n_samples": 100
+            "n_samples": 200
         },
         "unstratified_params": {
-            "n_estimators": 661,
-            "min_samples_split": 6,
+            "n_estimators": 882,
+            "min_samples_split": 14,
             "min_samples_leaf": 8,
-            "max_features": 2
+            "max_features": 4
         },
         "stratified_params": {
-            "n_estimators": 661,
-            "min_samples_split": 6,
+            "n_estimators": 882,
+            "min_samples_split": 14,
             "min_samples_leaf": 8,
-            "max_features": 2
+            "max_features": 4
         },
         "unstratified_results": {
-            "train r2": 0.7116,
-            "test r2": 0.6253,
-            "train mse": 7.7759,
-            "test mse": 8.8909,
-            "train mae": 2.1362,
-            "test mae": 2.4453
+            "train r2": 0.8464,
+            "test r2": 0.7585,
+            "train mse": 3.9367,
+            "test mse": 5.731,
+            "train mae": 1.5798,
+            "test mae": 1.9262
         },
         "stratified_results": {
-            "train r2": 0.7116,
-            "test r2": 0.6253,
-            "train mse": 7.7759,
-            "test mse": 8.8909,
-            "train mae": 2.1362,
-            "test mae": 2.4453
+            "train r2": 0.8464,
+            "test r2": 0.7585,
+            "train mse": 3.9367,
+            "test mse": 5.731,
+            "train mae": 1.5798,
+            "test mae": 1.9262
         }
     },
     {
@@ -46,25 +46,25 @@
             "n_folds": 5,
             "n_groups": 20,
             "n_iter": 10,
-            "n_samples": 100
+            "n_samples": 200
         },
         "unstratified_params": {},
         "stratified_params": {},
         "unstratified_results": {
             "train r2": 0.0,
-            "test r2": -0.0005,
-            "train mse": 26.9598,
-            "test mse": 23.7425,
-            "train mae": 4.1108,
-            "test mae": 3.9698
+            "test r2": -0.0019,
+            "train mse": 25.6285,
+            "test mse": 23.7758,
+            "train mae": 4.1124,
+            "test mae": 3.9725
         },
         "stratified_results": {
             "train r2": 0.0,
-            "test r2": -0.0005,
-            "train mse": 26.9598,
-            "test mse": 23.7425,
-            "train mae": 4.1108,
-            "test mae": 3.9698
+            "test r2": -0.0019,
+            "train mse": 25.6285,
+            "test mse": 23.7758,
+            "train mae": 4.1124,
+            "test mae": 3.9725
         }
     },
     {
@@ -75,35 +75,35 @@
             "n_folds": 5,
             "n_groups": 20,
             "n_iter": 10,
-            "n_samples": 100
+            "n_samples": 200
         },
         "unstratified_params": {
-            "n_estimators": 661,
-            "min_samples_split": 6,
+            "n_estimators": 882,
+            "min_samples_split": 14,
             "min_samples_leaf": 8,
-            "max_features": 2
+            "max_features": 4
         },
         "stratified_params": {
-            "n_estimators": 661,
-            "min_samples_split": 6,
+            "n_estimators": 882,
+            "min_samples_split": 14,
             "min_samples_leaf": 8,
-            "max_features": 2
+            "max_features": 4
         },
         "unstratified_results": {
-            "train r2": 0.6003,
-            "test r2": 0.6101,
-            "train mse": 0.1025,
-            "test mse": 0.062,
-            "train mae": 0.191,
-            "test mae": 0.1886
+            "train r2": 0.775,
+            "test r2": 0.7329,
+            "train mse": 0.048,
+            "test mse": 0.0425,
+            "train mae": 0.136,
+            "test mae": 0.1544
         },
         "stratified_results": {
-            "train r2": 0.6003,
-            "test r2": 0.6101,
-            "train mse": 0.1025,
-            "test mse": 0.062,
-            "train mae": 0.191,
-            "test mae": 0.1886
+            "train r2": 0.775,
+            "test r2": 0.7329,
+            "train mse": 0.048,
+            "test mse": 0.0425,
+            "train mae": 0.136,
+            "test mae": 0.1544
         }
     },
     {
@@ -114,35 +114,35 @@
             "n_folds": 5,
             "n_groups": 20,
             "n_iter": 10,
-            "n_samples": 100
+            "n_samples": 200
         },
         "unstratified_params": {
-            "n_estimators": 661,
-            "min_samples_split": 6,
+            "n_estimators": 882,
+            "min_samples_split": 14,
             "min_samples_leaf": 8,
-            "max_features": 2
+            "max_features": 4
         },
         "stratified_params": {
-            "n_estimators": 661,
-            "min_samples_split": 6,
+            "n_estimators": 882,
+            "min_samples_split": 14,
             "min_samples_leaf": 8,
-            "max_features": 2
+            "max_features": 4
         },
         "unstratified_results": {
-            "train r2": 0.6805,
-            "test r2": 0.6267,
-            "train mse": 0.1847,
-            "test mse": 0.1707,
-            "train mae": 0.3076,
-            "test mae": 0.3311
+            "train r2": 0.8315,
+            "test r2": 0.7581,
+            "train mse": 0.0896,
+            "test mse": 0.1106,
+            "train mae": 0.2222,
+            "test mae": 0.2639
         },
         "stratified_results": {
-            "train r2": 0.6805,
-            "test r2": 0.6267,
-            "train mse": 0.1847,
-            "test mse": 0.1707,
-            "train mae": 0.3076,
-            "test mae": 0.3311
+            "train r2": 0.8315,
+            "test r2": 0.7581,
+            "train mse": 0.0896,
+            "test mse": 0.1106,
+            "train mae": 0.2222,
+            "test mae": 0.2639
         }
     },
     {
@@ -299,13 +299,13 @@
             "n_folds": 5,
             "n_groups": 20,
             "n_iter": 10,
-            "n_samples": 200
+            "n_samples": 1000
         },
         "unstratified_params": {
-            "n_estimators": 882,
-            "min_samples_split": 14,
+            "n_estimators": 661,
+            "min_samples_split": 6,
             "min_samples_leaf": 8,
-            "max_features": 4
+            "max_features": 2
         },
         "stratified_params": {
             "n_estimators": 882,
@@ -314,20 +314,20 @@
             "max_features": 4
         },
         "unstratified_results": {
-            "train r2": 0.8464,
-            "test r2": 0.7585,
-            "train mse": 3.9367,
-            "test mse": 5.731,
-            "train mae": 1.5798,
-            "test mae": 1.9262
+            "train r2": 0.9173,
+            "test r2": 0.8627,
+            "train mse": 1.9305,
+            "test mse": 3.259,
+            "train mae": 1.0948,
+            "test mae": 1.4257
         },
         "stratified_results": {
-            "train r2": 0.8464,
-            "test r2": 0.7585,
-            "train mse": 3.9367,
-            "test mse": 5.731,
-            "train mae": 1.5798,
-            "test mae": 1.9262
+            "train r2": 0.9215,
+            "test r2": 0.856,
+            "train mse": 1.8324,
+            "test mse": 3.4183,
+            "train mae": 1.0607,
+            "test mae": 1.463
         }
     },
     {
@@ -338,25 +338,25 @@
             "n_folds": 5,
             "n_groups": 20,
             "n_iter": 10,
-            "n_samples": 200
+            "n_samples": 1000
         },
         "unstratified_params": {},
         "stratified_params": {},
         "unstratified_results": {
             "train r2": 0.0,
-            "test r2": -0.0019,
-            "train mse": 25.6285,
-            "test mse": 23.7758,
-            "train mae": 4.1124,
-            "test mae": 3.9725
+            "test r2": -0.0013,
+            "train mse": 23.3415,
+            "test mse": 23.762,
+            "train mae": 3.9503,
+            "test mae": 3.9714
         },
         "stratified_results": {
             "train r2": 0.0,
-            "test r2": -0.0019,
-            "train mse": 25.6285,
-            "test mse": 23.7758,
-            "train mae": 4.1124,
-            "test mae": 3.9725
+            "test r2": -0.0013,
+            "train mse": 23.3415,
+            "test mse": 23.762,
+            "train mae": 3.9503,
+            "test mae": 3.9714
         }
     },
     {
@@ -367,7 +367,7 @@
             "n_folds": 5,
             "n_groups": 20,
             "n_iter": 10,
-            "n_samples": 200
+            "n_samples": 1000
         },
         "unstratified_params": {
             "n_estimators": 882,
@@ -382,20 +382,20 @@
             "max_features": 4
         },
         "unstratified_results": {
-            "train r2": 0.775,
-            "test r2": 0.7329,
-            "train mse": 0.048,
-            "test mse": 0.0425,
-            "train mae": 0.136,
-            "test mae": 0.1544
+            "train r2": 0.9032,
+            "test r2": 0.8387,
+            "train mse": 0.0156,
+            "test mse": 0.0257,
+            "train mae": 0.0865,
+            "test mae": 0.1163
         },
         "stratified_results": {
-            "train r2": 0.775,
-            "test r2": 0.7329,
-            "train mse": 0.048,
-            "test mse": 0.0425,
-            "train mae": 0.136,
-            "test mae": 0.1544
+            "train r2": 0.9032,
+            "test r2": 0.8387,
+            "train mse": 0.0156,
+            "test mse": 0.0257,
+            "train mae": 0.0865,
+            "test mae": 0.1163
         }
     },
     {
@@ -406,13 +406,13 @@
             "n_folds": 5,
             "n_groups": 20,
             "n_iter": 10,
-            "n_samples": 200
+            "n_samples": 1000
         },
         "unstratified_params": {
-            "n_estimators": 882,
-            "min_samples_split": 14,
+            "n_estimators": 661,
+            "min_samples_split": 6,
             "min_samples_leaf": 8,
-            "max_features": 4
+            "max_features": 2
         },
         "stratified_params": {
             "n_estimators": 882,
@@ -421,20 +421,20 @@
             "max_features": 4
         },
         "unstratified_results": {
-            "train r2": 0.8315,
-            "test r2": 0.7581,
-            "train mse": 0.0896,
-            "test mse": 0.1106,
-            "train mae": 0.2222,
-            "test mae": 0.2639
+            "train r2": 0.9128,
+            "test r2": 0.8599,
+            "train mse": 0.0397,
+            "test mse": 0.0641,
+            "train mae": 0.1519,
+            "test mae": 0.196
         },
         "stratified_results": {
-            "train r2": 0.8315,
-            "test r2": 0.7581,
-            "train mse": 0.0896,
-            "test mse": 0.1106,
-            "train mae": 0.2222,
-            "test mae": 0.2639
+            "train r2": 0.9177,
+            "test r2": 0.8536,
+            "train mse": 0.0375,
+            "test mse": 0.0669,
+            "train mae": 0.1482,
+            "test mae": 0.2022
         }
     }
 ]

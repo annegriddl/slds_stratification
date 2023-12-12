@@ -294,7 +294,10 @@ class ModelOptimizer:
             stratified_results: the results of the stratified cross-validation
         Important: The results are stored in a JSON file. Initialize a new file with an empty list as content.
         '''
-
+        # Check for NaN values in the data
+        if pd.isna(X_train).any().any() or pd.isna(y_train).any() or pd.isna(X_test).any().any() or pd.isna(y_test).any():
+            raise ValueError("Input data contains NaN values. Please handle NaN values in your data.")
+        
         # get parameters from params dictionary
         n_folds= params['n_folds']
         n_groups = params['n_groups']
@@ -340,7 +343,7 @@ class ModelOptimizer:
         results = {
             'model_info': params,
             'hyperparameters_same:': hyperparameters_same,
-            'unstratified_params': unstratified_params,
+            'unstratified_params':unstratified_params,
             'stratified_params': stratified_params,
             'unstratified_results': unstratified_results,
             'stratified_results': stratified_results
@@ -433,10 +436,21 @@ class ModelOptimizer:
         
      
     def _convert_numpy_types(self, obj):
+        '''
+        Function to convert numpy types.
+        Inputs:
+            obj: the object to be converted
+        Outputs:
+            the converted object
+        '''
         if isinstance(obj, np.ndarray):
             return obj.tolist()
+        elif isinstance(obj, np.int32):
+            return int(obj)
         elif isinstance(obj, np.int64):
             return int(obj)
+        elif isinstance(obj, (list, tuple)):
+            return [self._convert_numpy_types(item) for item in obj]
         elif isinstance(obj, dict):
             return {key: self._convert_numpy_types(value) for key, value in obj.items()}
         else:
