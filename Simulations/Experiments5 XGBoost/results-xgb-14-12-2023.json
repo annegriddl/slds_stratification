@@ -1,0 +1,59 @@
+[
+    {
+        "model_info": {
+            "model": "XGBRegressor",
+            "n_train": 100,
+            "n_test": 100000,
+            "n_features": 10,
+            "FD_noise": 0,
+            "transformation": "sqrt",
+            "n_groups": 10,
+            "n_folds": 5,
+            "n_iter": 50,
+            "n_repetitions": 1,
+            "scoring": "neg_mean_squared_error",
+            "n_jobs": -1,
+            "json_file": "./results-xgb-14-12-2023.json"
+        },
+        "seed": 100,
+        "repetition": 0,
+        "random_state": 2387,
+        "hyperparameters_same:": false,
+        "unstratified_params": {
+            "subsample": 0.9,
+            "n_estimators": 300,
+            "min_child_weight": 5,
+            "max_depth": 7,
+            "learning_rate": 0.1,
+            "gamma": 0,
+            "colsample_bytree": 0.8
+        },
+        "stratified_params": {
+            "subsample": 1.0,
+            "n_estimators": 100,
+            "min_child_weight": 1,
+            "max_depth": 3,
+            "learning_rate": 0.1,
+            "gamma": 0,
+            "colsample_bytree": 0.8
+        },
+        "unstratified_results": {
+            "train r2": 1.0,
+            "test r2": 0.7636,
+            "train mse": 0.0,
+            "test mse": 0.1084,
+            "train mae": 0.0004,
+            "test mae": 0.2541
+        },
+        "stratified_results": {
+            "train r2": 0.998,
+            "test r2": 0.7922,
+            "train mse": 0.0009,
+            "test mse": 0.0952,
+            "train mae": 0.0223,
+            "test mae": 0.2336
+        },
+        "unstratified_running_time": 4.19,
+        "stratified_running_time": 1.56
+    }
+]
