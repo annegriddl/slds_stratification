@@ -1,0 +1,1142 @@
+[
+    {
+        "model_info": {
+            "model": "XGBRegressor",
+            "n_train": 1000,
+            "n_test": 100000,
+            "n_features": 10,
+            "FD_noise": 0,
+            "transformation": "sqrt",
+            "n_groups": 10,
+            "n_folds": 5,
+            "n_iter": 200,
+            "n_repetitions": 20,
+            "scoring": "neg_mean_squared_error",
+            "n_jobs": -1,
+            "json_file": "./results-xgb-boxplot1-15-12-2023.json"
+        },
+        "seed": 100,
+        "repetition": 0,
+        "random_state": 2387,
+        "hyperparameters_same:": true,
+        "unstratified_params": {
+            "subsample": 0.8,
+            "n_estimators": 300,
+            "min_child_weight": 5,
+            "max_depth": 3,
+            "learning_rate": 0.1,
+            "gamma": 0,
+            "colsample_bytree": 0.9
+        },
+        "stratified_params": {
+            "subsample": 0.8,
+            "n_estimators": 300,
+            "min_child_weight": 5,
+            "max_depth": 3,
+            "learning_rate": 0.1,
+            "gamma": 0,
+            "colsample_bytree": 0.9
+        },
+        "unstratified_results": {
+            "train r2": 0.996,
+            "test r2": 0.972,
+            "train mse": 0.0017,
+            "test mse": 0.0128,
+            "train mae": 0.0325,
+            "test mae": 0.0859
+        },
+        "stratified_results": {
+            "train r2": 0.996,
+            "test r2": 0.972,
+            "train mse": 0.0017,
+            "test mse": 0.0128,
+            "train mae": 0.0325,
+            "test mae": 0.0859
+        },
+        "unstratified_running_time": 253.58,
+        "stratified_running_time": 242.98
+    },
+    {
+        "model_info": {
+            "model": "XGBRegressor",
+            "n_train": 1000,
+            "n_test": 100000,
+            "n_features": 10,
+            "FD_noise": 0,
+            "transformation": "sqrt",
+            "n_groups": 10,
+            "n_folds": 5,
+            "n_iter": 200,
+            "n_repetitions": 20,
+            "scoring": "neg_mean_squared_error",
+            "n_jobs": -1,
+            "json_file": "./results-xgb-boxplot1-15-12-2023.json"
+        },
+        "seed": 100,
+        "repetition": 1,
+        "random_state": 7529,
+        "hyperparameters_same:": true,
+        "unstratified_params": {
+            "subsample": 0.8,
+            "n_estimators": 300,
+            "min_child_weight": 5,
+            "max_depth": 3,
+            "learning_rate": 0.1,
+            "gamma": 0,
+            "colsample_bytree": 1.0
+        },
+        "stratified_params": {
+            "subsample": 0.8,
+            "n_estimators": 300,
+            "min_child_weight": 5,
+            "max_depth": 3,
+            "learning_rate": 0.1,
+            "gamma": 0,
+            "colsample_bytree": 1.0
+        },
+        "unstratified_results": {
+            "train r2": 0.9966,
+            "test r2": 0.9759,
+            "train mse": 0.0016,
+            "test mse": 0.011,
+            "train mae": 0.0313,
+            "test mae": 0.0801
+        },
+        "stratified_results": {
+            "train r2": 0.9966,
+            "test r2": 0.9759,
+            "train mse": 0.0016,
+            "test mse": 0.011,
+            "train mae": 0.0313,
+            "test mae": 0.0801
+        },
+        "unstratified_running_time": 210.05,
+        "stratified_running_time": 216.43
+    },
+    {
+        "model_info": {
+            "model": "XGBRegressor",
+            "n_train": 1000,
+            "n_test": 100000,
+            "n_features": 10,
+            "FD_noise": 0,
+            "transformation": "sqrt",
+            "n_groups": 10,
+            "n_folds": 5,
+            "n_iter": 200,
+            "n_repetitions": 20,
+            "scoring": "neg_mean_squared_error",
+            "n_jobs": -1,
+            "json_file": "./results-xgb-boxplot1-15-12-2023.json"
+        },
+        "seed": 100,
+        "repetition": 2,
+        "random_state": 7454,
+        "hyperparameters_same:": true,
+        "unstratified_params": {
+            "subsample": 0.9,
+            "n_estimators": 300,
+            "min_child_weight": 5,
+            "max_depth": 3,
+            "learning_rate": 0.1,
+            "gamma": 0,
+            "colsample_bytree": 0.9
+        },
+        "stratified_params": {
+            "subsample": 0.9,
+            "n_estimators": 300,
+            "min_child_weight": 5,
+            "max_depth": 3,
+            "learning_rate": 0.1,
+            "gamma": 0,
+            "colsample_bytree": 0.9
+        },
+        "unstratified_results": {
+            "train r2": 0.9962,
+            "test r2": 0.9734,
+            "train mse": 0.0018,
+            "test mse": 0.0122,
+            "train mae": 0.0327,
+            "test mae": 0.0842
+        },
+        "stratified_results": {
+            "train r2": 0.9962,
+            "test r2": 0.9734,
+            "train mse": 0.0018,
+            "test mse": 0.0122,
+            "train mae": 0.0327,
+            "test mae": 0.0842
+        },
+        "unstratified_running_time": 182.09,
+        "stratified_running_time": 176.58
+    },
+    {
+        "model_info": {
+            "model": "XGBRegressor",
+            "n_train": 1000,
+            "n_test": 100000,
+            "n_features": 10,
+            "FD_noise": 0,
+            "transformation": "sqrt",
+            "n_groups": 10,
+            "n_folds": 5,
+            "n_iter": 200,
+            "n_repetitions": 20,
+            "scoring": "neg_mean_squared_error",
+            "n_jobs": -1,
+            "json_file": "./results-xgb-boxplot1-15-12-2023.json"
+        },
+        "seed": 100,
+        "repetition": 3,
+        "random_state": 2864,
+        "hyperparameters_same:": true,
+        "unstratified_params": {
+            "subsample": 0.9,
+            "n_estimators": 300,
+            "min_child_weight": 1,
+            "max_depth": 3,
+            "learning_rate": 0.1,
+            "gamma": 0,
+            "colsample_bytree": 0.9
+        },
+        "stratified_params": {
+            "subsample": 0.9,
+            "n_estimators": 300,
+            "min_child_weight": 1,
+            "max_depth": 3,
+            "learning_rate": 0.1,
+            "gamma": 0,
+            "colsample_bytree": 0.9
+        },
+        "unstratified_results": {
+            "train r2": 0.997,
+            "test r2": 0.9712,
+            "train mse": 0.0015,
+            "test mse": 0.0132,
+            "train mae": 0.0292,
+            "test mae": 0.085
+        },
+        "stratified_results": {
+            "train r2": 0.997,
+            "test r2": 0.9712,
+            "train mse": 0.0015,
+            "test mse": 0.0132,
+            "train mae": 0.0292,
+            "test mae": 0.085
+        },
+        "unstratified_running_time": 84.42,
+        "stratified_running_time": 119.76
+    },
+    {
+        "model_info": {
+            "model": "XGBRegressor",
+            "n_train": 1000,
+            "n_test": 100000,
+            "n_features": 10,
+            "FD_noise": 0,
+            "transformation": "sqrt",
+            "n_groups": 10,
+            "n_folds": 5,
+            "n_iter": 200,
+            "n_repetitions": 20,
+            "scoring": "neg_mean_squared_error",
+            "n_jobs": -1,
+            "json_file": "./results-xgb-boxplot1-15-12-2023.json"
+        },
+        "seed": 100,
+        "repetition": 4,
+        "random_state": 6440,
+        "hyperparameters_same:": true,
+        "unstratified_params": {
+            "subsample": 0.8,
+            "n_estimators": 300,
+            "min_child_weight": 5,
+            "max_depth": 3,
+            "learning_rate": 0.2,
+            "gamma": 0,
+            "colsample_bytree": 0.9
+        },
+        "stratified_params": {
+            "subsample": 0.8,
+            "n_estimators": 300,
+            "min_child_weight": 5,
+            "max_depth": 3,
+            "learning_rate": 0.2,
+            "gamma": 0,
+            "colsample_bytree": 0.9
+        },
+        "unstratified_results": {
+            "train r2": 0.9985,
+            "test r2": 0.9716,
+            "train mse": 0.0007,
+            "test mse": 0.013,
+            "train mae": 0.0198,
+            "test mae": 0.0874
+        },
+        "stratified_results": {
+            "train r2": 0.9985,
+            "test r2": 0.9716,
+            "train mse": 0.0007,
+            "test mse": 0.013,
+            "train mae": 0.0198,
+            "test mae": 0.0874
+        },
+        "unstratified_running_time": 152.0,
+        "stratified_running_time": 159.11
+    },
+    {
+        "model_info": {
+            "model": "XGBRegressor",
+            "n_train": 1000,
+            "n_test": 100000,
+            "n_features": 10,
+            "FD_noise": 0,
+            "transformation": "sqrt",
+            "n_groups": 10,
+            "n_folds": 5,
+            "n_iter": 200,
+            "n_repetitions": 20,
+            "scoring": "neg_mean_squared_error",
+            "n_jobs": -1,
+            "json_file": "./results-xgb-boxplot1-15-12-2023.json"
+        },
+        "seed": 100,
+        "repetition": 5,
+        "random_state": 5731,
+        "hyperparameters_same:": true,
+        "unstratified_params": {
+            "subsample": 0.8,
+            "n_estimators": 300,
+            "min_child_weight": 5,
+            "max_depth": 3,
+            "learning_rate": 0.1,
+            "gamma": 0,
+            "colsample_bytree": 0.8
+        },
+        "stratified_params": {
+            "subsample": 0.8,
+            "n_estimators": 300,
+            "min_child_weight": 5,
+            "max_depth": 3,
+            "learning_rate": 0.1,
+            "gamma": 0,
+            "colsample_bytree": 0.8
+        },
+        "unstratified_results": {
+            "train r2": 0.9961,
+            "test r2": 0.9706,
+            "train mse": 0.0019,
+            "test mse": 0.0135,
+            "train mae": 0.0333,
+            "test mae": 0.0872
+        },
+        "stratified_results": {
+            "train r2": 0.9961,
+            "test r2": 0.9706,
+            "train mse": 0.0019,
+            "test mse": 0.0135,
+            "train mae": 0.0333,
+            "test mae": 0.0872
+        },
+        "unstratified_running_time": 160.59,
+        "stratified_running_time": 155.81
+    },
+    {
+        "model_info": {
+            "model": "XGBRegressor",
+            "n_train": 1000,
+            "n_test": 100000,
+            "n_features": 10,
+            "FD_noise": 0,
+            "transformation": "sqrt",
+            "n_groups": 10,
+            "n_folds": 5,
+            "n_iter": 200,
+            "n_repetitions": 20,
+            "scoring": "neg_mean_squared_error",
+            "n_jobs": -1,
+            "json_file": "./results-xgb-boxplot1-15-12-2023.json"
+        },
+        "seed": 100,
+        "repetition": 6,
+        "random_state": 7103,
+        "hyperparameters_same:": true,
+        "unstratified_params": {
+            "subsample": 0.9,
+            "n_estimators": 300,
+            "min_child_weight": 1,
+            "max_depth": 3,
+            "learning_rate": 0.1,
+            "gamma": 0,
+            "colsample_bytree": 0.9
+        },
+        "stratified_params": {
+            "subsample": 0.9,
+            "n_estimators": 300,
+            "min_child_weight": 1,
+            "max_depth": 3,
+            "learning_rate": 0.1,
+            "gamma": 0,
+            "colsample_bytree": 0.9
+        },
+        "unstratified_results": {
+            "train r2": 0.9971,
+            "test r2": 0.976,
+            "train mse": 0.0014,
+            "test mse": 0.011,
+            "train mae": 0.0287,
+            "test mae": 0.0792
+        },
+        "stratified_results": {
+            "train r2": 0.9971,
+            "test r2": 0.976,
+            "train mse": 0.0014,
+            "test mse": 0.011,
+            "train mae": 0.0287,
+            "test mae": 0.0792
+        },
+        "unstratified_running_time": 140.87,
+        "stratified_running_time": 73.09
+    },
+    {
+        "model_info": {
+            "model": "XGBRegressor",
+            "n_train": 1000,
+            "n_test": 100000,
+            "n_features": 10,
+            "FD_noise": 0,
+            "transformation": "sqrt",
+            "n_groups": 10,
+            "n_folds": 5,
+            "n_iter": 200,
+            "n_repetitions": 20,
+            "scoring": "neg_mean_squared_error",
+            "n_jobs": -1,
+            "json_file": "./results-xgb-boxplot1-15-12-2023.json"
+        },
+        "seed": 100,
+        "repetition": 7,
+        "random_state": 8305,
+        "hyperparameters_same:": false,
+        "unstratified_params": {
+            "subsample": 0.9,
+            "n_estimators": 300,
+            "min_child_weight": 3,
+            "max_depth": 3,
+            "learning_rate": 0.1,
+            "gamma": 0,
+            "colsample_bytree": 1.0
+        },
+        "stratified_params": {
+            "subsample": 0.9,
+            "n_estimators": 300,
+            "min_child_weight": 3,
+            "max_depth": 3,
+            "learning_rate": 0.1,
+            "gamma": 0,
+            "colsample_bytree": 0.8
+        },
+        "unstratified_results": {
+            "train r2": 0.9968,
+            "test r2": 0.9743,
+            "train mse": 0.0015,
+            "test mse": 0.0118,
+            "train mae": 0.0297,
+            "test mae": 0.081
+        },
+        "stratified_results": {
+            "train r2": 0.9965,
+            "test r2": 0.9725,
+            "train mse": 0.0016,
+            "test mse": 0.0126,
+            "train mae": 0.0308,
+            "test mae": 0.0844
+        },
+        "unstratified_running_time": 100.63,
+        "stratified_running_time": 143.83
+    },
+    {
+        "model_info": {
+            "model": "XGBRegressor",
+            "n_train": 1000,
+            "n_test": 100000,
+            "n_features": 10,
+            "FD_noise": 0,
+            "transformation": "sqrt",
+            "n_groups": 10,
+            "n_folds": 5,
+            "n_iter": 200,
+            "n_repetitions": 20,
+            "scoring": "neg_mean_squared_error",
+            "n_jobs": -1,
+            "json_file": "./results-xgb-boxplot1-15-12-2023.json"
+        },
+        "seed": 100,
+        "repetition": 8,
+        "random_state": 1802,
+        "hyperparameters_same:": false,
+        "unstratified_params": {
+            "subsample": 0.9,
+            "n_estimators": 300,
+            "min_child_weight": 5,
+            "max_depth": 3,
+            "learning_rate": 0.2,
+            "gamma": 0,
+            "colsample_bytree": 0.9
+        },
+        "stratified_params": {
+            "subsample": 0.9,
+            "n_estimators": 300,
+            "min_child_weight": 1,
+            "max_depth": 3,
+            "learning_rate": 0.2,
+            "gamma": 0,
+            "colsample_bytree": 1.0
+        },
+        "unstratified_results": {
+            "train r2": 0.9986,
+            "test r2": 0.9728,
+            "train mse": 0.0006,
+            "test mse": 0.0125,
+            "train mae": 0.0189,
+            "test mae": 0.0841
+        },
+        "stratified_results": {
+            "train r2": 0.9987,
+            "test r2": 0.9705,
+            "train mse": 0.0006,
+            "test mse": 0.0135,
+            "train mae": 0.0181,
+            "test mae": 0.0873
+        },
+        "unstratified_running_time": 151.28,
+        "stratified_running_time": 163.4
+    },
+    {
+        "model_info": {
+            "model": "XGBRegressor",
+            "n_train": 1000,
+            "n_test": 100000,
+            "n_features": 10,
+            "FD_noise": 0,
+            "transformation": "sqrt",
+            "n_groups": 10,
+            "n_folds": 5,
+            "n_iter": 200,
+            "n_repetitions": 20,
+            "scoring": "neg_mean_squared_error",
+            "n_jobs": -1,
+            "json_file": "./results-xgb-boxplot1-15-12-2023.json"
+        },
+        "seed": 100,
+        "repetition": 9,
+        "random_state": 8732,
+        "hyperparameters_same:": true,
+        "unstratified_params": {
+            "subsample": 0.8,
+            "n_estimators": 300,
+            "min_child_weight": 1,
+            "max_depth": 3,
+            "learning_rate": 0.1,
+            "gamma": 0,
+            "colsample_bytree": 1.0
+        },
+        "stratified_params": {
+            "subsample": 0.8,
+            "n_estimators": 300,
+            "min_child_weight": 1,
+            "max_depth": 3,
+            "learning_rate": 0.1,
+            "gamma": 0,
+            "colsample_bytree": 1.0
+        },
+        "unstratified_results": {
+            "train r2": 0.9965,
+            "test r2": 0.9717,
+            "train mse": 0.0016,
+            "test mse": 0.013,
+            "train mae": 0.0308,
+            "test mae": 0.0868
+        },
+        "stratified_results": {
+            "train r2": 0.9965,
+            "test r2": 0.9717,
+            "train mse": 0.0016,
+            "test mse": 0.013,
+            "train mae": 0.0308,
+            "test mae": 0.0868
+        },
+        "unstratified_running_time": 131.49,
+        "stratified_running_time": 146.59
+    },
+    {
+        "model_info": {
+            "model": "XGBRegressor",
+            "n_train": 1000,
+            "n_test": 100000,
+            "n_features": 10,
+            "FD_noise": 0,
+            "transformation": "sqrt",
+            "n_groups": 10,
+            "n_folds": 5,
+            "n_iter": 200,
+            "n_repetitions": 20,
+            "scoring": "neg_mean_squared_error",
+            "n_jobs": -1,
+            "json_file": "./results-xgb-boxplot1-15-12-2023.json"
+        },
+        "seed": 100,
+        "repetition": 10,
+        "random_state": 1988,
+        "hyperparameters_same:": false,
+        "unstratified_params": {
+            "subsample": 0.8,
+            "n_estimators": 300,
+            "min_child_weight": 5,
+            "max_depth": 3,
+            "learning_rate": 0.1,
+            "gamma": 0,
+            "colsample_bytree": 0.8
+        },
+        "stratified_params": {
+            "subsample": 0.8,
+            "n_estimators": 300,
+            "min_child_weight": 3,
+            "max_depth": 3,
+            "learning_rate": 0.1,
+            "gamma": 0,
+            "colsample_bytree": 0.9
+        },
+        "unstratified_results": {
+            "train r2": 0.9961,
+            "test r2": 0.9706,
+            "train mse": 0.0018,
+            "test mse": 0.0135,
+            "train mae": 0.0326,
+            "test mae": 0.0877
+        },
+        "stratified_results": {
+            "train r2": 0.9964,
+            "test r2": 0.9717,
+            "train mse": 0.0016,
+            "test mse": 0.013,
+            "train mae": 0.031,
+            "test mae": 0.086
+        },
+        "unstratified_running_time": 46.0,
+        "stratified_running_time": 140.01
+    },
+    {
+        "model_info": {
+            "model": "XGBRegressor",
+            "n_train": 1000,
+            "n_test": 100000,
+            "n_features": 10,
+            "FD_noise": 0,
+            "transformation": "sqrt",
+            "n_groups": 10,
+            "n_folds": 5,
+            "n_iter": 200,
+            "n_repetitions": 20,
+            "scoring": "neg_mean_squared_error",
+            "n_jobs": -1,
+            "json_file": "./results-xgb-boxplot1-15-12-2023.json"
+        },
+        "seed": 100,
+        "repetition": 11,
+        "random_state": 1314,
+        "hyperparameters_same:": false,
+        "unstratified_params": {
+            "subsample": 0.8,
+            "n_estimators": 300,
+            "min_child_weight": 5,
+            "max_depth": 3,
+            "learning_rate": 0.2,
+            "gamma": 0,
+            "colsample_bytree": 1.0
+        },
+        "stratified_params": {
+            "subsample": 0.8,
+            "n_estimators": 300,
+            "min_child_weight": 3,
+            "max_depth": 3,
+            "learning_rate": 0.1,
+            "gamma": 0,
+            "colsample_bytree": 0.9
+        },
+        "unstratified_results": {
+            "train r2": 0.9985,
+            "test r2": 0.9696,
+            "train mse": 0.0006,
+            "test mse": 0.0139,
+            "train mae": 0.0191,
+            "test mae": 0.0895
+        },
+        "stratified_results": {
+            "train r2": 0.996,
+            "test r2": 0.9681,
+            "train mse": 0.0017,
+            "test mse": 0.0146,
+            "train mae": 0.0326,
+            "test mae": 0.0907
+        },
+        "unstratified_running_time": 150.29,
+        "stratified_running_time": 141.75
+    },
+    {
+        "model_info": {
+            "model": "XGBRegressor",
+            "n_train": 1000,
+            "n_test": 100000,
+            "n_features": 10,
+            "FD_noise": 0,
+            "transformation": "sqrt",
+            "n_groups": 10,
+            "n_folds": 5,
+            "n_iter": 200,
+            "n_repetitions": 20,
+            "scoring": "neg_mean_squared_error",
+            "n_jobs": -1,
+            "json_file": "./results-xgb-boxplot1-15-12-2023.json"
+        },
+        "seed": 100,
+        "repetition": 12,
+        "random_state": 7471,
+        "hyperparameters_same:": true,
+        "unstratified_params": {
+            "subsample": 0.8,
+            "n_estimators": 300,
+            "min_child_weight": 5,
+            "max_depth": 3,
+            "learning_rate": 0.1,
+            "gamma": 0,
+            "colsample_bytree": 0.8
+        },
+        "stratified_params": {
+            "subsample": 0.8,
+            "n_estimators": 300,
+            "min_child_weight": 5,
+            "max_depth": 3,
+            "learning_rate": 0.1,
+            "gamma": 0,
+            "colsample_bytree": 0.8
+        },
+        "unstratified_results": {
+            "train r2": 0.9965,
+            "test r2": 0.9749,
+            "train mse": 0.0015,
+            "test mse": 0.0115,
+            "train mae": 0.0305,
+            "test mae": 0.0792
+        },
+        "stratified_results": {
+            "train r2": 0.9965,
+            "test r2": 0.9749,
+            "train mse": 0.0015,
+            "test mse": 0.0115,
+            "train mae": 0.0305,
+            "test mae": 0.0792
+        },
+        "unstratified_running_time": 127.39,
+        "stratified_running_time": 116.22
+    },
+    {
+        "model_info": {
+            "model": "XGBRegressor",
+            "n_train": 1000,
+            "n_test": 100000,
+            "n_features": 10,
+            "FD_noise": 0,
+            "transformation": "sqrt",
+            "n_groups": 10,
+            "n_folds": 5,
+            "n_iter": 200,
+            "n_repetitions": 20,
+            "scoring": "neg_mean_squared_error",
+            "n_jobs": -1,
+            "json_file": "./results-xgb-boxplot1-15-12-2023.json"
+        },
+        "seed": 100,
+        "repetition": 13,
+        "random_state": 4316,
+        "hyperparameters_same:": true,
+        "unstratified_params": {
+            "subsample": 1.0,
+            "n_estimators": 300,
+            "min_child_weight": 5,
+            "max_depth": 3,
+            "learning_rate": 0.1,
+            "gamma": 0,
+            "colsample_bytree": 1.0
+        },
+        "stratified_params": {
+            "subsample": 1.0,
+            "n_estimators": 300,
+            "min_child_weight": 5,
+            "max_depth": 3,
+            "learning_rate": 0.1,
+            "gamma": 0,
+            "colsample_bytree": 1.0
+        },
+        "unstratified_results": {
+            "train r2": 0.9959,
+            "test r2": 0.9713,
+            "train mse": 0.0017,
+            "test mse": 0.0132,
+            "train mae": 0.0318,
+            "test mae": 0.0847
+        },
+        "stratified_results": {
+            "train r2": 0.9959,
+            "test r2": 0.9713,
+            "train mse": 0.0017,
+            "test mse": 0.0132,
+            "train mae": 0.0318,
+            "test mae": 0.0847
+        },
+        "unstratified_running_time": 120.91,
+        "stratified_running_time": 38.53
+    },
+    {
+        "model_info": {
+            "model": "XGBRegressor",
+            "n_train": 1000,
+            "n_test": 100000,
+            "n_features": 10,
+            "FD_noise": 0,
+            "transformation": "sqrt",
+            "n_groups": 10,
+            "n_folds": 5,
+            "n_iter": 200,
+            "n_repetitions": 20,
+            "scoring": "neg_mean_squared_error",
+            "n_jobs": -1,
+            "json_file": "./results-xgb-boxplot1-15-12-2023.json"
+        },
+        "seed": 100,
+        "repetition": 14,
+        "random_state": 785,
+        "hyperparameters_same:": false,
+        "unstratified_params": {
+            "subsample": 0.9,
+            "n_estimators": 300,
+            "min_child_weight": 5,
+            "max_depth": 3,
+            "learning_rate": 0.1,
+            "gamma": 0,
+            "colsample_bytree": 0.8
+        },
+        "stratified_params": {
+            "subsample": 0.9,
+            "n_estimators": 300,
+            "min_child_weight": 1,
+            "max_depth": 3,
+            "learning_rate": 0.1,
+            "gamma": 0,
+            "colsample_bytree": 0.8
+        },
+        "unstratified_results": {
+            "train r2": 0.9963,
+            "test r2": 0.9709,
+            "train mse": 0.0017,
+            "test mse": 0.0134,
+            "train mae": 0.0325,
+            "test mae": 0.0872
+        },
+        "stratified_results": {
+            "train r2": 0.9965,
+            "test r2": 0.9716,
+            "train mse": 0.0016,
+            "test mse": 0.013,
+            "train mae": 0.0317,
+            "test mae": 0.0861
+        },
+        "unstratified_running_time": 141.2,
+        "stratified_running_time": 143.41
+    },
+    {
+        "model_info": {
+            "model": "XGBRegressor",
+            "n_train": 1000,
+            "n_test": 100000,
+            "n_features": 10,
+            "FD_noise": 0,
+            "transformation": "sqrt",
+            "n_groups": 10,
+            "n_folds": 5,
+            "n_iter": 200,
+            "n_repetitions": 20,
+            "scoring": "neg_mean_squared_error",
+            "n_jobs": -1,
+            "json_file": "./results-xgb-boxplot1-15-12-2023.json"
+        },
+        "seed": 100,
+        "repetition": 15,
+        "random_state": 3351,
+        "hyperparameters_same:": false,
+        "unstratified_params": {
+            "subsample": 1.0,
+            "n_estimators": 200,
+            "min_child_weight": 5,
+            "max_depth": 3,
+            "learning_rate": 0.2,
+            "gamma": 0,
+            "colsample_bytree": 1.0
+        },
+        "stratified_params": {
+            "subsample": 0.8,
+            "n_estimators": 300,
+            "min_child_weight": 3,
+            "max_depth": 3,
+            "learning_rate": 0.2,
+            "gamma": 0,
+            "colsample_bytree": 1.0
+        },
+        "unstratified_results": {
+            "train r2": 0.997,
+            "test r2": 0.9696,
+            "train mse": 0.0014,
+            "test mse": 0.0139,
+            "train mae": 0.029,
+            "test mae": 0.0909
+        },
+        "stratified_results": {
+            "train r2": 0.9985,
+            "test r2": 0.9697,
+            "train mse": 0.0007,
+            "test mse": 0.0139,
+            "train mae": 0.02,
+            "test mae": 0.0914
+        },
+        "unstratified_running_time": 137.03,
+        "stratified_running_time": 157.44
+    },
+    {
+        "model_info": {
+            "model": "XGBRegressor",
+            "n_train": 1000,
+            "n_test": 100000,
+            "n_features": 10,
+            "FD_noise": 0,
+            "transformation": "sqrt",
+            "n_groups": 10,
+            "n_folds": 5,
+            "n_iter": 200,
+            "n_repetitions": 20,
+            "scoring": "neg_mean_squared_error",
+            "n_jobs": -1,
+            "json_file": "./results-xgb-boxplot1-15-12-2023.json"
+        },
+        "seed": 100,
+        "repetition": 16,
+        "random_state": 5495,
+        "hyperparameters_same:": true,
+        "unstratified_params": {
+            "subsample": 0.9,
+            "n_estimators": 200,
+            "min_child_weight": 3,
+            "max_depth": 3,
+            "learning_rate": 0.2,
+            "gamma": 0,
+            "colsample_bytree": 1.0
+        },
+        "stratified_params": {
+            "subsample": 0.9,
+            "n_estimators": 200,
+            "min_child_weight": 3,
+            "max_depth": 3,
+            "learning_rate": 0.2,
+            "gamma": 0,
+            "colsample_bytree": 1.0
+        },
+        "unstratified_results": {
+            "train r2": 0.9971,
+            "test r2": 0.9691,
+            "train mse": 0.0013,
+            "test mse": 0.0142,
+            "train mae": 0.0282,
+            "test mae": 0.0919
+        },
+        "stratified_results": {
+            "train r2": 0.9971,
+            "test r2": 0.9691,
+            "train mse": 0.0013,
+            "test mse": 0.0142,
+            "train mae": 0.0282,
+            "test mae": 0.0919
+        },
+        "unstratified_running_time": 136.55,
+        "stratified_running_time": 101.54
+    },
+    {
+        "model_info": {
+            "model": "XGBRegressor",
+            "n_train": 1000,
+            "n_test": 100000,
+            "n_features": 10,
+            "FD_noise": 0,
+            "transformation": "sqrt",
+            "n_groups": 10,
+            "n_folds": 5,
+            "n_iter": 200,
+            "n_repetitions": 20,
+            "scoring": "neg_mean_squared_error",
+            "n_jobs": -1,
+            "json_file": "./results-xgb-boxplot1-15-12-2023.json"
+        },
+        "seed": 100,
+        "repetition": 17,
+        "random_state": 3764,
+        "hyperparameters_same:": true,
+        "unstratified_params": {
+            "subsample": 0.8,
+            "n_estimators": 300,
+            "min_child_weight": 3,
+            "max_depth": 3,
+            "learning_rate": 0.1,
+            "gamma": 0,
+            "colsample_bytree": 1.0
+        },
+        "stratified_params": {
+            "subsample": 0.8,
+            "n_estimators": 300,
+            "min_child_weight": 3,
+            "max_depth": 3,
+            "learning_rate": 0.1,
+            "gamma": 0,
+            "colsample_bytree": 1.0
+        },
+        "unstratified_results": {
+            "train r2": 0.9968,
+            "test r2": 0.974,
+            "train mse": 0.0015,
+            "test mse": 0.0119,
+            "train mae": 0.03,
+            "test mae": 0.0809
+        },
+        "stratified_results": {
+            "train r2": 0.9968,
+            "test r2": 0.974,
+            "train mse": 0.0015,
+            "test mse": 0.0119,
+            "train mae": 0.03,
+            "test mae": 0.0809
+        },
+        "unstratified_running_time": 41.3,
+        "stratified_running_time": 131.64
+    },
+    {
+        "model_info": {
+            "model": "XGBRegressor",
+            "n_train": 1000,
+            "n_test": 100000,
+            "n_features": 10,
+            "FD_noise": 0,
+            "transformation": "sqrt",
+            "n_groups": 10,
+            "n_folds": 5,
+            "n_iter": 200,
+            "n_repetitions": 20,
+            "scoring": "neg_mean_squared_error",
+            "n_jobs": -1,
+            "json_file": "./results-xgb-boxplot1-15-12-2023.json"
+        },
+        "seed": 100,
+        "repetition": 18,
+        "random_state": 5070,
+        "hyperparameters_same:": false,
+        "unstratified_params": {
+            "subsample": 0.8,
+            "n_estimators": 300,
+            "min_child_weight": 3,
+            "max_depth": 3,
+            "learning_rate": 0.2,
+            "gamma": 0,
+            "colsample_bytree": 0.8
+        },
+        "stratified_params": {
+            "subsample": 0.8,
+            "n_estimators": 200,
+            "min_child_weight": 5,
+            "max_depth": 3,
+            "learning_rate": 0.2,
+            "gamma": 0,
+            "colsample_bytree": 1.0
+        },
+        "unstratified_results": {
+            "train r2": 0.9984,
+            "test r2": 0.9693,
+            "train mse": 0.0007,
+            "test mse": 0.0141,
+            "train mae": 0.021,
+            "test mae": 0.0899
+        },
+        "stratified_results": {
+            "train r2": 0.9965,
+            "test r2": 0.9702,
+            "train mse": 0.0016,
+            "test mse": 0.0137,
+            "train mae": 0.0308,
+            "test mae": 0.0883
+        },
+        "unstratified_running_time": 137.08,
+        "stratified_running_time": 128.3
+    },
+    {
+        "model_info": {
+            "model": "XGBRegressor",
+            "n_train": 1000,
+            "n_test": 100000,
+            "n_features": 10,
+            "FD_noise": 0,
+            "transformation": "sqrt",
+            "n_groups": 10,
+            "n_folds": 5,
+            "n_iter": 200,
+            "n_repetitions": 20,
+            "scoring": "neg_mean_squared_error",
+            "n_jobs": -1,
+            "json_file": "./results-xgb-boxplot1-15-12-2023.json"
+        },
+        "seed": 100,
+        "repetition": 19,
+        "random_state": 3341,
+        "hyperparameters_same:": true,
+        "unstratified_params": {
+            "subsample": 0.8,
+            "n_estimators": 300,
+            "min_child_weight": 5,
+            "max_depth": 3,
+            "learning_rate": 0.1,
+            "gamma": 0,
+            "colsample_bytree": 0.9
+        },
+        "stratified_params": {
+            "subsample": 0.8,
+            "n_estimators": 300,
+            "min_child_weight": 5,
+            "max_depth": 3,
+            "learning_rate": 0.1,
+            "gamma": 0,
+            "colsample_bytree": 0.9
+        },
+        "unstratified_results": {
+            "train r2": 0.9962,
+            "test r2": 0.9729,
+            "train mse": 0.0017,
+            "test mse": 0.0124,
+            "train mae": 0.0323,
+            "test mae": 0.084
+        },
+        "stratified_results": {
+            "train r2": 0.9962,
+            "test r2": 0.9729,
+            "train mse": 0.0017,
+            "test mse": 0.0124,
+            "train mae": 0.0323,
+            "test mae": 0.084
+        },
+        "unstratified_running_time": 111.61,
+        "stratified_running_time": 112.46
+    }
+]
