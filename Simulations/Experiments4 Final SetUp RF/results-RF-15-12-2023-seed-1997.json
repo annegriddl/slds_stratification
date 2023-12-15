@@ -1,0 +1,1175 @@
+[
+    {
+        "model_info": {
+            "model": "RandomForestRegressor",
+            "n_train": 500,
+            "n_test": 100000,
+            "n_features": 10,
+            "FD_noise": 0,
+            "transformation": "log",
+            "n_groups": 20,
+            "n_folds": 5,
+            "n_iter": 100,
+            "n_repetitions": 30,
+            "scoring": "neg_mean_squared_error",
+            "n_jobs": -1,
+            "json_file": "./results-RF-15-12-2023.json"
+        },
+        "seed": 1997,
+        "repetition": 0,
+        "random_state": 3858,
+        "hyperparameters_same:": false,
+        "unstratified_params": {
+            "n_estimators": 599,
+            "min_samples_split": 5,
+            "min_samples_leaf": 2,
+            "max_features": 4
+        },
+        "stratified_params": {
+            "n_estimators": 934,
+            "min_samples_split": 8,
+            "min_samples_leaf": 2,
+            "max_features": 8
+        },
+        "unstratified_results": {
+            "train r2": 0.9515,
+            "test r2": 0.8014,
+            "train mse": 0.0072,
+            "test mse": 0.0318,
+            "train mae": 0.0598,
+            "test mae": 0.1246
+        },
+        "stratified_results": {
+            "train r2": 0.9422,
+            "test r2": 0.8073,
+            "train mse": 0.0086,
+            "test mse": 0.0308,
+            "train mae": 0.065,
+            "test mae": 0.1246
+        },
+        "unstratified_running_time": 303.64,
+        "stratified_running_time": 313.17
+    },
+    {
+        "model_info": {
+            "model": "RandomForestRegressor",
+            "n_train": 500,
+            "n_test": 100000,
+            "n_features": 10,
+            "FD_noise": 0,
+            "transformation": "log",
+            "n_groups": 20,
+            "n_folds": 5,
+            "n_iter": 100,
+            "n_repetitions": 30,
+            "scoring": "neg_mean_squared_error",
+            "n_jobs": -1,
+            "json_file": "./results-RF-15-12-2023.json"
+        },
+        "seed": 1997,
+        "repetition": 1,
+        "random_state": 1092,
+        "hyperparameters_same:": true,
+        "unstratified_params": {
+            "n_estimators": 873,
+            "min_samples_split": 4,
+            "min_samples_leaf": 1,
+            "max_features": 7
+        },
+        "stratified_params": {
+            "n_estimators": 873,
+            "min_samples_split": 4,
+            "min_samples_leaf": 1,
+            "max_features": 7
+        },
+        "unstratified_results": {
+            "train r2": 0.9727,
+            "test r2": 0.8372,
+            "train mse": 0.0048,
+            "test mse": 0.026,
+            "train mae": 0.049,
+            "test mae": 0.1155
+        },
+        "stratified_results": {
+            "train r2": 0.9727,
+            "test r2": 0.8372,
+            "train mse": 0.0048,
+            "test mse": 0.026,
+            "train mae": 0.049,
+            "test mae": 0.1155
+        },
+        "unstratified_running_time": 300.32,
+        "stratified_running_time": 272.23
+    },
+    {
+        "model_info": {
+            "model": "RandomForestRegressor",
+            "n_train": 500,
+            "n_test": 100000,
+            "n_features": 10,
+            "FD_noise": 0,
+            "transformation": "log",
+            "n_groups": 20,
+            "n_folds": 5,
+            "n_iter": 100,
+            "n_repetitions": 30,
+            "scoring": "neg_mean_squared_error",
+            "n_jobs": -1,
+            "json_file": "./results-RF-15-12-2023.json"
+        },
+        "seed": 1997,
+        "repetition": 2,
+        "random_state": 3624,
+        "hyperparameters_same:": true,
+        "unstratified_params": {
+            "n_estimators": 856,
+            "min_samples_split": 3,
+            "min_samples_leaf": 2,
+            "max_features": 9
+        },
+        "stratified_params": {
+            "n_estimators": 856,
+            "min_samples_split": 3,
+            "min_samples_leaf": 2,
+            "max_features": 9
+        },
+        "unstratified_results": {
+            "train r2": 0.9666,
+            "test r2": 0.8227,
+            "train mse": 0.0051,
+            "test mse": 0.0284,
+            "train mae": 0.0513,
+            "test mae": 0.1227
+        },
+        "stratified_results": {
+            "train r2": 0.9666,
+            "test r2": 0.8227,
+            "train mse": 0.0051,
+            "test mse": 0.0284,
+            "train mae": 0.0513,
+            "test mae": 0.1227
+        },
+        "unstratified_running_time": 303.37,
+        "stratified_running_time": 297.96
+    },
+    {
+        "model_info": {
+            "model": "RandomForestRegressor",
+            "n_train": 500,
+            "n_test": 100000,
+            "n_features": 10,
+            "FD_noise": 0,
+            "transformation": "log",
+            "n_groups": 20,
+            "n_folds": 5,
+            "n_iter": 100,
+            "n_repetitions": 30,
+            "scoring": "neg_mean_squared_error",
+            "n_jobs": -1,
+            "json_file": "./results-RF-15-12-2023.json"
+        },
+        "seed": 1997,
+        "repetition": 3,
+        "random_state": 2072,
+        "hyperparameters_same:": true,
+        "unstratified_params": {
+            "n_estimators": 964,
+            "min_samples_split": 9,
+            "min_samples_leaf": 3,
+            "max_features": 5
+        },
+        "stratified_params": {
+            "n_estimators": 964,
+            "min_samples_split": 9,
+            "min_samples_leaf": 3,
+            "max_features": 5
+        },
+        "unstratified_results": {
+            "train r2": 0.9279,
+            "test r2": 0.8009,
+            "train mse": 0.0106,
+            "test mse": 0.0318,
+            "train mae": 0.0738,
+            "test mae": 0.1255
+        },
+        "stratified_results": {
+            "train r2": 0.9279,
+            "test r2": 0.8009,
+            "train mse": 0.0106,
+            "test mse": 0.0318,
+            "train mae": 0.0738,
+            "test mae": 0.1255
+        },
+        "unstratified_running_time": 274.04,
+        "stratified_running_time": 272.66
+    },
+    {
+        "model_info": {
+            "model": "RandomForestRegressor",
+            "n_train": 500,
+            "n_test": 100000,
+            "n_features": 10,
+            "FD_noise": 0,
+            "transformation": "log",
+            "n_groups": 20,
+            "n_folds": 5,
+            "n_iter": 100,
+            "n_repetitions": 30,
+            "scoring": "neg_mean_squared_error",
+            "n_jobs": -1,
+            "json_file": "./results-RF-15-12-2023.json"
+        },
+        "seed": 1997,
+        "repetition": 4,
+        "random_state": 3629,
+        "hyperparameters_same:": true,
+        "unstratified_params": {
+            "n_estimators": 554,
+            "min_samples_split": 2,
+            "min_samples_leaf": 2,
+            "max_features": 7
+        },
+        "stratified_params": {
+            "n_estimators": 554,
+            "min_samples_split": 2,
+            "min_samples_leaf": 2,
+            "max_features": 7
+        },
+        "unstratified_results": {
+            "train r2": 0.9628,
+            "test r2": 0.8008,
+            "train mse": 0.0049,
+            "test mse": 0.0318,
+            "train mae": 0.0506,
+            "test mae": 0.1215
+        },
+        "stratified_results": {
+            "train r2": 0.9628,
+            "test r2": 0.8008,
+            "train mse": 0.0049,
+            "test mse": 0.0318,
+            "train mae": 0.0506,
+            "test mae": 0.1215
+        },
+        "unstratified_running_time": 293.7,
+        "stratified_running_time": 289.65
+    },
+    {
+        "model_info": {
+            "model": "RandomForestRegressor",
+            "n_train": 500,
+            "n_test": 100000,
+            "n_features": 10,
+            "FD_noise": 0,
+            "transformation": "log",
+            "n_groups": 20,
+            "n_folds": 5,
+            "n_iter": 100,
+            "n_repetitions": 30,
+            "scoring": "neg_mean_squared_error",
+            "n_jobs": -1,
+            "json_file": "./results-RF-15-12-2023.json"
+        },
+        "seed": 1997,
+        "repetition": 5,
+        "random_state": 6399,
+        "hyperparameters_same:": true,
+        "unstratified_params": {
+            "n_estimators": 574,
+            "min_samples_split": 4,
+            "min_samples_leaf": 2,
+            "max_features": 6
+        },
+        "stratified_params": {
+            "n_estimators": 574,
+            "min_samples_split": 4,
+            "min_samples_leaf": 2,
+            "max_features": 6
+        },
+        "unstratified_results": {
+            "train r2": 0.9659,
+            "test r2": 0.8246,
+            "train mse": 0.0057,
+            "test mse": 0.028,
+            "train mae": 0.0527,
+            "test mae": 0.1235
+        },
+        "stratified_results": {
+            "train r2": 0.9659,
+            "test r2": 0.8246,
+            "train mse": 0.0057,
+            "test mse": 0.028,
+            "train mae": 0.0527,
+            "test mae": 0.1235
+        },
+        "unstratified_running_time": 311.51,
+        "stratified_running_time": 313.28
+    },
+    {
+        "model_info": {
+            "model": "RandomForestRegressor",
+            "n_train": 500,
+            "n_test": 100000,
+            "n_features": 10,
+            "FD_noise": 0,
+            "transformation": "log",
+            "n_groups": 20,
+            "n_folds": 5,
+            "n_iter": 100,
+            "n_repetitions": 30,
+            "scoring": "neg_mean_squared_error",
+            "n_jobs": -1,
+            "json_file": "./results-RF-15-12-2023.json"
+        },
+        "seed": 1997,
+        "repetition": 6,
+        "random_state": 5406,
+        "hyperparameters_same:": true,
+        "unstratified_params": {
+            "n_estimators": 650,
+            "min_samples_split": 6,
+            "min_samples_leaf": 2,
+            "max_features": 5
+        },
+        "stratified_params": {
+            "n_estimators": 650,
+            "min_samples_split": 6,
+            "min_samples_leaf": 2,
+            "max_features": 5
+        },
+        "unstratified_results": {
+            "train r2": 0.9512,
+            "test r2": 0.8004,
+            "train mse": 0.0072,
+            "test mse": 0.0319,
+            "train mae": 0.0582,
+            "test mae": 0.1284
+        },
+        "stratified_results": {
+            "train r2": 0.9512,
+            "test r2": 0.8004,
+            "train mse": 0.0072,
+            "test mse": 0.0319,
+            "train mae": 0.0582,
+            "test mae": 0.1284
+        },
+        "unstratified_running_time": 268.14,
+        "stratified_running_time": 264.97
+    },
+    {
+        "model_info": {
+            "model": "RandomForestRegressor",
+            "n_train": 500,
+            "n_test": 100000,
+            "n_features": 10,
+            "FD_noise": 0,
+            "transformation": "log",
+            "n_groups": 20,
+            "n_folds": 5,
+            "n_iter": 100,
+            "n_repetitions": 30,
+            "scoring": "neg_mean_squared_error",
+            "n_jobs": -1,
+            "json_file": "./results-RF-15-12-2023.json"
+        },
+        "seed": 1997,
+        "repetition": 7,
+        "random_state": 7204,
+        "hyperparameters_same:": false,
+        "unstratified_params": {
+            "n_estimators": 539,
+            "min_samples_split": 5,
+            "min_samples_leaf": 1,
+            "max_features": 9
+        },
+        "stratified_params": {
+            "n_estimators": 567,
+            "min_samples_split": 4,
+            "min_samples_leaf": 2,
+            "max_features": 9
+        },
+        "unstratified_results": {
+            "train r2": 0.9643,
+            "test r2": 0.8083,
+            "train mse": 0.0054,
+            "test mse": 0.0307,
+            "train mae": 0.0498,
+            "test mae": 0.1252
+        },
+        "stratified_results": {
+            "train r2": 0.9604,
+            "test r2": 0.8121,
+            "train mse": 0.006,
+            "test mse": 0.03,
+            "train mae": 0.0502,
+            "test mae": 0.1241
+        },
+        "unstratified_running_time": 284.11,
+        "stratified_running_time": 317.05
+    },
+    {
+        "model_info": {
+            "model": "RandomForestRegressor",
+            "n_train": 500,
+            "n_test": 100000,
+            "n_features": 10,
+            "FD_noise": 0,
+            "transformation": "log",
+            "n_groups": 20,
+            "n_folds": 5,
+            "n_iter": 100,
+            "n_repetitions": 30,
+            "scoring": "neg_mean_squared_error",
+            "n_jobs": -1,
+            "json_file": "./results-RF-15-12-2023.json"
+        },
+        "seed": 1997,
+        "repetition": 8,
+        "random_state": 4032,
+        "hyperparameters_same:": true,
+        "unstratified_params": {
+            "n_estimators": 703,
+            "min_samples_split": 2,
+            "min_samples_leaf": 1,
+            "max_features": 6
+        },
+        "stratified_params": {
+            "n_estimators": 703,
+            "min_samples_split": 2,
+            "min_samples_leaf": 1,
+            "max_features": 6
+        },
+        "unstratified_results": {
+            "train r2": 0.98,
+            "test r2": 0.8396,
+            "train mse": 0.0037,
+            "test mse": 0.0256,
+            "train mae": 0.0451,
+            "test mae": 0.1159
+        },
+        "stratified_results": {
+            "train r2": 0.98,
+            "test r2": 0.8396,
+            "train mse": 0.0037,
+            "test mse": 0.0256,
+            "train mae": 0.0451,
+            "test mae": 0.1159
+        },
+        "unstratified_running_time": 297.88,
+        "stratified_running_time": 300.07
+    },
+    {
+        "model_info": {
+            "model": "RandomForestRegressor",
+            "n_train": 500,
+            "n_test": 100000,
+            "n_features": 10,
+            "FD_noise": 0,
+            "transformation": "log",
+            "n_groups": 20,
+            "n_folds": 5,
+            "n_iter": 100,
+            "n_repetitions": 30,
+            "scoring": "neg_mean_squared_error",
+            "n_jobs": -1,
+            "json_file": "./results-RF-15-12-2023.json"
+        },
+        "seed": 1997,
+        "repetition": 9,
+        "random_state": 3760,
+        "hyperparameters_same:": true,
+        "unstratified_params": {
+            "n_estimators": 969,
+            "min_samples_split": 2,
+            "min_samples_leaf": 1,
+            "max_features": 7
+        },
+        "stratified_params": {
+            "n_estimators": 969,
+            "min_samples_split": 2,
+            "min_samples_leaf": 1,
+            "max_features": 7
+        },
+        "unstratified_results": {
+            "train r2": 0.9791,
+            "test r2": 0.8127,
+            "train mse": 0.0032,
+            "test mse": 0.0299,
+            "train mae": 0.0419,
+            "test mae": 0.1239
+        },
+        "stratified_results": {
+            "train r2": 0.9791,
+            "test r2": 0.8127,
+            "train mse": 0.0032,
+            "test mse": 0.0299,
+            "train mae": 0.0419,
+            "test mae": 0.1239
+        },
+        "unstratified_running_time": 349.38,
+        "stratified_running_time": 292.86
+    },
+    {
+        "model_info": {
+            "model": "RandomForestRegressor",
+            "n_train": 500,
+            "n_test": 100000,
+            "n_features": 10,
+            "FD_noise": 0,
+            "transformation": "log",
+            "n_groups": 20,
+            "n_folds": 5,
+            "n_iter": 100,
+            "n_repetitions": 30,
+            "scoring": "neg_mean_squared_error",
+            "n_jobs": -1,
+            "json_file": "./results-RF-15-12-2023.json"
+        },
+        "seed": 1997,
+        "repetition": 10,
+        "random_state": 904,
+        "hyperparameters_same:": true,
+        "unstratified_params": {
+            "n_estimators": 976,
+            "min_samples_split": 4,
+            "min_samples_leaf": 2,
+            "max_features": 5
+        },
+        "stratified_params": {
+            "n_estimators": 976,
+            "min_samples_split": 4,
+            "min_samples_leaf": 2,
+            "max_features": 5
+        },
+        "unstratified_results": {
+            "train r2": 0.9646,
+            "test r2": 0.8338,
+            "train mse": 0.0053,
+            "test mse": 0.0266,
+            "train mae": 0.0523,
+            "test mae": 0.1186
+        },
+        "stratified_results": {
+            "train r2": 0.9646,
+            "test r2": 0.8338,
+            "train mse": 0.0053,
+            "test mse": 0.0266,
+            "train mae": 0.0523,
+            "test mae": 0.1186
+        },
+        "unstratified_running_time": 272.58,
+        "stratified_running_time": 277.63
+    },
+    {
+        "model_info": {
+            "model": "RandomForestRegressor",
+            "n_train": 500,
+            "n_test": 100000,
+            "n_features": 10,
+            "FD_noise": 0,
+            "transformation": "log",
+            "n_groups": 20,
+            "n_folds": 5,
+            "n_iter": 100,
+            "n_repetitions": 30,
+            "scoring": "neg_mean_squared_error",
+            "n_jobs": -1,
+            "json_file": "./results-RF-15-12-2023.json"
+        },
+        "seed": 1997,
+        "repetition": 11,
+        "random_state": 6627,
+        "hyperparameters_same:": true,
+        "unstratified_params": {
+            "n_estimators": 550,
+            "min_samples_split": 3,
+            "min_samples_leaf": 1,
+            "max_features": 7
+        },
+        "stratified_params": {
+            "n_estimators": 550,
+            "min_samples_split": 3,
+            "min_samples_leaf": 1,
+            "max_features": 7
+        },
+        "unstratified_results": {
+            "train r2": 0.975,
+            "test r2": 0.8026,
+            "train mse": 0.0035,
+            "test mse": 0.0316,
+            "train mae": 0.0439,
+            "test mae": 0.1245
+        },
+        "stratified_results": {
+            "train r2": 0.975,
+            "test r2": 0.8026,
+            "train mse": 0.0035,
+            "test mse": 0.0316,
+            "train mae": 0.0439,
+            "test mae": 0.1245
+        },
+        "unstratified_running_time": 286.97,
+        "stratified_running_time": 354.73
+    },
+    {
+        "model_info": {
+            "model": "RandomForestRegressor",
+            "n_train": 500,
+            "n_test": 100000,
+            "n_features": 10,
+            "FD_noise": 0,
+            "transformation": "log",
+            "n_groups": 20,
+            "n_folds": 5,
+            "n_iter": 100,
+            "n_repetitions": 30,
+            "scoring": "neg_mean_squared_error",
+            "n_jobs": -1,
+            "json_file": "./results-RF-15-12-2023.json"
+        },
+        "seed": 1997,
+        "repetition": 12,
+        "random_state": 4681,
+        "hyperparameters_same:": true,
+        "unstratified_params": {
+            "n_estimators": 792,
+            "min_samples_split": 2,
+            "min_samples_leaf": 2,
+            "max_features": 8
+        },
+        "stratified_params": {
+            "n_estimators": 792,
+            "min_samples_split": 2,
+            "min_samples_leaf": 2,
+            "max_features": 8
+        },
+        "unstratified_results": {
+            "train r2": 0.9621,
+            "test r2": 0.8315,
+            "train mse": 0.0069,
+            "test mse": 0.0269,
+            "train mae": 0.0542,
+            "test mae": 0.1202
+        },
+        "stratified_results": {
+            "train r2": 0.9621,
+            "test r2": 0.8315,
+            "train mse": 0.0069,
+            "test mse": 0.0269,
+            "train mae": 0.0542,
+            "test mae": 0.1202
+        },
+        "unstratified_running_time": 319.04,
+        "stratified_running_time": 339.25
+    },
+    {
+        "model_info": {
+            "model": "RandomForestRegressor",
+            "n_train": 500,
+            "n_test": 100000,
+            "n_features": 10,
+            "FD_noise": 0,
+            "transformation": "log",
+            "n_groups": 20,
+            "n_folds": 5,
+            "n_iter": 100,
+            "n_repetitions": 30,
+            "scoring": "neg_mean_squared_error",
+            "n_jobs": -1,
+            "json_file": "./results-RF-15-12-2023.json"
+        },
+        "seed": 1997,
+        "repetition": 13,
+        "random_state": 2807,
+        "hyperparameters_same:": false,
+        "unstratified_params": {
+            "n_estimators": 720,
+            "min_samples_split": 4,
+            "min_samples_leaf": 1,
+            "max_features": 6
+        },
+        "stratified_params": {
+            "n_estimators": 772,
+            "min_samples_split": 3,
+            "min_samples_leaf": 1,
+            "max_features": 5
+        },
+        "unstratified_results": {
+            "train r2": 0.9659,
+            "test r2": 0.8313,
+            "train mse": 0.0058,
+            "test mse": 0.027,
+            "train mae": 0.0491,
+            "test mae": 0.1174
+        },
+        "stratified_results": {
+            "train r2": 0.971,
+            "test r2": 0.8355,
+            "train mse": 0.0049,
+            "test mse": 0.0263,
+            "train mae": 0.0458,
+            "test mae": 0.1157
+        },
+        "unstratified_running_time": 308.01,
+        "stratified_running_time": 281.92
+    },
+    {
+        "model_info": {
+            "model": "RandomForestRegressor",
+            "n_train": 500,
+            "n_test": 100000,
+            "n_features": 10,
+            "FD_noise": 0,
+            "transformation": "log",
+            "n_groups": 20,
+            "n_folds": 5,
+            "n_iter": 100,
+            "n_repetitions": 30,
+            "scoring": "neg_mean_squared_error",
+            "n_jobs": -1,
+            "json_file": "./results-RF-15-12-2023.json"
+        },
+        "seed": 1997,
+        "repetition": 14,
+        "random_state": 522,
+        "hyperparameters_same:": true,
+        "unstratified_params": {
+            "n_estimators": 518,
+            "min_samples_split": 4,
+            "min_samples_leaf": 1,
+            "max_features": 10
+        },
+        "stratified_params": {
+            "n_estimators": 518,
+            "min_samples_split": 4,
+            "min_samples_leaf": 1,
+            "max_features": 10
+        },
+        "unstratified_results": {
+            "train r2": 0.9744,
+            "test r2": 0.8161,
+            "train mse": 0.0042,
+            "test mse": 0.0294,
+            "train mae": 0.046,
+            "test mae": 0.1233
+        },
+        "stratified_results": {
+            "train r2": 0.9744,
+            "test r2": 0.8161,
+            "train mse": 0.0042,
+            "test mse": 0.0294,
+            "train mae": 0.046,
+            "test mae": 0.1233
+        },
+        "unstratified_running_time": 268.47,
+        "stratified_running_time": 265.14
+    },
+    {
+        "model_info": {
+            "model": "RandomForestRegressor",
+            "n_train": 500,
+            "n_test": 100000,
+            "n_features": 10,
+            "FD_noise": 0,
+            "transformation": "log",
+            "n_groups": 20,
+            "n_folds": 5,
+            "n_iter": 100,
+            "n_repetitions": 30,
+            "scoring": "neg_mean_squared_error",
+            "n_jobs": -1,
+            "json_file": "./results-RF-15-12-2023.json"
+        },
+        "seed": 1997,
+        "repetition": 15,
+        "random_state": 6551,
+        "hyperparameters_same:": false,
+        "unstratified_params": {
+            "n_estimators": 605,
+            "min_samples_split": 4,
+            "min_samples_leaf": 2,
+            "max_features": 7
+        },
+        "stratified_params": {
+            "n_estimators": 752,
+            "min_samples_split": 2,
+            "min_samples_leaf": 2,
+            "max_features": 10
+        },
+        "unstratified_results": {
+            "train r2": 0.9601,
+            "test r2": 0.8309,
+            "train mse": 0.0066,
+            "test mse": 0.027,
+            "train mae": 0.0546,
+            "test mae": 0.1199
+        },
+        "stratified_results": {
+            "train r2": 0.962,
+            "test r2": 0.8281,
+            "train mse": 0.0063,
+            "test mse": 0.0275,
+            "train mae": 0.0539,
+            "test mae": 0.1212
+        },
+        "unstratified_running_time": 270.6,
+        "stratified_running_time": 272.36
+    },
+    {
+        "model_info": {
+            "model": "RandomForestRegressor",
+            "n_train": 500,
+            "n_test": 100000,
+            "n_features": 10,
+            "FD_noise": 0,
+            "transformation": "log",
+            "n_groups": 20,
+            "n_folds": 5,
+            "n_iter": 100,
+            "n_repetitions": 30,
+            "scoring": "neg_mean_squared_error",
+            "n_jobs": -1,
+            "json_file": "./results-RF-15-12-2023.json"
+        },
+        "seed": 1997,
+        "repetition": 16,
+        "random_state": 9667,
+        "hyperparameters_same:": false,
+        "unstratified_params": {
+            "n_estimators": 827,
+            "min_samples_split": 4,
+            "min_samples_leaf": 1,
+            "max_features": 6
+        },
+        "stratified_params": {
+            "n_estimators": 889,
+            "min_samples_split": 6,
+            "min_samples_leaf": 2,
+            "max_features": 8
+        },
+        "unstratified_results": {
+            "train r2": 0.9681,
+            "test r2": 0.8115,
+            "train mse": 0.0049,
+            "test mse": 0.0301,
+            "train mae": 0.0464,
+            "test mae": 0.1223
+        },
+        "stratified_results": {
+            "train r2": 0.9507,
+            "test r2": 0.8029,
+            "train mse": 0.0075,
+            "test mse": 0.0315,
+            "train mae": 0.0558,
+            "test mae": 0.1256
+        },
+        "unstratified_running_time": 272.01,
+        "stratified_running_time": 273.91
+    },
+    {
+        "model_info": {
+            "model": "RandomForestRegressor",
+            "n_train": 500,
+            "n_test": 100000,
+            "n_features": 10,
+            "FD_noise": 0,
+            "transformation": "log",
+            "n_groups": 20,
+            "n_folds": 5,
+            "n_iter": 100,
+            "n_repetitions": 30,
+            "scoring": "neg_mean_squared_error",
+            "n_jobs": -1,
+            "json_file": "./results-RF-15-12-2023.json"
+        },
+        "seed": 1997,
+        "repetition": 17,
+        "random_state": 1669,
+        "hyperparameters_same:": true,
+        "unstratified_params": {
+            "n_estimators": 691,
+            "min_samples_split": 2,
+            "min_samples_leaf": 1,
+            "max_features": 9
+        },
+        "stratified_params": {
+            "n_estimators": 691,
+            "min_samples_split": 2,
+            "min_samples_leaf": 1,
+            "max_features": 9
+        },
+        "unstratified_results": {
+            "train r2": 0.9729,
+            "test r2": 0.8098,
+            "train mse": 0.0039,
+            "test mse": 0.0304,
+            "train mae": 0.0455,
+            "test mae": 0.1232
+        },
+        "stratified_results": {
+            "train r2": 0.9729,
+            "test r2": 0.8098,
+            "train mse": 0.0039,
+            "test mse": 0.0304,
+            "train mae": 0.0455,
+            "test mae": 0.1232
+        },
+        "unstratified_running_time": 287.11,
+        "stratified_running_time": 281.83
+    },
+    {
+        "model_info": {
+            "model": "RandomForestRegressor",
+            "n_train": 500,
+            "n_test": 100000,
+            "n_features": 10,
+            "FD_noise": 0,
+            "transformation": "log",
+            "n_groups": 20,
+            "n_folds": 5,
+            "n_iter": 100,
+            "n_repetitions": 30,
+            "scoring": "neg_mean_squared_error",
+            "n_jobs": -1,
+            "json_file": "./results-RF-15-12-2023.json"
+        },
+        "seed": 1997,
+        "repetition": 18,
+        "random_state": 3810,
+        "hyperparameters_same:": true,
+        "unstratified_params": {
+            "n_estimators": 666,
+            "min_samples_split": 2,
+            "min_samples_leaf": 1,
+            "max_features": 6
+        },
+        "stratified_params": {
+            "n_estimators": 666,
+            "min_samples_split": 2,
+            "min_samples_leaf": 1,
+            "max_features": 6
+        },
+        "unstratified_results": {
+            "train r2": 0.9721,
+            "test r2": 0.8218,
+            "train mse": 0.004,
+            "test mse": 0.0285,
+            "train mae": 0.0457,
+            "test mae": 0.1221
+        },
+        "stratified_results": {
+            "train r2": 0.9721,
+            "test r2": 0.8218,
+            "train mse": 0.004,
+            "test mse": 0.0285,
+            "train mae": 0.0457,
+            "test mae": 0.1221
+        },
+        "unstratified_running_time": 274.88,
+        "stratified_running_time": 274.47
+    },
+    {
+        "model_info": {
+            "model": "RandomForestRegressor",
+            "n_train": 500,
+            "n_test": 100000,
+            "n_features": 10,
+            "FD_noise": 0,
+            "transformation": "log",
+            "n_groups": 20,
+            "n_folds": 5,
+            "n_iter": 100,
+            "n_repetitions": 30,
+            "scoring": "neg_mean_squared_error",
+            "n_jobs": -1,
+            "json_file": "./results-RF-15-12-2023.json"
+        },
+        "seed": 1997,
+        "repetition": 19,
+        "random_state": 5358,
+        "hyperparameters_same:": true,
+        "unstratified_params": {
+            "n_estimators": 705,
+            "min_samples_split": 8,
+            "min_samples_leaf": 1,
+            "max_features": 5
+        },
+        "stratified_params": {
+            "n_estimators": 705,
+            "min_samples_split": 8,
+            "min_samples_leaf": 1,
+            "max_features": 5
+        },
+        "unstratified_results": {
+            "train r2": 0.9513,
+            "test r2": 0.8132,
+            "train mse": 0.0073,
+            "test mse": 0.0299,
+            "train mae": 0.0612,
+            "test mae": 0.1234
+        },
+        "stratified_results": {
+            "train r2": 0.9513,
+            "test r2": 0.8132,
+            "train mse": 0.0073,
+            "test mse": 0.0299,
+            "train mae": 0.0612,
+            "test mae": 0.1234
+        },
+        "unstratified_running_time": 285.02,
+        "stratified_running_time": 285.75
+    },
+    {
+        "model_info": {
+            "model": "RandomForestRegressor",
+            "n_train": 500,
+            "n_test": 100000,
+            "n_features": 10,
+            "FD_noise": 0,
+            "transformation": "log",
+            "n_groups": 20,
+            "n_folds": 5,
+            "n_iter": 100,
+            "n_repetitions": 30,
+            "scoring": "neg_mean_squared_error",
+            "n_jobs": -1,
+            "json_file": "./results-RF-15-12-2023.json"
+        },
+        "seed": 1997,
+        "repetition": 20,
+        "random_state": 5441,
+        "hyperparameters_same:": true,
+        "unstratified_params": {
+            "n_estimators": 766,
+            "min_samples_split": 5,
+            "min_samples_leaf": 2,
+            "max_features": 8
+        },
+        "stratified_params": {
+            "n_estimators": 766,
+            "min_samples_split": 5,
+            "min_samples_leaf": 2,
+            "max_features": 8
+        },
+        "unstratified_results": {
+            "train r2": 0.9652,
+            "test r2": 0.827,
+            "train mse": 0.0061,
+            "test mse": 0.0277,
+            "train mae": 0.0529,
+            "test mae": 0.1196
+        },
+        "stratified_results": {
+            "train r2": 0.9652,
+            "test r2": 0.827,
+            "train mse": 0.0061,
+            "test mse": 0.0277,
+            "train mae": 0.0529,
+            "test mae": 0.1196
+        },
+        "unstratified_running_time": 288.72,
+        "stratified_running_time": 283.02
+    },
+    {
+        "model_info": {
+            "model": "RandomForestRegressor",
+            "n_train": 500,
+            "n_test": 100000,
+            "n_features": 10,
+            "FD_noise": 0,
+            "transformation": "log",
+            "n_groups": 20,
+            "n_folds": 5,
+            "n_iter": 100,
+            "n_repetitions": 30,
+            "scoring": "neg_mean_squared_error",
+            "n_jobs": -1,
+            "json_file": "./results-RF-15-12-2023.json"
+        },
+        "seed": 1997,
+        "repetition": 21,
+        "random_state": 4256,
+        "hyperparameters_same:": true,
+        "unstratified_params": {
+            "n_estimators": 910,
+            "min_samples_split": 3,
+            "min_samples_leaf": 3,
+            "max_features": 5
+        },
+        "stratified_params": {
+            "n_estimators": 910,
+            "min_samples_split": 3,
+            "min_samples_leaf": 3,
+            "max_features": 5
+        },
+        "unstratified_results": {
+            "train r2": 0.9501,
+            "test r2": 0.8171,
+            "train mse": 0.0082,
+            "test mse": 0.0292,
+            "train mae": 0.0668,
+            "test mae": 0.1215
+        },
+        "stratified_results": {
+            "train r2": 0.9501,
+            "test r2": 0.8171,
+            "train mse": 0.0082,
+            "test mse": 0.0292,
+            "train mae": 0.0668,
+            "test mae": 0.1215
+        },
+        "unstratified_running_time": 271.14,
+        "stratified_running_time": 272.87
+    },
+    {
+        "model_info": {
+            "model": "RandomForestRegressor",
+            "n_train": 500,
+            "n_test": 100000,
+            "n_features": 10,
+            "FD_noise": 0,
+            "transformation": "log",
+            "n_groups": 20,
+            "n_folds": 5,
+            "n_iter": 100,
+            "n_repetitions": 30,
+            "scoring": "neg_mean_squared_error",
+            "n_jobs": -1,
+            "json_file": "./results-RF-15-12-2023.json"
+        },
+        "seed": 1997,
+        "repetition": 22,
+        "random_state": 939,
+        "hyperparameters_same:": true,
+        "unstratified_params": {
+            "n_estimators": 675,
+            "min_samples_split": 4,
+            "min_samples_leaf": 1,
+            "max_features": 8
+        },
+        "stratified_params": {
+            "n_estimators": 675,
+            "min_samples_split": 4,
+            "min_samples_leaf": 1,
+            "max_features": 8
+        },
+        "unstratified_results": {
+            "train r2": 0.9731,
+            "test r2": 0.8285,
+            "train mse": 0.0042,
+            "test mse": 0.0274,
+            "train mae": 0.0478,
+            "test mae": 0.1189
+        },
+        "stratified_results": {
+            "train r2": 0.9731,
+            "test r2": 0.8285,
+            "train mse": 0.0042,
+            "test mse": 0.0274,
+            "train mae": 0.0478,
+            "test mae": 0.1189
+        },
+        "unstratified_running_time": 267.37,
+        "stratified_running_time": 274.16
+    }
+]
