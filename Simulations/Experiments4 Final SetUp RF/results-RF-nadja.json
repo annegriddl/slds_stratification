@@ -1,0 +1,2450 @@
+[
+    {
+        "model_info": {
+            "model": "RandomForestRegressor",
+            "n_train": 1000,
+            "n_test": 100000,
+            "n_features": 10,
+            "FD_noise": 0,
+            "transformation": "sqrt",
+            "n_groups": 10,
+            "n_folds": 5,
+            "n_iter": 200,
+            "n_repetitions": 20,
+            "scoring": "neg_mean_squared_error",
+            "n_jobs": -1,
+            "json_file": "./results-RF-boxplot114-12-2023.json"
+        },
+        "seed": 100,
+        "repetition": 0,
+        "random_state": 2387,
+        "hyperparameters_same": true,
+        "unstratified_params": {
+            "n_estimators": 639,
+            "min_samples_split": 4,
+            "min_samples_leaf": 1,
+            "max_features": 6
+        },
+        "stratified_params": {
+            "n_estimators": 639,
+            "min_samples_split": 4,
+            "min_samples_leaf": 1,
+            "max_features": 6
+        },
+        "unstratified_results": {
+            "train r2": 0.9767,
+            "test r2": 0.8617,
+            "train mse": 0.0101,
+            "test mse": 0.0634,
+            "train mae": 0.076,
+            "test mae": 0.1962
+        },
+        "stratified_results": {
+            "train r2": 0.9767,
+            "test r2": 0.8617,
+            "train mse": 0.0101,
+            "test mse": 0.0634,
+            "train mae": 0.076,
+            "test mae": 0.1962
+        },
+        "unstratified_running_time": 397.99,
+        "stratified_running_time": 346.61
+    },
+    {
+        "model_info": {
+            "model": "RandomForestRegressor",
+            "n_train": 1000,
+            "n_test": 100000,
+            "n_features": 10,
+            "FD_noise": 0,
+            "transformation": "sqrt",
+            "n_groups": 10,
+            "n_folds": 5,
+            "n_iter": 200,
+            "n_repetitions": 20,
+            "scoring": "neg_mean_squared_error",
+            "n_jobs": -1,
+            "json_file": "./results-RF-boxplot114-12-2023.json"
+        },
+        "seed": 100,
+        "repetition": 1,
+        "random_state": 7529,
+        "hyperparameters_same": true,
+        "unstratified_params": {
+            "n_estimators": 994,
+            "min_samples_split": 3,
+            "min_samples_leaf": 1,
+            "max_features": 7
+        },
+        "stratified_params": {
+            "n_estimators": 994,
+            "min_samples_split": 3,
+            "min_samples_leaf": 1,
+            "max_features": 7
+        },
+        "unstratified_results": {
+            "train r2": 0.9822,
+            "test r2": 0.8819,
+            "train mse": 0.0084,
+            "test mse": 0.0541,
+            "train mae": 0.0699,
+            "test mae": 0.1816
+        },
+        "stratified_results": {
+            "train r2": 0.9822,
+            "test r2": 0.8819,
+            "train mse": 0.0084,
+            "test mse": 0.0541,
+            "train mae": 0.0699,
+            "test mae": 0.1816
+        },
+        "unstratified_running_time": 350.1,
+        "stratified_running_time": 362.05
+    },
+    {
+        "model_info": {
+            "model": "RandomForestRegressor",
+            "n_train": 1000,
+            "n_test": 100000,
+            "n_features": 10,
+            "FD_noise": 0,
+            "transformation": "sqrt",
+            "n_groups": 10,
+            "n_folds": 5,
+            "n_iter": 200,
+            "n_repetitions": 20,
+            "scoring": "neg_mean_squared_error",
+            "n_jobs": -1,
+            "json_file": "./results-RF-boxplot114-12-2023.json"
+        },
+        "seed": 100,
+        "repetition": 2,
+        "random_state": 7454,
+        "hyperparameters_same": false,
+        "unstratified_params": {
+            "n_estimators": 555,
+            "min_samples_split": 2,
+            "min_samples_leaf": 1,
+            "max_features": 6
+        },
+        "stratified_params": {
+            "n_estimators": 876,
+            "min_samples_split": 2,
+            "min_samples_leaf": 1,
+            "max_features": 7
+        },
+        "unstratified_results": {
+            "train r2": 0.9841,
+            "test r2": 0.8827,
+            "train mse": 0.0074,
+            "test mse": 0.0537,
+            "train mae": 0.066,
+            "test mae": 0.1811
+        },
+        "stratified_results": {
+            "train r2": 0.9842,
+            "test r2": 0.8829,
+            "train mse": 0.0074,
+            "test mse": 0.0537,
+            "train mae": 0.0656,
+            "test mae": 0.1809
+        },
+        "unstratified_running_time": 320.24,
+        "stratified_running_time": 324.0
+    },
+    {
+        "model_info": {
+            "model": "RandomForestRegressor",
+            "n_train": 1000,
+            "n_test": 100000,
+            "n_features": 10,
+            "FD_noise": 0,
+            "transformation": "sqrt",
+            "n_groups": 10,
+            "n_folds": 5,
+            "n_iter": 200,
+            "n_repetitions": 20,
+            "scoring": "neg_mean_squared_error",
+            "n_jobs": -1,
+            "json_file": "./results-RF-boxplot114-12-2023.json"
+        },
+        "seed": 100,
+        "repetition": 3,
+        "random_state": 2864,
+        "hyperparameters_same": true,
+        "unstratified_params": {
+            "n_estimators": 597,
+            "min_samples_split": 3,
+            "min_samples_leaf": 1,
+            "max_features": 5
+        },
+        "stratified_params": {
+            "n_estimators": 597,
+            "min_samples_split": 3,
+            "min_samples_leaf": 1,
+            "max_features": 5
+        },
+        "unstratified_results": {
+            "train r2": 0.984,
+            "test r2": 0.8857,
+            "train mse": 0.0077,
+            "test mse": 0.0524,
+            "train mae": 0.069,
+            "test mae": 0.1775
+        },
+        "stratified_results": {
+            "train r2": 0.984,
+            "test r2": 0.8857,
+            "train mse": 0.0077,
+            "test mse": 0.0524,
+            "train mae": 0.069,
+            "test mae": 0.1775
+        },
+        "unstratified_running_time": 350.35,
+        "stratified_running_time": 1265.62
+    },
+    {
+        "model_info": {
+            "model": "RandomForestRegressor",
+            "n_train": 1000,
+            "n_test": 100000,
+            "n_features": 10,
+            "FD_noise": 0,
+            "transformation": "sqrt",
+            "n_groups": 10,
+            "n_folds": 5,
+            "n_iter": 200,
+            "n_repetitions": 20,
+            "scoring": "neg_mean_squared_error",
+            "n_jobs": -1,
+            "json_file": "./results-RF-boxplot114-12-2023.json"
+        },
+        "seed": 100,
+        "repetition": 4,
+        "random_state": 6440,
+        "hyperparameters_same": true,
+        "unstratified_params": {
+            "n_estimators": 833,
+            "min_samples_split": 2,
+            "min_samples_leaf": 2,
+            "max_features": 5
+        },
+        "stratified_params": {
+            "n_estimators": 833,
+            "min_samples_split": 2,
+            "min_samples_leaf": 2,
+            "max_features": 5
+        },
+        "unstratified_results": {
+            "train r2": 0.9762,
+            "test r2": 0.8776,
+            "train mse": 0.0109,
+            "test mse": 0.0561,
+            "train mae": 0.0799,
+            "test mae": 0.1847
+        },
+        "stratified_results": {
+            "train r2": 0.9762,
+            "test r2": 0.8776,
+            "train mse": 0.0109,
+            "test mse": 0.0561,
+            "train mae": 0.0799,
+            "test mae": 0.1847
+        },
+        "unstratified_running_time": 23714.19,
+        "stratified_running_time": 1455.57
+    },
+    {
+        "model_info": {
+            "model": "RandomForestRegressor",
+            "n_train": 1000,
+            "n_test": 100000,
+            "n_features": 10,
+            "FD_noise": 0,
+            "transformation": "sqrt",
+            "n_groups": 10,
+            "n_folds": 5,
+            "n_iter": 200,
+            "n_repetitions": 20,
+            "scoring": "neg_mean_squared_error",
+            "n_jobs": -1,
+            "json_file": "./results-RF-boxplot114-12-2023.json"
+        },
+        "seed": 100,
+        "repetition": 5,
+        "random_state": 5731,
+        "hyperparameters_same": true,
+        "unstratified_params": {
+            "n_estimators": 828,
+            "min_samples_split": 3,
+            "min_samples_leaf": 1,
+            "max_features": 8
+        },
+        "stratified_params": {
+            "n_estimators": 828,
+            "min_samples_split": 3,
+            "min_samples_leaf": 1,
+            "max_features": 8
+        },
+        "unstratified_results": {
+            "train r2": 0.9823,
+            "test r2": 0.877,
+            "train mse": 0.0084,
+            "test mse": 0.0564,
+            "train mae": 0.0713,
+            "test mae": 0.1865
+        },
+        "stratified_results": {
+            "train r2": 0.9823,
+            "test r2": 0.877,
+            "train mse": 0.0084,
+            "test mse": 0.0564,
+            "train mae": 0.0713,
+            "test mae": 0.1865
+        },
+        "unstratified_running_time": 926.71,
+        "stratified_running_time": 814.78
+    },
+    {
+        "model_info": {
+            "model": "RandomForestRegressor",
+            "n_train": 1000,
+            "n_test": 100000,
+            "n_features": 10,
+            "FD_noise": 0,
+            "transformation": "sqrt",
+            "n_groups": 10,
+            "n_folds": 5,
+            "n_iter": 200,
+            "n_repetitions": 20,
+            "scoring": "neg_mean_squared_error",
+            "n_jobs": -1,
+            "json_file": "./results-RF-boxplot114-12-2023.json"
+        },
+        "seed": 100,
+        "repetition": 6,
+        "random_state": 7103,
+        "hyperparameters_same": false,
+        "unstratified_params": {
+            "n_estimators": 833,
+            "min_samples_split": 5,
+            "min_samples_leaf": 2,
+            "max_features": 6
+        },
+        "stratified_params": {
+            "n_estimators": 946,
+            "min_samples_split": 4,
+            "min_samples_leaf": 2,
+            "max_features": 7
+        },
+        "unstratified_results": {
+            "train r2": 0.9746,
+            "test r2": 0.885,
+            "train mse": 0.012,
+            "test mse": 0.0527,
+            "train mae": 0.0835,
+            "test mae": 0.1794
+        },
+        "stratified_results": {
+            "train r2": 0.9775,
+            "test r2": 0.884,
+            "train mse": 0.0106,
+            "test mse": 0.0532,
+            "train mae": 0.079,
+            "test mae": 0.1804
+        },
+        "unstratified_running_time": 808.96,
+        "stratified_running_time": 828.84
+    },
+    {
+        "model_info": {
+            "model": "RandomForestRegressor",
+            "n_train": 1000,
+            "n_test": 100000,
+            "n_features": 10,
+            "FD_noise": 0,
+            "transformation": "sqrt",
+            "n_groups": 10,
+            "n_folds": 5,
+            "n_iter": 200,
+            "n_repetitions": 20,
+            "scoring": "neg_mean_squared_error",
+            "n_jobs": -1,
+            "json_file": "./results-RF-boxplot114-12-2023.json"
+        },
+        "seed": 100,
+        "repetition": 7,
+        "random_state": 8305,
+        "hyperparameters_same": true,
+        "unstratified_params": {
+            "n_estimators": 601,
+            "min_samples_split": 5,
+            "min_samples_leaf": 2,
+            "max_features": 6
+        },
+        "stratified_params": {
+            "n_estimators": 601,
+            "min_samples_split": 5,
+            "min_samples_leaf": 2,
+            "max_features": 6
+        },
+        "unstratified_results": {
+            "train r2": 0.9748,
+            "test r2": 0.8819,
+            "train mse": 0.0116,
+            "test mse": 0.0542,
+            "train mae": 0.0833,
+            "test mae": 0.1822
+        },
+        "stratified_results": {
+            "train r2": 0.9748,
+            "test r2": 0.8819,
+            "train mse": 0.0116,
+            "test mse": 0.0542,
+            "train mae": 0.0833,
+            "test mae": 0.1822
+        },
+        "unstratified_running_time": 638.3,
+        "stratified_running_time": 19609.32
+    },
+    {
+        "model_info": {
+            "model": "RandomForestRegressor",
+            "n_train": 1000,
+            "n_test": 100000,
+            "n_features": 10,
+            "FD_noise": 0,
+            "transformation": "sqrt",
+            "n_groups": 10,
+            "n_folds": 5,
+            "n_iter": 200,
+            "n_repetitions": 10,
+            "scoring": "neg_mean_squared_error",
+            "n_jobs": -1,
+            "json_file": "./results-RF-nadja.json"
+        },
+        "seed": 100,
+        "repetition": 0,
+        "random_state": 2387,
+        "hyperparameters_same": true,
+        "unstratified_params": {
+            "n_estimators": 639,
+            "min_samples_split": 4,
+            "min_samples_leaf": 1,
+            "max_features": 6
+        },
+        "stratified_params": {
+            "n_estimators": 639,
+            "min_samples_split": 4,
+            "min_samples_leaf": 1,
+            "max_features": 6
+        },
+        "unstratified_results": {
+            "train r2": 0.9767,
+            "test r2": 0.8617,
+            "train mse": 0.0101,
+            "test mse": 0.0634,
+            "train mae": 0.076,
+            "test mae": 0.1962
+        },
+        "stratified_results": {
+            "train r2": 0.9767,
+            "test r2": 0.8617,
+            "train mse": 0.0101,
+            "test mse": 0.0634,
+            "train mae": 0.076,
+            "test mae": 0.1962
+        },
+        "unstratified_running_time": 291.89,
+        "stratified_running_time": 294.75
+    },
+    {
+        "model_info": {
+            "model": "RandomForestRegressor",
+            "n_train": 1000,
+            "n_test": 100000,
+            "n_features": 10,
+            "FD_noise": 0,
+            "transformation": "sqrt",
+            "n_groups": 10,
+            "n_folds": 5,
+            "n_iter": 200,
+            "n_repetitions": 10,
+            "scoring": "neg_mean_squared_error",
+            "n_jobs": -1,
+            "json_file": "./results-RF-nadja.json"
+        },
+        "seed": 100,
+        "repetition": 1,
+        "random_state": 7529,
+        "hyperparameters_same": true,
+        "unstratified_params": {
+            "n_estimators": 994,
+            "min_samples_split": 3,
+            "min_samples_leaf": 1,
+            "max_features": 7
+        },
+        "stratified_params": {
+            "n_estimators": 994,
+            "min_samples_split": 3,
+            "min_samples_leaf": 1,
+            "max_features": 7
+        },
+        "unstratified_results": {
+            "train r2": 0.9822,
+            "test r2": 0.8819,
+            "train mse": 0.0084,
+            "test mse": 0.0541,
+            "train mae": 0.0699,
+            "test mae": 0.1816
+        },
+        "stratified_results": {
+            "train r2": 0.9822,
+            "test r2": 0.8819,
+            "train mse": 0.0084,
+            "test mse": 0.0541,
+            "train mae": 0.0699,
+            "test mae": 0.1816
+        },
+        "unstratified_running_time": 275.31,
+        "stratified_running_time": 274.9
+    },
+    {
+        "model_info": {
+            "model": "RandomForestRegressor",
+            "n_train": 1000,
+            "n_test": 100000,
+            "n_features": 10,
+            "FD_noise": 0,
+            "transformation": "sqrt",
+            "n_groups": 10,
+            "n_folds": 5,
+            "n_iter": 200,
+            "n_repetitions": 10,
+            "scoring": "neg_mean_squared_error",
+            "n_jobs": -1,
+            "json_file": "./results-RF-nadja.json"
+        },
+        "seed": 100,
+        "repetition": 2,
+        "random_state": 7454,
+        "hyperparameters_same": false,
+        "unstratified_params": {
+            "n_estimators": 555,
+            "min_samples_split": 2,
+            "min_samples_leaf": 1,
+            "max_features": 6
+        },
+        "stratified_params": {
+            "n_estimators": 876,
+            "min_samples_split": 2,
+            "min_samples_leaf": 1,
+            "max_features": 7
+        },
+        "unstratified_results": {
+            "train r2": 0.9841,
+            "test r2": 0.8828,
+            "train mse": 0.0074,
+            "test mse": 0.0537,
+            "train mae": 0.066,
+            "test mae": 0.1811
+        },
+        "stratified_results": {
+            "train r2": 0.9842,
+            "test r2": 0.8829,
+            "train mse": 0.0074,
+            "test mse": 0.0537,
+            "train mae": 0.0657,
+            "test mae": 0.1809
+        },
+        "unstratified_running_time": 281.17,
+        "stratified_running_time": 367.73
+    },
+    {
+        "model_info": {
+            "model": "RandomForestRegressor",
+            "n_train": 1000,
+            "n_test": 100000,
+            "n_features": 10,
+            "FD_noise": 0,
+            "transformation": "sqrt",
+            "n_groups": 10,
+            "n_folds": 5,
+            "n_iter": 200,
+            "n_repetitions": 10,
+            "scoring": "neg_mean_squared_error",
+            "n_jobs": -1,
+            "json_file": "./results-RF-nadja.json"
+        },
+        "seed": 100,
+        "repetition": 3,
+        "random_state": 2864,
+        "hyperparameters_same": true,
+        "unstratified_params": {
+            "n_estimators": 597,
+            "min_samples_split": 3,
+            "min_samples_leaf": 1,
+            "max_features": 5
+        },
+        "stratified_params": {
+            "n_estimators": 597,
+            "min_samples_split": 3,
+            "min_samples_leaf": 1,
+            "max_features": 5
+        },
+        "unstratified_results": {
+            "train r2": 0.984,
+            "test r2": 0.8857,
+            "train mse": 0.0077,
+            "test mse": 0.0524,
+            "train mae": 0.069,
+            "test mae": 0.1775
+        },
+        "stratified_results": {
+            "train r2": 0.984,
+            "test r2": 0.8857,
+            "train mse": 0.0077,
+            "test mse": 0.0524,
+            "train mae": 0.069,
+            "test mae": 0.1775
+        },
+        "unstratified_running_time": 398.26,
+        "stratified_running_time": 285.75
+    },
+    {
+        "model_info": {
+            "model": "RandomForestRegressor",
+            "n_train": 1000,
+            "n_test": 100000,
+            "n_features": 10,
+            "FD_noise": 0,
+            "transformation": "sqrt",
+            "n_groups": 10,
+            "n_folds": 5,
+            "n_iter": 200,
+            "n_repetitions": 10,
+            "scoring": "neg_mean_squared_error",
+            "n_jobs": -1,
+            "json_file": "./results-RF-nadja.json"
+        },
+        "seed": 100,
+        "repetition": 4,
+        "random_state": 6440,
+        "hyperparameters_same": true,
+        "unstratified_params": {
+            "n_estimators": 833,
+            "min_samples_split": 2,
+            "min_samples_leaf": 2,
+            "max_features": 5
+        },
+        "stratified_params": {
+            "n_estimators": 833,
+            "min_samples_split": 2,
+            "min_samples_leaf": 2,
+            "max_features": 5
+        },
+        "unstratified_results": {
+            "train r2": 0.9762,
+            "test r2": 0.8777,
+            "train mse": 0.0109,
+            "test mse": 0.0561,
+            "train mae": 0.0799,
+            "test mae": 0.1847
+        },
+        "stratified_results": {
+            "train r2": 0.9762,
+            "test r2": 0.8777,
+            "train mse": 0.0109,
+            "test mse": 0.0561,
+            "train mae": 0.0799,
+            "test mae": 0.1847
+        },
+        "unstratified_running_time": 279.15,
+        "stratified_running_time": 286.08
+    },
+    {
+        "model_info": {
+            "model": "RandomForestRegressor",
+            "n_train": 1000,
+            "n_test": 100000,
+            "n_features": 10,
+            "FD_noise": 0,
+            "transformation": "sqrt",
+            "n_groups": 10,
+            "n_folds": 5,
+            "n_iter": 200,
+            "n_repetitions": 10,
+            "scoring": "neg_mean_squared_error",
+            "n_jobs": -1,
+            "json_file": "./results-RF-nadja.json"
+        },
+        "seed": 100,
+        "repetition": 5,
+        "random_state": 5731,
+        "hyperparameters_same": true,
+        "unstratified_params": {
+            "n_estimators": 828,
+            "min_samples_split": 3,
+            "min_samples_leaf": 1,
+            "max_features": 8
+        },
+        "stratified_params": {
+            "n_estimators": 828,
+            "min_samples_split": 3,
+            "min_samples_leaf": 1,
+            "max_features": 8
+        },
+        "unstratified_results": {
+            "train r2": 0.9823,
+            "test r2": 0.877,
+            "train mse": 0.0084,
+            "test mse": 0.0564,
+            "train mae": 0.0712,
+            "test mae": 0.1865
+        },
+        "stratified_results": {
+            "train r2": 0.9823,
+            "test r2": 0.877,
+            "train mse": 0.0084,
+            "test mse": 0.0564,
+            "train mae": 0.0712,
+            "test mae": 0.1865
+        },
+        "unstratified_running_time": 293.31,
+        "stratified_running_time": 293.99
+    },
+    {
+        "model_info": {
+            "model": "RandomForestRegressor",
+            "n_train": 1000,
+            "n_test": 100000,
+            "n_features": 10,
+            "FD_noise": 0,
+            "transformation": "sqrt",
+            "n_groups": 10,
+            "n_folds": 5,
+            "n_iter": 200,
+            "n_repetitions": 10,
+            "scoring": "neg_mean_squared_error",
+            "n_jobs": -1,
+            "json_file": "./results-RF-nadja.json"
+        },
+        "seed": 100,
+        "repetition": 6,
+        "random_state": 7103,
+        "hyperparameters_same": false,
+        "unstratified_params": {
+            "n_estimators": 833,
+            "min_samples_split": 5,
+            "min_samples_leaf": 2,
+            "max_features": 6
+        },
+        "stratified_params": {
+            "n_estimators": 946,
+            "min_samples_split": 4,
+            "min_samples_leaf": 2,
+            "max_features": 7
+        },
+        "unstratified_results": {
+            "train r2": 0.9746,
+            "test r2": 0.885,
+            "train mse": 0.012,
+            "test mse": 0.0527,
+            "train mae": 0.0835,
+            "test mae": 0.1794
+        },
+        "stratified_results": {
+            "train r2": 0.9775,
+            "test r2": 0.884,
+            "train mse": 0.0106,
+            "test mse": 0.0532,
+            "train mae": 0.079,
+            "test mae": 0.1804
+        },
+        "unstratified_running_time": 289.68,
+        "stratified_running_time": 291.69
+    },
+    {
+        "model_info": {
+            "model": "RandomForestRegressor",
+            "n_train": 1000,
+            "n_test": 100000,
+            "n_features": 10,
+            "FD_noise": 0,
+            "transformation": "sqrt",
+            "n_groups": 10,
+            "n_folds": 5,
+            "n_iter": 200,
+            "n_repetitions": 10,
+            "scoring": "neg_mean_squared_error",
+            "n_jobs": -1,
+            "json_file": "./results-RF-nadja.json"
+        },
+        "seed": 100,
+        "repetition": 7,
+        "random_state": 8305,
+        "hyperparameters_same": true,
+        "unstratified_params": {
+            "n_estimators": 601,
+            "min_samples_split": 5,
+            "min_samples_leaf": 2,
+            "max_features": 6
+        },
+        "stratified_params": {
+            "n_estimators": 601,
+            "min_samples_split": 5,
+            "min_samples_leaf": 2,
+            "max_features": 6
+        },
+        "unstratified_results": {
+            "train r2": 0.9748,
+            "test r2": 0.8819,
+            "train mse": 0.0116,
+            "test mse": 0.0542,
+            "train mae": 0.0834,
+            "test mae": 0.1822
+        },
+        "stratified_results": {
+            "train r2": 0.9748,
+            "test r2": 0.8819,
+            "train mse": 0.0116,
+            "test mse": 0.0542,
+            "train mae": 0.0834,
+            "test mae": 0.1822
+        },
+        "unstratified_running_time": 279.2,
+        "stratified_running_time": 280.61
+    },
+    {
+        "model_info": {
+            "model": "RandomForestRegressor",
+            "n_train": 1000,
+            "n_test": 100000,
+            "n_features": 10,
+            "FD_noise": 0,
+            "transformation": "sqrt",
+            "n_groups": 10,
+            "n_folds": 5,
+            "n_iter": 200,
+            "n_repetitions": 10,
+            "scoring": "neg_mean_squared_error",
+            "n_jobs": -1,
+            "json_file": "./results-RF-nadja.json"
+        },
+        "seed": 100,
+        "repetition": 8,
+        "random_state": 1802,
+        "hyperparameters_same": true,
+        "unstratified_params": {
+            "n_estimators": 930,
+            "min_samples_split": 4,
+            "min_samples_leaf": 2,
+            "max_features": 5
+        },
+        "stratified_params": {
+            "n_estimators": 930,
+            "min_samples_split": 4,
+            "min_samples_leaf": 2,
+            "max_features": 5
+        },
+        "unstratified_results": {
+            "train r2": 0.9757,
+            "test r2": 0.8821,
+            "train mse": 0.0106,
+            "test mse": 0.054,
+            "train mae": 0.0774,
+            "test mae": 0.1815
+        },
+        "stratified_results": {
+            "train r2": 0.9757,
+            "test r2": 0.8821,
+            "train mse": 0.0106,
+            "test mse": 0.054,
+            "train mae": 0.0774,
+            "test mae": 0.1815
+        },
+        "unstratified_running_time": 286.77,
+        "stratified_running_time": 284.48
+    },
+    {
+        "model_info": {
+            "model": "RandomForestRegressor",
+            "n_train": 1000,
+            "n_test": 100000,
+            "n_features": 10,
+            "FD_noise": 0,
+            "transformation": "sqrt",
+            "n_groups": 10,
+            "n_folds": 5,
+            "n_iter": 200,
+            "n_repetitions": 10,
+            "scoring": "neg_mean_squared_error",
+            "n_jobs": -1,
+            "json_file": "./results-RF-nadja.json"
+        },
+        "seed": 100,
+        "repetition": 9,
+        "random_state": 8732,
+        "hyperparameters_same": true,
+        "unstratified_params": {
+            "n_estimators": 666,
+            "min_samples_split": 3,
+            "min_samples_leaf": 2,
+            "max_features": 7
+        },
+        "stratified_params": {
+            "n_estimators": 666,
+            "min_samples_split": 3,
+            "min_samples_leaf": 2,
+            "max_features": 7
+        },
+        "unstratified_results": {
+            "train r2": 0.9763,
+            "test r2": 0.8791,
+            "train mse": 0.0109,
+            "test mse": 0.0554,
+            "train mae": 0.0782,
+            "test mae": 0.1836
+        },
+        "stratified_results": {
+            "train r2": 0.9763,
+            "test r2": 0.8791,
+            "train mse": 0.0109,
+            "test mse": 0.0554,
+            "train mae": 0.0782,
+            "test mae": 0.1836
+        },
+        "unstratified_running_time": 300.76,
+        "stratified_running_time": 301.58
+    },
+    {
+        "model_info": {
+            "model": "RandomForestRegressor",
+            "n_train": 1000,
+            "n_test": 100000,
+            "n_features": 10,
+            "FD_noise": 0,
+            "transformation": "identity",
+            "n_groups": 10,
+            "n_folds": 5,
+            "n_iter": 200,
+            "n_repetitions": 10,
+            "scoring": "neg_mean_squared_error",
+            "n_jobs": -1,
+            "json_file": "./results-RF-nadja.json"
+        },
+        "seed": 100,
+        "repetition": 0,
+        "random_state": 2387,
+        "hyperparameters_same": true,
+        "unstratified_params": {
+            "n_estimators": 639,
+            "min_samples_split": 4,
+            "min_samples_leaf": 1,
+            "max_features": 6
+        },
+        "stratified_params": {
+            "n_estimators": 639,
+            "min_samples_split": 4,
+            "min_samples_leaf": 1,
+            "max_features": 6
+        },
+        "unstratified_results": {
+            "train r2": 0.9783,
+            "test r2": 0.8664,
+            "train mse": 0.4984,
+            "test mse": 3.1744,
+            "train mae": 0.5415,
+            "test mae": 1.4157
+        },
+        "stratified_results": {
+            "train r2": 0.9783,
+            "test r2": 0.8664,
+            "train mse": 0.4984,
+            "test mse": 3.1744,
+            "train mae": 0.5415,
+            "test mae": 1.4157
+        },
+        "unstratified_running_time": 290.51,
+        "stratified_running_time": 294.09
+    },
+    {
+        "model_info": {
+            "model": "RandomForestRegressor",
+            "n_train": 1000,
+            "n_test": 100000,
+            "n_features": 10,
+            "FD_noise": 0,
+            "transformation": "identity",
+            "n_groups": 10,
+            "n_folds": 5,
+            "n_iter": 200,
+            "n_repetitions": 10,
+            "scoring": "neg_mean_squared_error",
+            "n_jobs": -1,
+            "json_file": "./results-RF-nadja.json"
+        },
+        "seed": 100,
+        "repetition": 1,
+        "random_state": 7529,
+        "hyperparameters_same": true,
+        "unstratified_params": {
+            "n_estimators": 994,
+            "min_samples_split": 3,
+            "min_samples_leaf": 1,
+            "max_features": 7
+        },
+        "stratified_params": {
+            "n_estimators": 994,
+            "min_samples_split": 3,
+            "min_samples_leaf": 1,
+            "max_features": 7
+        },
+        "unstratified_results": {
+            "train r2": 0.983,
+            "test r2": 0.8872,
+            "train mse": 0.4108,
+            "test mse": 2.6791,
+            "train mae": 0.4967,
+            "test mae": 1.2932
+        },
+        "stratified_results": {
+            "train r2": 0.983,
+            "test r2": 0.8872,
+            "train mse": 0.4108,
+            "test mse": 2.6791,
+            "train mae": 0.4967,
+            "test mae": 1.2932
+        },
+        "unstratified_running_time": 274.13,
+        "stratified_running_time": 273.27
+    },
+    {
+        "model_info": {
+            "model": "RandomForestRegressor",
+            "n_train": 1000,
+            "n_test": 100000,
+            "n_features": 10,
+            "FD_noise": 0,
+            "transformation": "identity",
+            "n_groups": 10,
+            "n_folds": 5,
+            "n_iter": 200,
+            "n_repetitions": 10,
+            "scoring": "neg_mean_squared_error",
+            "n_jobs": -1,
+            "json_file": "./results-RF-nadja.json"
+        },
+        "seed": 100,
+        "repetition": 2,
+        "random_state": 7454,
+        "hyperparameters_same": false,
+        "unstratified_params": {
+            "n_estimators": 876,
+            "min_samples_split": 2,
+            "min_samples_leaf": 1,
+            "max_features": 7
+        },
+        "stratified_params": {
+            "n_estimators": 555,
+            "min_samples_split": 2,
+            "min_samples_leaf": 1,
+            "max_features": 6
+        },
+        "unstratified_results": {
+            "train r2": 0.9846,
+            "test r2": 0.886,
+            "train mse": 0.3739,
+            "test mse": 2.7088,
+            "train mae": 0.4783,
+            "test mae": 1.3025
+        },
+        "stratified_results": {
+            "train r2": 0.9845,
+            "test r2": 0.8851,
+            "train mse": 0.377,
+            "test mse": 2.7288,
+            "train mae": 0.4781,
+            "test mae": 1.3077
+        },
+        "unstratified_running_time": 282.65,
+        "stratified_running_time": 279.03
+    },
+    {
+        "model_info": {
+            "model": "RandomForestRegressor",
+            "n_train": 1000,
+            "n_test": 100000,
+            "n_features": 10,
+            "FD_noise": 0,
+            "transformation": "identity",
+            "n_groups": 10,
+            "n_folds": 5,
+            "n_iter": 200,
+            "n_repetitions": 10,
+            "scoring": "neg_mean_squared_error",
+            "n_jobs": -1,
+            "json_file": "./results-RF-nadja.json"
+        },
+        "seed": 100,
+        "repetition": 3,
+        "random_state": 2864,
+        "hyperparameters_same": true,
+        "unstratified_params": {
+            "n_estimators": 597,
+            "min_samples_split": 3,
+            "min_samples_leaf": 1,
+            "max_features": 5
+        },
+        "stratified_params": {
+            "n_estimators": 597,
+            "min_samples_split": 3,
+            "min_samples_leaf": 1,
+            "max_features": 5
+        },
+        "unstratified_results": {
+            "train r2": 0.9843,
+            "test r2": 0.8898,
+            "train mse": 0.3958,
+            "test mse": 2.6172,
+            "train mae": 0.498,
+            "test mae": 1.2811
+        },
+        "stratified_results": {
+            "train r2": 0.9843,
+            "test r2": 0.8898,
+            "train mse": 0.3958,
+            "test mse": 2.6172,
+            "train mae": 0.498,
+            "test mae": 1.2811
+        },
+        "unstratified_running_time": 282.89,
+        "stratified_running_time": 282.88
+    },
+    {
+        "model_info": {
+            "model": "RandomForestRegressor",
+            "n_train": 1000,
+            "n_test": 100000,
+            "n_features": 10,
+            "FD_noise": 0,
+            "transformation": "identity",
+            "n_groups": 10,
+            "n_folds": 5,
+            "n_iter": 200,
+            "n_repetitions": 10,
+            "scoring": "neg_mean_squared_error",
+            "n_jobs": -1,
+            "json_file": "./results-RF-nadja.json"
+        },
+        "seed": 100,
+        "repetition": 4,
+        "random_state": 6440,
+        "hyperparameters_same": true,
+        "unstratified_params": {
+            "n_estimators": 833,
+            "min_samples_split": 2,
+            "min_samples_leaf": 2,
+            "max_features": 5
+        },
+        "stratified_params": {
+            "n_estimators": 833,
+            "min_samples_split": 2,
+            "min_samples_leaf": 2,
+            "max_features": 5
+        },
+        "unstratified_results": {
+            "train r2": 0.9767,
+            "test r2": 0.8827,
+            "train mse": 0.5535,
+            "test mse": 2.7862,
+            "train mae": 0.5773,
+            "test mae": 1.3266
+        },
+        "stratified_results": {
+            "train r2": 0.9767,
+            "test r2": 0.8827,
+            "train mse": 0.5535,
+            "test mse": 2.7862,
+            "train mae": 0.5773,
+            "test mae": 1.3266
+        },
+        "unstratified_running_time": 276.51,
+        "stratified_running_time": 276.91
+    },
+    {
+        "model_info": {
+            "model": "RandomForestRegressor",
+            "n_train": 1000,
+            "n_test": 100000,
+            "n_features": 10,
+            "FD_noise": 0,
+            "transformation": "identity",
+            "n_groups": 10,
+            "n_folds": 5,
+            "n_iter": 200,
+            "n_repetitions": 10,
+            "scoring": "neg_mean_squared_error",
+            "n_jobs": -1,
+            "json_file": "./results-RF-nadja.json"
+        },
+        "seed": 100,
+        "repetition": 5,
+        "random_state": 5731,
+        "hyperparameters_same": true,
+        "unstratified_params": {
+            "n_estimators": 828,
+            "min_samples_split": 3,
+            "min_samples_leaf": 1,
+            "max_features": 8
+        },
+        "stratified_params": {
+            "n_estimators": 828,
+            "min_samples_split": 3,
+            "min_samples_leaf": 1,
+            "max_features": 8
+        },
+        "unstratified_results": {
+            "train r2": 0.9827,
+            "test r2": 0.8848,
+            "train mse": 0.4229,
+            "test mse": 2.7359,
+            "train mae": 0.5154,
+            "test mae": 1.3246
+        },
+        "stratified_results": {
+            "train r2": 0.9827,
+            "test r2": 0.8848,
+            "train mse": 0.4229,
+            "test mse": 2.7359,
+            "train mae": 0.5154,
+            "test mae": 1.3246
+        },
+        "unstratified_running_time": 291.6,
+        "stratified_running_time": 291.63
+    },
+    {
+        "model_info": {
+            "model": "RandomForestRegressor",
+            "n_train": 1000,
+            "n_test": 100000,
+            "n_features": 10,
+            "FD_noise": 0,
+            "transformation": "identity",
+            "n_groups": 10,
+            "n_folds": 5,
+            "n_iter": 200,
+            "n_repetitions": 10,
+            "scoring": "neg_mean_squared_error",
+            "n_jobs": -1,
+            "json_file": "./results-RF-nadja.json"
+        },
+        "seed": 100,
+        "repetition": 6,
+        "random_state": 7103,
+        "hyperparameters_same": false,
+        "unstratified_params": {
+            "n_estimators": 946,
+            "min_samples_split": 4,
+            "min_samples_leaf": 2,
+            "max_features": 7
+        },
+        "stratified_params": {
+            "n_estimators": 833,
+            "min_samples_split": 5,
+            "min_samples_leaf": 2,
+            "max_features": 6
+        },
+        "unstratified_results": {
+            "train r2": 0.9785,
+            "test r2": 0.8896,
+            "train mse": 0.531,
+            "test mse": 2.6228,
+            "train mae": 0.5675,
+            "test mae": 1.2885
+        },
+        "stratified_results": {
+            "train r2": 0.9758,
+            "test r2": 0.8899,
+            "train mse": 0.5987,
+            "test mse": 2.6159,
+            "train mae": 0.6022,
+            "test mae": 1.2883
+        },
+        "unstratified_running_time": 290.52,
+        "stratified_running_time": 288.23
+    },
+    {
+        "model_info": {
+            "model": "RandomForestRegressor",
+            "n_train": 1000,
+            "n_test": 100000,
+            "n_features": 10,
+            "FD_noise": 0,
+            "transformation": "identity",
+            "n_groups": 10,
+            "n_folds": 5,
+            "n_iter": 200,
+            "n_repetitions": 10,
+            "scoring": "neg_mean_squared_error",
+            "n_jobs": -1,
+            "json_file": "./results-RF-nadja.json"
+        },
+        "seed": 100,
+        "repetition": 7,
+        "random_state": 8305,
+        "hyperparameters_same": true,
+        "unstratified_params": {
+            "n_estimators": 601,
+            "min_samples_split": 5,
+            "min_samples_leaf": 2,
+            "max_features": 6
+        },
+        "stratified_params": {
+            "n_estimators": 601,
+            "min_samples_split": 5,
+            "min_samples_leaf": 2,
+            "max_features": 6
+        },
+        "unstratified_results": {
+            "train r2": 0.9753,
+            "test r2": 0.8872,
+            "train mse": 0.5936,
+            "test mse": 2.6797,
+            "train mae": 0.5997,
+            "test mae": 1.307
+        },
+        "stratified_results": {
+            "train r2": 0.9753,
+            "test r2": 0.8872,
+            "train mse": 0.5936,
+            "test mse": 2.6797,
+            "train mae": 0.5997,
+            "test mae": 1.307
+        },
+        "unstratified_running_time": 277.55,
+        "stratified_running_time": 277.91
+    },
+    {
+        "model_info": {
+            "model": "RandomForestRegressor",
+            "n_train": 1000,
+            "n_test": 100000,
+            "n_features": 10,
+            "FD_noise": 0,
+            "transformation": "identity",
+            "n_groups": 10,
+            "n_folds": 5,
+            "n_iter": 200,
+            "n_repetitions": 10,
+            "scoring": "neg_mean_squared_error",
+            "n_jobs": -1,
+            "json_file": "./results-RF-nadja.json"
+        },
+        "seed": 100,
+        "repetition": 8,
+        "random_state": 1802,
+        "hyperparameters_same": true,
+        "unstratified_params": {
+            "n_estimators": 930,
+            "min_samples_split": 4,
+            "min_samples_leaf": 2,
+            "max_features": 5
+        },
+        "stratified_params": {
+            "n_estimators": 930,
+            "min_samples_split": 4,
+            "min_samples_leaf": 2,
+            "max_features": 5
+        },
+        "unstratified_results": {
+            "train r2": 0.9759,
+            "test r2": 0.8835,
+            "train mse": 0.5548,
+            "test mse": 2.7689,
+            "train mae": 0.5741,
+            "test mae": 1.3217
+        },
+        "stratified_results": {
+            "train r2": 0.9759,
+            "test r2": 0.8835,
+            "train mse": 0.5548,
+            "test mse": 2.7689,
+            "train mae": 0.5741,
+            "test mae": 1.3217
+        },
+        "unstratified_running_time": 282.95,
+        "stratified_running_time": 282.42
+    },
+    {
+        "model_info": {
+            "model": "RandomForestRegressor",
+            "n_train": 1000,
+            "n_test": 100000,
+            "n_features": 10,
+            "FD_noise": 0,
+            "transformation": "identity",
+            "n_groups": 10,
+            "n_folds": 5,
+            "n_iter": 200,
+            "n_repetitions": 10,
+            "scoring": "neg_mean_squared_error",
+            "n_jobs": -1,
+            "json_file": "./results-RF-nadja.json"
+        },
+        "seed": 100,
+        "repetition": 9,
+        "random_state": 8732,
+        "hyperparameters_same": true,
+        "unstratified_params": {
+            "n_estimators": 666,
+            "min_samples_split": 3,
+            "min_samples_leaf": 2,
+            "max_features": 7
+        },
+        "stratified_params": {
+            "n_estimators": 666,
+            "min_samples_split": 3,
+            "min_samples_leaf": 2,
+            "max_features": 7
+        },
+        "unstratified_results": {
+            "train r2": 0.9773,
+            "test r2": 0.8839,
+            "train mse": 0.5397,
+            "test mse": 2.7578,
+            "train mae": 0.5609,
+            "test mae": 1.312
+        },
+        "stratified_results": {
+            "train r2": 0.9773,
+            "test r2": 0.8839,
+            "train mse": 0.5397,
+            "test mse": 2.7578,
+            "train mae": 0.5609,
+            "test mae": 1.312
+        },
+        "unstratified_running_time": 298.0,
+        "stratified_running_time": 299.23
+    },
+    {
+        "model_info": {
+            "model": "RandomForestRegressor",
+            "n_train": 1000,
+            "n_test": 100000,
+            "n_features": 10,
+            "FD_noise": 0,
+            "transformation": "identity",
+            "n_groups": 20,
+            "n_folds": 5,
+            "n_iter": 200,
+            "n_repetitions": 10,
+            "scoring": "neg_mean_squared_error",
+            "n_jobs": -1,
+            "json_file": "./results-RF-nadja.json"
+        },
+        "seed": 100,
+        "repetition": 0,
+        "random_state": 2387,
+        "hyperparameters_same": true,
+        "unstratified_params": {
+            "n_estimators": 639,
+            "min_samples_split": 4,
+            "min_samples_leaf": 1,
+            "max_features": 6
+        },
+        "stratified_params": {
+            "n_estimators": 639,
+            "min_samples_split": 4,
+            "min_samples_leaf": 1,
+            "max_features": 6
+        },
+        "unstratified_results": {
+            "train r2": 0.9783,
+            "test r2": 0.8664,
+            "train mse": 0.4984,
+            "test mse": 3.1744,
+            "train mae": 0.5415,
+            "test mae": 1.4157
+        },
+        "stratified_results": {
+            "train r2": 0.9783,
+            "test r2": 0.8664,
+            "train mse": 0.4984,
+            "test mse": 3.1744,
+            "train mae": 0.5415,
+            "test mae": 1.4157
+        },
+        "unstratified_running_time": 298.56,
+        "stratified_running_time": 296.36
+    },
+    {
+        "model_info": {
+            "model": "RandomForestRegressor",
+            "n_train": 1000,
+            "n_test": 100000,
+            "n_features": 10,
+            "FD_noise": 0,
+            "transformation": "identity",
+            "n_groups": 20,
+            "n_folds": 5,
+            "n_iter": 200,
+            "n_repetitions": 10,
+            "scoring": "neg_mean_squared_error",
+            "n_jobs": -1,
+            "json_file": "./results-RF-nadja.json"
+        },
+        "seed": 100,
+        "repetition": 1,
+        "random_state": 7529,
+        "hyperparameters_same": true,
+        "unstratified_params": {
+            "n_estimators": 994,
+            "min_samples_split": 3,
+            "min_samples_leaf": 1,
+            "max_features": 7
+        },
+        "stratified_params": {
+            "n_estimators": 994,
+            "min_samples_split": 3,
+            "min_samples_leaf": 1,
+            "max_features": 7
+        },
+        "unstratified_results": {
+            "train r2": 0.983,
+            "test r2": 0.8872,
+            "train mse": 0.4108,
+            "test mse": 2.6791,
+            "train mae": 0.4967,
+            "test mae": 1.2932
+        },
+        "stratified_results": {
+            "train r2": 0.983,
+            "test r2": 0.8872,
+            "train mse": 0.4108,
+            "test mse": 2.6791,
+            "train mae": 0.4967,
+            "test mae": 1.2932
+        },
+        "unstratified_running_time": 273.92,
+        "stratified_running_time": 274.39
+    },
+    {
+        "model_info": {
+            "model": "RandomForestRegressor",
+            "n_train": 1000,
+            "n_test": 100000,
+            "n_features": 10,
+            "FD_noise": 0,
+            "transformation": "identity",
+            "n_groups": 20,
+            "n_folds": 5,
+            "n_iter": 200,
+            "n_repetitions": 10,
+            "scoring": "neg_mean_squared_error",
+            "n_jobs": -1,
+            "json_file": "./results-RF-nadja.json"
+        },
+        "seed": 100,
+        "repetition": 2,
+        "random_state": 7454,
+        "hyperparameters_same": false,
+        "unstratified_params": {
+            "n_estimators": 876,
+            "min_samples_split": 2,
+            "min_samples_leaf": 1,
+            "max_features": 7
+        },
+        "stratified_params": {
+            "n_estimators": 555,
+            "min_samples_split": 2,
+            "min_samples_leaf": 1,
+            "max_features": 6
+        },
+        "unstratified_results": {
+            "train r2": 0.9846,
+            "test r2": 0.886,
+            "train mse": 0.3739,
+            "test mse": 2.7088,
+            "train mae": 0.4783,
+            "test mae": 1.3025
+        },
+        "stratified_results": {
+            "train r2": 0.9845,
+            "test r2": 0.8851,
+            "train mse": 0.377,
+            "test mse": 2.7288,
+            "train mae": 0.4781,
+            "test mae": 1.3077
+        },
+        "unstratified_running_time": 282.32,
+        "stratified_running_time": 278.01
+    },
+    {
+        "model_info": {
+            "model": "RandomForestRegressor",
+            "n_train": 1000,
+            "n_test": 100000,
+            "n_features": 10,
+            "FD_noise": 0,
+            "transformation": "identity",
+            "n_groups": 20,
+            "n_folds": 5,
+            "n_iter": 200,
+            "n_repetitions": 10,
+            "scoring": "neg_mean_squared_error",
+            "n_jobs": -1,
+            "json_file": "./results-RF-nadja.json"
+        },
+        "seed": 100,
+        "repetition": 3,
+        "random_state": 2864,
+        "hyperparameters_same": true,
+        "unstratified_params": {
+            "n_estimators": 597,
+            "min_samples_split": 3,
+            "min_samples_leaf": 1,
+            "max_features": 5
+        },
+        "stratified_params": {
+            "n_estimators": 597,
+            "min_samples_split": 3,
+            "min_samples_leaf": 1,
+            "max_features": 5
+        },
+        "unstratified_results": {
+            "train r2": 0.9843,
+            "test r2": 0.8898,
+            "train mse": 0.3958,
+            "test mse": 2.6172,
+            "train mae": 0.498,
+            "test mae": 1.2811
+        },
+        "stratified_results": {
+            "train r2": 0.9843,
+            "test r2": 0.8898,
+            "train mse": 0.3958,
+            "test mse": 2.6172,
+            "train mae": 0.498,
+            "test mae": 1.2811
+        },
+        "unstratified_running_time": 282.48,
+        "stratified_running_time": 282.83
+    },
+    {
+        "model_info": {
+            "model": "RandomForestRegressor",
+            "n_train": 1000,
+            "n_test": 100000,
+            "n_features": 10,
+            "FD_noise": 0,
+            "transformation": "identity",
+            "n_groups": 20,
+            "n_folds": 5,
+            "n_iter": 200,
+            "n_repetitions": 10,
+            "scoring": "neg_mean_squared_error",
+            "n_jobs": -1,
+            "json_file": "./results-RF-nadja.json"
+        },
+        "seed": 100,
+        "repetition": 4,
+        "random_state": 6440,
+        "hyperparameters_same": true,
+        "unstratified_params": {
+            "n_estimators": 833,
+            "min_samples_split": 2,
+            "min_samples_leaf": 2,
+            "max_features": 5
+        },
+        "stratified_params": {
+            "n_estimators": 833,
+            "min_samples_split": 2,
+            "min_samples_leaf": 2,
+            "max_features": 5
+        },
+        "unstratified_results": {
+            "train r2": 0.9767,
+            "test r2": 0.8827,
+            "train mse": 0.5535,
+            "test mse": 2.7862,
+            "train mae": 0.5773,
+            "test mae": 1.3266
+        },
+        "stratified_results": {
+            "train r2": 0.9767,
+            "test r2": 0.8827,
+            "train mse": 0.5535,
+            "test mse": 2.7862,
+            "train mae": 0.5773,
+            "test mae": 1.3266
+        },
+        "unstratified_running_time": 275.93,
+        "stratified_running_time": 276.71
+    },
+    {
+        "model_info": {
+            "model": "RandomForestRegressor",
+            "n_train": 1000,
+            "n_test": 100000,
+            "n_features": 10,
+            "FD_noise": 0,
+            "transformation": "identity",
+            "n_groups": 20,
+            "n_folds": 5,
+            "n_iter": 200,
+            "n_repetitions": 10,
+            "scoring": "neg_mean_squared_error",
+            "n_jobs": -1,
+            "json_file": "./results-RF-nadja.json"
+        },
+        "seed": 100,
+        "repetition": 5,
+        "random_state": 5731,
+        "hyperparameters_same": true,
+        "unstratified_params": {
+            "n_estimators": 828,
+            "min_samples_split": 3,
+            "min_samples_leaf": 1,
+            "max_features": 8
+        },
+        "stratified_params": {
+            "n_estimators": 828,
+            "min_samples_split": 3,
+            "min_samples_leaf": 1,
+            "max_features": 8
+        },
+        "unstratified_results": {
+            "train r2": 0.9827,
+            "test r2": 0.8848,
+            "train mse": 0.4229,
+            "test mse": 2.7359,
+            "train mae": 0.5154,
+            "test mae": 1.3246
+        },
+        "stratified_results": {
+            "train r2": 0.9827,
+            "test r2": 0.8848,
+            "train mse": 0.4229,
+            "test mse": 2.7359,
+            "train mae": 0.5154,
+            "test mae": 1.3246
+        },
+        "unstratified_running_time": 292.04,
+        "stratified_running_time": 291.44
+    },
+    {
+        "model_info": {
+            "model": "RandomForestRegressor",
+            "n_train": 1000,
+            "n_test": 100000,
+            "n_features": 10,
+            "FD_noise": 0,
+            "transformation": "identity",
+            "n_groups": 20,
+            "n_folds": 5,
+            "n_iter": 200,
+            "n_repetitions": 10,
+            "scoring": "neg_mean_squared_error",
+            "n_jobs": -1,
+            "json_file": "./results-RF-nadja.json"
+        },
+        "seed": 100,
+        "repetition": 6,
+        "random_state": 7103,
+        "hyperparameters_same": false,
+        "unstratified_params": {
+            "n_estimators": 946,
+            "min_samples_split": 4,
+            "min_samples_leaf": 2,
+            "max_features": 7
+        },
+        "stratified_params": {
+            "n_estimators": 833,
+            "min_samples_split": 5,
+            "min_samples_leaf": 2,
+            "max_features": 6
+        },
+        "unstratified_results": {
+            "train r2": 0.9785,
+            "test r2": 0.8896,
+            "train mse": 0.531,
+            "test mse": 2.6228,
+            "train mae": 0.5675,
+            "test mae": 1.2885
+        },
+        "stratified_results": {
+            "train r2": 0.9758,
+            "test r2": 0.8899,
+            "train mse": 0.5987,
+            "test mse": 2.6159,
+            "train mae": 0.6022,
+            "test mae": 1.2883
+        },
+        "unstratified_running_time": 290.78,
+        "stratified_running_time": 288.87
+    },
+    {
+        "model_info": {
+            "model": "RandomForestRegressor",
+            "n_train": 1000,
+            "n_test": 100000,
+            "n_features": 10,
+            "FD_noise": 0,
+            "transformation": "identity",
+            "n_groups": 20,
+            "n_folds": 5,
+            "n_iter": 200,
+            "n_repetitions": 10,
+            "scoring": "neg_mean_squared_error",
+            "n_jobs": -1,
+            "json_file": "./results-RF-nadja.json"
+        },
+        "seed": 100,
+        "repetition": 7,
+        "random_state": 8305,
+        "hyperparameters_same": true,
+        "unstratified_params": {
+            "n_estimators": 601,
+            "min_samples_split": 5,
+            "min_samples_leaf": 2,
+            "max_features": 6
+        },
+        "stratified_params": {
+            "n_estimators": 601,
+            "min_samples_split": 5,
+            "min_samples_leaf": 2,
+            "max_features": 6
+        },
+        "unstratified_results": {
+            "train r2": 0.9753,
+            "test r2": 0.8872,
+            "train mse": 0.5936,
+            "test mse": 2.6797,
+            "train mae": 0.5997,
+            "test mae": 1.307
+        },
+        "stratified_results": {
+            "train r2": 0.9753,
+            "test r2": 0.8872,
+            "train mse": 0.5936,
+            "test mse": 2.6797,
+            "train mae": 0.5997,
+            "test mae": 1.307
+        },
+        "unstratified_running_time": 277.33,
+        "stratified_running_time": 277.77
+    },
+    {
+        "model_info": {
+            "model": "RandomForestRegressor",
+            "n_train": 1000,
+            "n_test": 100000,
+            "n_features": 10,
+            "FD_noise": 0,
+            "transformation": "identity",
+            "n_groups": 20,
+            "n_folds": 5,
+            "n_iter": 200,
+            "n_repetitions": 10,
+            "scoring": "neg_mean_squared_error",
+            "n_jobs": -1,
+            "json_file": "./results-RF-nadja.json"
+        },
+        "seed": 100,
+        "repetition": 8,
+        "random_state": 1802,
+        "hyperparameters_same": true,
+        "unstratified_params": {
+            "n_estimators": 930,
+            "min_samples_split": 4,
+            "min_samples_leaf": 2,
+            "max_features": 5
+        },
+        "stratified_params": {
+            "n_estimators": 930,
+            "min_samples_split": 4,
+            "min_samples_leaf": 2,
+            "max_features": 5
+        },
+        "unstratified_results": {
+            "train r2": 0.9759,
+            "test r2": 0.8835,
+            "train mse": 0.5548,
+            "test mse": 2.7689,
+            "train mae": 0.5741,
+            "test mae": 1.3217
+        },
+        "stratified_results": {
+            "train r2": 0.9759,
+            "test r2": 0.8835,
+            "train mse": 0.5548,
+            "test mse": 2.7689,
+            "train mae": 0.5741,
+            "test mae": 1.3217
+        },
+        "unstratified_running_time": 283.29,
+        "stratified_running_time": 282.43
+    },
+    {
+        "model_info": {
+            "model": "RandomForestRegressor",
+            "n_train": 1000,
+            "n_test": 100000,
+            "n_features": 10,
+            "FD_noise": 0,
+            "transformation": "identity",
+            "n_groups": 20,
+            "n_folds": 5,
+            "n_iter": 200,
+            "n_repetitions": 10,
+            "scoring": "neg_mean_squared_error",
+            "n_jobs": -1,
+            "json_file": "./results-RF-nadja.json"
+        },
+        "seed": 100,
+        "repetition": 9,
+        "random_state": 8732,
+        "hyperparameters_same": true,
+        "unstratified_params": {
+            "n_estimators": 666,
+            "min_samples_split": 3,
+            "min_samples_leaf": 2,
+            "max_features": 7
+        },
+        "stratified_params": {
+            "n_estimators": 666,
+            "min_samples_split": 3,
+            "min_samples_leaf": 2,
+            "max_features": 7
+        },
+        "unstratified_results": {
+            "train r2": 0.9773,
+            "test r2": 0.8839,
+            "train mse": 0.5397,
+            "test mse": 2.7578,
+            "train mae": 0.5609,
+            "test mae": 1.312
+        },
+        "stratified_results": {
+            "train r2": 0.9773,
+            "test r2": 0.8839,
+            "train mse": 0.5397,
+            "test mse": 2.7578,
+            "train mae": 0.5609,
+            "test mae": 1.312
+        },
+        "unstratified_running_time": 297.96,
+        "stratified_running_time": 298.65
+    },
+    {
+        "model_info": {
+            "model": "RandomForestRegressor",
+            "n_train": 1000,
+            "n_test": 100000,
+            "n_features": 10,
+            "FD_noise": 0,
+            "transformation": "sqrt",
+            "n_groups": 20,
+            "n_folds": 5,
+            "n_iter": 200,
+            "n_repetitions": 10,
+            "scoring": "neg_mean_squared_error",
+            "n_jobs": -1,
+            "json_file": "./results-RF-nadja.json"
+        },
+        "seed": 100,
+        "repetition": 0,
+        "random_state": 2387,
+        "hyperparameters_same": true,
+        "unstratified_params": {
+            "n_estimators": 639,
+            "min_samples_split": 4,
+            "min_samples_leaf": 1,
+            "max_features": 6
+        },
+        "stratified_params": {
+            "n_estimators": 639,
+            "min_samples_split": 4,
+            "min_samples_leaf": 1,
+            "max_features": 6
+        },
+        "unstratified_results": {
+            "train r2": 0.9767,
+            "test r2": 0.8617,
+            "train mse": 0.0101,
+            "test mse": 0.0634,
+            "train mae": 0.076,
+            "test mae": 0.1962
+        },
+        "stratified_results": {
+            "train r2": 0.9767,
+            "test r2": 0.8617,
+            "train mse": 0.0101,
+            "test mse": 0.0634,
+            "train mae": 0.076,
+            "test mae": 0.1962
+        },
+        "unstratified_running_time": 295.05,
+        "stratified_running_time": 294.88
+    },
+    {
+        "model_info": {
+            "model": "RandomForestRegressor",
+            "n_train": 1000,
+            "n_test": 100000,
+            "n_features": 10,
+            "FD_noise": 0,
+            "transformation": "sqrt",
+            "n_groups": 20,
+            "n_folds": 5,
+            "n_iter": 200,
+            "n_repetitions": 10,
+            "scoring": "neg_mean_squared_error",
+            "n_jobs": -1,
+            "json_file": "./results-RF-nadja.json"
+        },
+        "seed": 100,
+        "repetition": 1,
+        "random_state": 7529,
+        "hyperparameters_same": true,
+        "unstratified_params": {
+            "n_estimators": 994,
+            "min_samples_split": 3,
+            "min_samples_leaf": 1,
+            "max_features": 7
+        },
+        "stratified_params": {
+            "n_estimators": 994,
+            "min_samples_split": 3,
+            "min_samples_leaf": 1,
+            "max_features": 7
+        },
+        "unstratified_results": {
+            "train r2": 0.9822,
+            "test r2": 0.8819,
+            "train mse": 0.0084,
+            "test mse": 0.0541,
+            "train mae": 0.0699,
+            "test mae": 0.1816
+        },
+        "stratified_results": {
+            "train r2": 0.9822,
+            "test r2": 0.8819,
+            "train mse": 0.0084,
+            "test mse": 0.0541,
+            "train mae": 0.0699,
+            "test mae": 0.1816
+        },
+        "unstratified_running_time": 276.28,
+        "stratified_running_time": 274.56
+    },
+    {
+        "model_info": {
+            "model": "RandomForestRegressor",
+            "n_train": 1000,
+            "n_test": 100000,
+            "n_features": 10,
+            "FD_noise": 0,
+            "transformation": "sqrt",
+            "n_groups": 20,
+            "n_folds": 5,
+            "n_iter": 200,
+            "n_repetitions": 10,
+            "scoring": "neg_mean_squared_error",
+            "n_jobs": -1,
+            "json_file": "./results-RF-nadja.json"
+        },
+        "seed": 100,
+        "repetition": 2,
+        "random_state": 7454,
+        "hyperparameters_same": true,
+        "unstratified_params": {
+            "n_estimators": 555,
+            "min_samples_split": 2,
+            "min_samples_leaf": 1,
+            "max_features": 6
+        },
+        "stratified_params": {
+            "n_estimators": 555,
+            "min_samples_split": 2,
+            "min_samples_leaf": 1,
+            "max_features": 6
+        },
+        "unstratified_results": {
+            "train r2": 0.9841,
+            "test r2": 0.8828,
+            "train mse": 0.0074,
+            "test mse": 0.0537,
+            "train mae": 0.066,
+            "test mae": 0.1811
+        },
+        "stratified_results": {
+            "train r2": 0.9841,
+            "test r2": 0.8828,
+            "train mse": 0.0074,
+            "test mse": 0.0537,
+            "train mae": 0.066,
+            "test mae": 0.1811
+        },
+        "unstratified_running_time": 279.66,
+        "stratified_running_time": 280.34
+    },
+    {
+        "model_info": {
+            "model": "RandomForestRegressor",
+            "n_train": 1000,
+            "n_test": 100000,
+            "n_features": 10,
+            "FD_noise": 0,
+            "transformation": "sqrt",
+            "n_groups": 20,
+            "n_folds": 5,
+            "n_iter": 200,
+            "n_repetitions": 10,
+            "scoring": "neg_mean_squared_error",
+            "n_jobs": -1,
+            "json_file": "./results-RF-nadja.json"
+        },
+        "seed": 100,
+        "repetition": 3,
+        "random_state": 2864,
+        "hyperparameters_same": true,
+        "unstratified_params": {
+            "n_estimators": 597,
+            "min_samples_split": 3,
+            "min_samples_leaf": 1,
+            "max_features": 5
+        },
+        "stratified_params": {
+            "n_estimators": 597,
+            "min_samples_split": 3,
+            "min_samples_leaf": 1,
+            "max_features": 5
+        },
+        "unstratified_results": {
+            "train r2": 0.984,
+            "test r2": 0.8857,
+            "train mse": 0.0077,
+            "test mse": 0.0524,
+            "train mae": 0.069,
+            "test mae": 0.1775
+        },
+        "stratified_results": {
+            "train r2": 0.984,
+            "test r2": 0.8857,
+            "train mse": 0.0077,
+            "test mse": 0.0524,
+            "train mae": 0.069,
+            "test mae": 0.1775
+        },
+        "unstratified_running_time": 284.31,
+        "stratified_running_time": 285.55
+    },
+    {
+        "model_info": {
+            "model": "RandomForestRegressor",
+            "n_train": 1000,
+            "n_test": 100000,
+            "n_features": 10,
+            "FD_noise": 0,
+            "transformation": "sqrt",
+            "n_groups": 20,
+            "n_folds": 5,
+            "n_iter": 200,
+            "n_repetitions": 10,
+            "scoring": "neg_mean_squared_error",
+            "n_jobs": -1,
+            "json_file": "./results-RF-nadja.json"
+        },
+        "seed": 100,
+        "repetition": 4,
+        "random_state": 6440,
+        "hyperparameters_same": true,
+        "unstratified_params": {
+            "n_estimators": 833,
+            "min_samples_split": 2,
+            "min_samples_leaf": 2,
+            "max_features": 5
+        },
+        "stratified_params": {
+            "n_estimators": 833,
+            "min_samples_split": 2,
+            "min_samples_leaf": 2,
+            "max_features": 5
+        },
+        "unstratified_results": {
+            "train r2": 0.9762,
+            "test r2": 0.8777,
+            "train mse": 0.0109,
+            "test mse": 0.0561,
+            "train mae": 0.0799,
+            "test mae": 0.1847
+        },
+        "stratified_results": {
+            "train r2": 0.9762,
+            "test r2": 0.8777,
+            "train mse": 0.0109,
+            "test mse": 0.0561,
+            "train mae": 0.0799,
+            "test mae": 0.1847
+        },
+        "unstratified_running_time": 278.92,
+        "stratified_running_time": 277.88
+    },
+    {
+        "model_info": {
+            "model": "RandomForestRegressor",
+            "n_train": 1000,
+            "n_test": 100000,
+            "n_features": 10,
+            "FD_noise": 0,
+            "transformation": "sqrt",
+            "n_groups": 20,
+            "n_folds": 5,
+            "n_iter": 200,
+            "n_repetitions": 10,
+            "scoring": "neg_mean_squared_error",
+            "n_jobs": -1,
+            "json_file": "./results-RF-nadja.json"
+        },
+        "seed": 100,
+        "repetition": 5,
+        "random_state": 5731,
+        "hyperparameters_same": true,
+        "unstratified_params": {
+            "n_estimators": 828,
+            "min_samples_split": 3,
+            "min_samples_leaf": 1,
+            "max_features": 8
+        },
+        "stratified_params": {
+            "n_estimators": 828,
+            "min_samples_split": 3,
+            "min_samples_leaf": 1,
+            "max_features": 8
+        },
+        "unstratified_results": {
+            "train r2": 0.9823,
+            "test r2": 0.877,
+            "train mse": 0.0084,
+            "test mse": 0.0564,
+            "train mae": 0.0712,
+            "test mae": 0.1865
+        },
+        "stratified_results": {
+            "train r2": 0.9823,
+            "test r2": 0.877,
+            "train mse": 0.0084,
+            "test mse": 0.0564,
+            "train mae": 0.0712,
+            "test mae": 0.1865
+        },
+        "unstratified_running_time": 293.75,
+        "stratified_running_time": 294.31
+    },
+    {
+        "model_info": {
+            "model": "RandomForestRegressor",
+            "n_train": 1000,
+            "n_test": 100000,
+            "n_features": 10,
+            "FD_noise": 0,
+            "transformation": "sqrt",
+            "n_groups": 20,
+            "n_folds": 5,
+            "n_iter": 200,
+            "n_repetitions": 10,
+            "scoring": "neg_mean_squared_error",
+            "n_jobs": -1,
+            "json_file": "./results-RF-nadja.json"
+        },
+        "seed": 100,
+        "repetition": 6,
+        "random_state": 7103,
+        "hyperparameters_same": false,
+        "unstratified_params": {
+            "n_estimators": 833,
+            "min_samples_split": 5,
+            "min_samples_leaf": 2,
+            "max_features": 6
+        },
+        "stratified_params": {
+            "n_estimators": 946,
+            "min_samples_split": 4,
+            "min_samples_leaf": 2,
+            "max_features": 7
+        },
+        "unstratified_results": {
+            "train r2": 0.9746,
+            "test r2": 0.885,
+            "train mse": 0.012,
+            "test mse": 0.0527,
+            "train mae": 0.0835,
+            "test mae": 0.1794
+        },
+        "stratified_results": {
+            "train r2": 0.9775,
+            "test r2": 0.884,
+            "train mse": 0.0106,
+            "test mse": 0.0532,
+            "train mae": 0.079,
+            "test mae": 0.1804
+        },
+        "unstratified_running_time": 289.76,
+        "stratified_running_time": 292.2
+    },
+    {
+        "model_info": {
+            "model": "RandomForestRegressor",
+            "n_train": 1000,
+            "n_test": 100000,
+            "n_features": 10,
+            "FD_noise": 0,
+            "transformation": "sqrt",
+            "n_groups": 20,
+            "n_folds": 5,
+            "n_iter": 200,
+            "n_repetitions": 10,
+            "scoring": "neg_mean_squared_error",
+            "n_jobs": -1,
+            "json_file": "./results-RF-nadja.json"
+        },
+        "seed": 100,
+        "repetition": 7,
+        "random_state": 8305,
+        "hyperparameters_same": true,
+        "unstratified_params": {
+            "n_estimators": 601,
+            "min_samples_split": 5,
+            "min_samples_leaf": 2,
+            "max_features": 6
+        },
+        "stratified_params": {
+            "n_estimators": 601,
+            "min_samples_split": 5,
+            "min_samples_leaf": 2,
+            "max_features": 6
+        },
+        "unstratified_results": {
+            "train r2": 0.9748,
+            "test r2": 0.8819,
+            "train mse": 0.0116,
+            "test mse": 0.0542,
+            "train mae": 0.0834,
+            "test mae": 0.1822
+        },
+        "stratified_results": {
+            "train r2": 0.9748,
+            "test r2": 0.8819,
+            "train mse": 0.0116,
+            "test mse": 0.0542,
+            "train mae": 0.0834,
+            "test mae": 0.1822
+        },
+        "unstratified_running_time": 278.38,
+        "stratified_running_time": 279.38
+    },
+    {
+        "model_info": {
+            "model": "RandomForestRegressor",
+            "n_train": 1000,
+            "n_test": 100000,
+            "n_features": 10,
+            "FD_noise": 0,
+            "transformation": "sqrt",
+            "n_groups": 20,
+            "n_folds": 5,
+            "n_iter": 200,
+            "n_repetitions": 10,
+            "scoring": "neg_mean_squared_error",
+            "n_jobs": -1,
+            "json_file": "./results-RF-nadja.json"
+        },
+        "seed": 100,
+        "repetition": 8,
+        "random_state": 1802,
+        "hyperparameters_same": true,
+        "unstratified_params": {
+            "n_estimators": 930,
+            "min_samples_split": 4,
+            "min_samples_leaf": 2,
+            "max_features": 5
+        },
+        "stratified_params": {
+            "n_estimators": 930,
+            "min_samples_split": 4,
+            "min_samples_leaf": 2,
+            "max_features": 5
+        },
+        "unstratified_results": {
+            "train r2": 0.9757,
+            "test r2": 0.8821,
+            "train mse": 0.0106,
+            "test mse": 0.054,
+            "train mae": 0.0774,
+            "test mae": 0.1815
+        },
+        "stratified_results": {
+            "train r2": 0.9757,
+            "test r2": 0.8821,
+            "train mse": 0.0106,
+            "test mse": 0.054,
+            "train mae": 0.0774,
+            "test mae": 0.1815
+        },
+        "unstratified_running_time": 284.98,
+        "stratified_running_time": 284.55
+    },
+    {
+        "model_info": {
+            "model": "RandomForestRegressor",
+            "n_train": 1000,
+            "n_test": 100000,
+            "n_features": 10,
+            "FD_noise": 0,
+            "transformation": "sqrt",
+            "n_groups": 20,
+            "n_folds": 5,
+            "n_iter": 200,
+            "n_repetitions": 10,
+            "scoring": "neg_mean_squared_error",
+            "n_jobs": -1,
+            "json_file": "./results-RF-nadja.json"
+        },
+        "seed": 100,
+        "repetition": 9,
+        "random_state": 8732,
+        "hyperparameters_same": true,
+        "unstratified_params": {
+            "n_estimators": 666,
+            "min_samples_split": 3,
+            "min_samples_leaf": 2,
+            "max_features": 7
+        },
+        "stratified_params": {
+            "n_estimators": 666,
+            "min_samples_split": 3,
+            "min_samples_leaf": 2,
+            "max_features": 7
+        },
+        "unstratified_results": {
+            "train r2": 0.9763,
+            "test r2": 0.8791,
+            "train mse": 0.0109,
+            "test mse": 0.0554,
+            "train mae": 0.0782,
+            "test mae": 0.1836
+        },
+        "stratified_results": {
+            "train r2": 0.9763,
+            "test r2": 0.8791,
+            "train mse": 0.0109,
+            "test mse": 0.0554,
+            "train mae": 0.0782,
+            "test mae": 0.1836
+        },
+        "unstratified_running_time": 300.74,
+        "stratified_running_time": 300.81
+    }
+]
