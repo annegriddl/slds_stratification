@@ -581,7 +581,7 @@ class ModelOptimizerFinal:
             results = {
                 'repetition': repetition,
                 'random_state': random_states[repetition],
-                'hyperparameters_same:': hyperparameters_same,
+                'hyperparameters_same': hyperparameters_same,
                 'unstratified_params':unstratified_params,
                 'stratified_params': stratified_params,
                 'unstratified_results': unstratified_results,
