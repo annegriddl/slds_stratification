@@ -25,7 +25,7 @@ def plot_data_3D(df, axes=['X1', 'X2', 'X3']):
     Outputs:
         None (it plots the data)
     '''
-    fig = plt.figure(figsize=(10, 8))
+    fig = plt.figure(figsize=(11, 8))
     ax = fig.add_subplot(111, projection='3d')
 
     ax.scatter(df['X1'], df['X2'], df['X3'], c=df['y'], cmap='viridis', marker='o')
@@ -542,7 +542,7 @@ class ModelOptimizerFinal:
                                                         transformation=transformation)
             # Check for NaN values in the data
             if pd.isna(X_train).any().any() or pd.isna(y_train).any() or pd.isna(X_test).any().any() or pd.isna(y_test).any():
-                raise ValueError("Input data contains NaN values. Please handle NaN values in your data.") #@Anne: where is this coming from log(negative number)?
+                raise ValueError("Input data contains NaN values. Please handle NaN values in your data.") #@Anne: where is this coming from log(negative number)? @Nadja: Yes!
                 
             # Perform optimization with unstratified cross-validation
             unstratified_results, unstratified_params, unstratified_running_time = self._perform_optimization(X_train, 
