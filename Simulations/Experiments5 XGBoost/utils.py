@@ -213,7 +213,7 @@ class FriedmanDataset:
         '''
         if transformation == 'identity':
             pass
-        if transformation == 'log':
+        elif transformation == 'log':
             self.df['y'] = np.log(self.df['y'])
             self.y = self.df['y'].values  
         elif transformation == 'sqrt':
