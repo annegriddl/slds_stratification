@@ -109,7 +109,7 @@ def fold_visualizer(data, fold_idxs, seed_num, stratified= False):
         stratified_title = "Random Split"
 
     fig, axs = plt.subplots(len(fold_idxs)//2, 2, figsize=(10,(len(fold_idxs)//2)*2))
-    fig.suptitle(stratified_title + " with seed: " + str(seed_num), fontsize=10)
+    fig.suptitle(stratified_title + " with seed: " + str(seed_num), fontsize=18)
     for fold_id, (train_ids, val_ids) in enumerate(fold_idxs):
         sns.histplot(data=data[train_ids],
                      kde=True,
