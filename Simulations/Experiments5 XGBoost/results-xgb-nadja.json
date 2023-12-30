@@ -18,7 +18,7 @@
         "seed": 100,
         "repetition": 0,
         "random_state": 2387,
-        "hyperparameters_same:": false,
+        "hyperparameters_same": false,
         "unstratified_params": {
             "subsample": 0.7546457661607673,
             "n_estimators": 550,
@@ -75,7 +75,7 @@
         "seed": 100,
         "repetition": 1,
         "random_state": 7529,
-        "hyperparameters_same:": false,
+        "hyperparameters_same": false,
         "unstratified_params": {
             "subsample": 0.5921785529683752,
             "n_estimators": 680,
@@ -132,7 +132,7 @@
         "seed": 100,
         "repetition": 2,
         "random_state": 7454,
-        "hyperparameters_same:": false,
+        "hyperparameters_same": false,
         "unstratified_params": {
             "subsample": 0.7242290209630107,
             "n_estimators": 172,
@@ -189,7 +189,7 @@
         "seed": 100,
         "repetition": 3,
         "random_state": 2864,
-        "hyperparameters_same:": false,
+        "hyperparameters_same": false,
         "unstratified_params": {
             "subsample": 0.5038507470781046,
             "n_estimators": 603,
@@ -246,7 +246,7 @@
         "seed": 100,
         "repetition": 4,
         "random_state": 6440,
-        "hyperparameters_same:": false,
+        "hyperparameters_same": false,
         "unstratified_params": {
             "subsample": 0.7242290209630107,
             "n_estimators": 712,
@@ -303,7 +303,7 @@
         "seed": 100,
         "repetition": 5,
         "random_state": 5731,
-        "hyperparameters_same:": false,
+        "hyperparameters_same": false,
         "unstratified_params": {
             "subsample": 0.6228052236215724,
             "n_estimators": 283,
@@ -360,7 +360,7 @@
         "seed": 100,
         "repetition": 6,
         "random_state": 7103,
-        "hyperparameters_same:": false,
+        "hyperparameters_same": false,
         "unstratified_params": {
             "subsample": 0.5038507470781046,
             "n_estimators": 736,
@@ -417,7 +417,7 @@
         "seed": 100,
         "repetition": 7,
         "random_state": 8305,
-        "hyperparameters_same:": false,
+        "hyperparameters_same": false,
         "unstratified_params": {
             "subsample": 0.5038507470781046,
             "n_estimators": 597,
@@ -474,7 +474,7 @@
         "seed": 100,
         "repetition": 8,
         "random_state": 1802,
-        "hyperparameters_same:": false,
+        "hyperparameters_same": false,
         "unstratified_params": {
             "subsample": 0.5259554167674574,
             "n_estimators": 718,
@@ -531,7 +531,7 @@
         "seed": 100,
         "repetition": 9,
         "random_state": 8732,
-        "hyperparameters_same:": false,
+        "hyperparameters_same": false,
         "unstratified_params": {
             "subsample": 0.5921785529683752,
             "n_estimators": 738,
@@ -588,7 +588,7 @@
         "seed": 100,
         "repetition": 10,
         "random_state": 1988,
-        "hyperparameters_same:": false,
+        "hyperparameters_same": false,
         "unstratified_params": {
             "subsample": 0.5921785529683752,
             "n_estimators": 736,
@@ -645,7 +645,7 @@
         "seed": 100,
         "repetition": 11,
         "random_state": 1314,
-        "hyperparameters_same:": false,
+        "hyperparameters_same": false,
         "unstratified_params": {
             "subsample": 0.7242290209630107,
             "n_estimators": 578,
@@ -702,7 +702,7 @@
         "seed": 100,
         "repetition": 12,
         "random_state": 7471,
-        "hyperparameters_same:": false,
+        "hyperparameters_same": false,
         "unstratified_params": {
             "subsample": 0.7242290209630107,
             "n_estimators": 713,
@@ -759,7 +759,7 @@
         "seed": 100,
         "repetition": 13,
         "random_state": 4316,
-        "hyperparameters_same:": false,
+        "hyperparameters_same": false,
         "unstratified_params": {
             "subsample": 0.7242290209630107,
             "n_estimators": 912,
@@ -816,7 +816,7 @@
         "seed": 100,
         "repetition": 14,
         "random_state": 785,
-        "hyperparameters_same:": false,
+        "hyperparameters_same": false,
         "unstratified_params": {
             "subsample": 0.5886558478566255,
             "n_estimators": 680,
@@ -873,7 +873,7 @@
         "seed": 100,
         "repetition": 15,
         "random_state": 3351,
-        "hyperparameters_same:": false,
+        "hyperparameters_same": false,
         "unstratified_params": {
             "subsample": 0.5259554167674574,
             "n_estimators": 509,
@@ -930,7 +930,7 @@
         "seed": 100,
         "repetition": 16,
         "random_state": 5495,
-        "hyperparameters_same:": false,
+        "hyperparameters_same": false,
         "unstratified_params": {
             "subsample": 0.5259554167674574,
             "n_estimators": 133,
@@ -987,7 +987,7 @@
         "seed": 100,
         "repetition": 17,
         "random_state": 3764,
-        "hyperparameters_same:": false,
+        "hyperparameters_same": false,
         "unstratified_params": {
             "subsample": 0.5038507470781046,
             "n_estimators": 450,
@@ -1044,7 +1044,7 @@
         "seed": 100,
         "repetition": 18,
         "random_state": 5070,
-        "hyperparameters_same:": false,
+        "hyperparameters_same": false,
         "unstratified_params": {
             "subsample": 0.5886558478566255,
             "n_estimators": 959,
@@ -1101,7 +1101,7 @@
         "seed": 100,
         "repetition": 19,
         "random_state": 3341,
-        "hyperparameters_same:": false,
+        "hyperparameters_same": false,
         "unstratified_params": {
             "subsample": 0.5259554167674574,
             "n_estimators": 558,
