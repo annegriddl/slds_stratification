@@ -25,8 +25,8 @@ def flatten_data(data_all):
 def plot_boxplots(data200, data1000, title_left, title_right, metric='r2', order=None):
     if order is None:
         order = [
-            f'unstratified_results_train {metric}', 
-            f'stratified_results_train {metric}'
+            f'unstratified_results_test {metric}', 
+            f'stratified_results_test {metric}'
         ]
 
     df_melted200 = pd.melt(data200, value_vars=order, var_name='Metric', value_name='Value')
