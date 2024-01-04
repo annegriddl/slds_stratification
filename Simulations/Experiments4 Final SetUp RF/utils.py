@@ -224,239 +224,6 @@ class FriedmanDataset:
 
 
 
-class ModelOptimizer:
-    '''
-    Class to optimize the model.
-    Inputs:
-        model: the model to be optimized
-        param_grid: the parameter grid to be used for the optimization
-        random_state: the random state to be used
-    '''
-    def __init__(self, model, param_grid, random_state=42):
-        self.model = model
-        self.param_grid = param_grid
-        self.random_state = random_state
-
-
-    def create_cont_folds(self, 
-                          y, 
-                          n_folds=5, 
-                          n_groups=5, 
-                          seed=1):
-        '''
-        Function to create continuous folds.
-        Inputs:
-            y: the target variable
-            n_folds: the number of folds
-            n_groups: the number of groups (based on quantiles)
-            seed: the seed to be used
-        Outputs:
-            cv_splits: the indices for the folds
-        '''
-        # create StratifiedKFold like for classification
-        skf = StratifiedKFold(n_splits=n_folds, shuffle=True, random_state=seed)
-
-        # create groups in y with pd.qcut: quantile-based discretization 
-        y_grouped = pd.qcut(y, n_groups, labels=False)
-
-        # create fold numbers    
-        fold_nums = np.zeros(len(y))
-        #split(X, y[, groups]): Generate indices to split data into training and test set
-        for fold_no, (t, v) in enumerate(skf.split(y_grouped, y_grouped)): #@Nadja: unabhängig von n_folds? n_folds = fol_no, test_data_size = N/n_folds
-            fold_nums[v] = fold_no
-
-        cv_splits = []
-
-        # iterate over folds and creat train and test indices for each fold
-        for i in range(n_folds):
-            test_indices = np.argwhere(fold_nums==i).flatten()
-            train_indices = list(set(range(len(y_grouped))) - set(test_indices))
-            cv_splits.append((train_indices, test_indices))
-
-        return cv_splits
-
-
-    def optimize(self, 
-                 X_train, 
-                 y_train, 
-                 X_test,
-                 y_test,
-                 cv=5, 
-                 n_groups=10, 
-                 scoring='neg_mean_squared_error', 
-                 n_jobs=-1, 
-                 n_iter=10,
-                 ROOT_PATH='./',
-                 transformation='identity'):
-        '''
-        Function to optimize the model.
-        Inputs:
-            X_train, X_test, y_train, y_test: the train and test data
-            cv: the number of folds
-            n_groups: the number of groups (based on quantiles)
-            scoring: the scoring to be used
-            n_jobs: the number of jobs to be used
-            n_iter: the number of iterations
-            ROOT_PATH: the root path to be used (results are stored in JSON file)
-            transformation: the transformation of target to be applied
-        Outputs:
-            unstratified_results: the results of the unstratified cross-validation
-            stratified_results: the results of the stratified cross-validation
-        Important: The results are stored in a JSON file. Initialize a new file with an empty list as content.
-        '''
-        
-        # Perform optimization with unstratified cross-validation
-        unstratified_results, unstratified_params = self._perform_optimization(X_train, 
-                                                          y_train, 
-                                                          X_test,
-                                                          y_test,
-                                                          cv, 
-                                                          n_groups,
-                                                          scoring, 
-                                                          n_jobs, 
-                                                          n_iter, 
-                                                          stratified=False)
-
-        # Perform optimization with stratified cross-validation
-        stratified_results, stratified_params = self._perform_optimization(X_train, 
-                                                        y_train, 
-                                                        X_test,
-                                                        y_test,
-                                                        cv, 
-                                                        n_groups, 
-                                                        scoring, 
-                                                        n_jobs, 
-                                                        n_iter, 
-                                                        stratified=True)
-       
-        
-        # Save results and parameters to a file
-        results = {
-            'model_info': {
-                'model': self.model.__class__.__name__,
-                'transformation': transformation,
-                'random_state': self.random_state,
-                'n_folds': cv,
-                'n_groups': n_groups,
-                'n_iter': n_iter,
-                'n_samples': X_train.shape[0]
-            },
-            'unstratified_params': unstratified_params,
-            'stratified_params': stratified_params,
-            'unstratified_results': unstratified_results,
-            'stratified_results': stratified_results
-        }
-        #print('self._convert_numpy_types(unstratified_params)', self._convert_numpy_types(unstratified_params))
-
-        # Load existing data or create an empty list
-        with open(ROOT_PATH+"optimization_results.json", 'r') as file:
-            existing_data = json.load(file)
-
-        # Append the new results dictionary to the existing data
-        existing_data.append(results)
-
-
-        with open(ROOT_PATH+"optimization_results.json", 'w') as file:
-            #json.dump(existing_data, file, indent=4, default=self._convert_numpy_types)
-            #json.dump(existing_data, file, indent=4, default=lambda x: x.tolist() if isinstance(x, np.ndarray) else {key: self._convert_numpy_types(value) for key, value in x})
-            json.dump(existing_data, file, indent=4, default=self._convert_numpy_types)
-
-        return unstratified_results, stratified_results
-    
-
-    def _perform_optimization(self, 
-                              X_train, 
-                              y_train, 
-                              X_test, 
-                              y_test, 
-                              cv, 
-                              n_groups, 
-                              scoring, 
-                              n_jobs, 
-                              n_iter, 
-                              stratified):
-        '''
-        Function to perform the optimization.
-        Inputs:
-            the same as in optimize function
-            stratified: whether to use stratified k-fold or not
-        Outputs:
-            evaluation_results: the evaluation results in a dictionary
-            best_params: the best parameters in a dictionary
-        '''
-        if stratified:
-            cv_splits = self.create_cont_folds(y_train, n_folds=cv, n_groups=n_groups)
-        else:
-            cv_splits = cv
-        start_time = time.time()
-        random_search = RandomizedSearchCV(estimator=self.model,
-                                           param_distributions=self.param_grid,
-                                           n_iter=n_iter,
-                                           cv=cv_splits,
-                                           scoring=scoring,
-                                           n_jobs=n_jobs,
-                                           random_state=self.random_state)
-        random_search.fit(X_train, y_train)
-        end_time = time.time()
-        print("Best Parameters:", random_search.best_params_)
-
-        # Evaluate the model
-        evaluation_results = self.evaluate_rf(random_search, X_train, X_test, y_train, y_test)
-        running_time = end_time - start_time #@nadja: wie running_time ausgeben um in json file zu speichern?
-        print('running_time: ', round(running_time, 2))
-
-        return evaluation_results, random_search.best_params_
-
-
-    def evaluate_rf(self, model, X_train, X_test, y_train, y_test):
-        '''
-        Function to evaluate the model.
-        Inputs:
-            model: the model to be evaluated
-            X_train, X_test, y_train, y_test: the train and test data
-        Outputs:
-            dictionary with the evaluation results (R2, MSE, MAE)
-        '''
-        model=model.best_estimator_
-        # @Anne: This somehow also does not work, do not know why.
-        #best_score = model.best_score_
-
-        train_r2, test_r2 = round(model.score(X_train, y_train), 4), round(model.score(X_test, y_test), 4)
-        y_train_pred, y_test_pred = model.predict(X_train), model.predict(X_test)
-        train_mse, test_mse = round(mean_squared_error(y_train, y_train_pred), 4), round(mean_squared_error(y_test, y_test_pred), 4)
-        train_mae, test_mae = round(mean_absolute_error(y_train, y_train_pred), 4), round(mean_absolute_error(y_test, y_test_pred), 4)
-        return {'train r2': train_r2, 
-                'test r2': test_r2, 
-                'train mse': train_mse,
-                'test mse': test_mse,
-                'train mae': train_mae,
-                'test mae': test_mae}
-    
-    def _convert_numpy_types(self, obj):
-        # otherwise I got errors when saving the results to a json file
-        '''
-        Function to convert numpy types.
-        Inputs:
-            obj: the object to be converted
-        Outputs:
-            the converted object
-        '''
-        if isinstance(obj, np.ndarray):
-            return obj.tolist()
-        elif isinstance(obj, np.int32):
-            return int(obj)
-        elif isinstance(obj, np.int64):
-            return int(obj)
-        elif isinstance(obj, (list, tuple)):
-            return [self._convert_numpy_types(item) for item in obj]
-        elif isinstance(obj, dict):
-            return {key: self._convert_numpy_types(value) for key, value in obj.items()}
-        else:
-            return obj
-
-
-
-
 class ModelOptimizerFinal:
     '''
     Class to optimize the model.
@@ -541,9 +308,28 @@ class ModelOptimizerFinal:
                                                         random_state=random_states[repetition],
                                                         transformation=transformation)
             # Check for NaN values in the data
-            if pd.isna(X_train).any().any() or pd.isna(y_train).any() or pd.isna(X_test).any().any() or pd.isna(y_test).any():
-                raise ValueError("Input data contains NaN values. Please handle NaN values in your data.") #@Anne: where is this coming from log(negative number)? @Nadja: Yes!
-                
+            if np.isnan(y_train).any() or np.isnan(y_test).any(): 
+                X_train, y_train = make_friedman1(n_samples=n_train,
+                                    n_features=n_features, 
+                                    noise=noise, 
+                                    random_state=random_states[repetition])
+                X_test, y_test = make_friedman1(n_samples=n_test,
+                                    n_features=n_features,
+                                    noise=noise,
+                                    random_state=1718)
+                min_val = min(y_train.min(), y_test.min())
+                # @Anne: Noch absprechen... +1 weil es sonst Skala durch Werte [0, 1] hauptsächlich bei y_test größer wird.           
+                y_train = y_train + abs(min_val) + 1
+                y_test = y_test + abs(min_val) + 1
+                if transformation=='identity':
+                    pass
+                elif transformation == 'log':
+                    y_train = np.log(y_train)
+                    y_test = np.log(y_test)
+                elif transformation == 'sqrt':
+                    y_train = np.sqrt(y_train)
+                    y_test = np.sqrt(y_test)
+                    
             # Perform optimization with unstratified cross-validation
             unstratified_results, unstratified_params, unstratified_running_time = self._perform_optimization(X_train, 
                                                             y_train, 
