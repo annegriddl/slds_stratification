@@ -58,9 +58,9 @@ def train_test_stratified(df, n_quantiles=20, train_size=0.8, seed=42):
 
 
 def create_cont_folds(y,
-                      n_folds=5, 
-                      n_groups=5, 
-                      seed=1):
+                      n_folds, 
+                      n_groups, 
+                      seed):
     '''
     Function to create continuous folds.
     Inputs:
@@ -329,7 +329,7 @@ class ModelOptimizerFinal:
                 elif transformation == 'sqrt':
                     y_train = np.sqrt(y_train)
                     y_test = np.sqrt(y_test)
-                    
+
             # Perform optimization with unstratified cross-validation
             unstratified_results, unstratified_params, unstratified_running_time = self._perform_optimization(X_train, 
                                                             y_train, 
@@ -433,7 +433,7 @@ class ModelOptimizerFinal:
             best_params: the best parameters in a dictionary
         '''
         if stratified:
-            cv_splits = self.create_cont_folds(y_train, n_folds=cv, n_groups=n_groups)
+            cv_splits = self.create_cont_folds(y=y_train, n_folds=cv, n_groups=n_groups, seed=random_state)
             output_text = 'Stratified Split Cross-validation'
         else:
             cv_splits = cv
@@ -461,9 +461,9 @@ class ModelOptimizerFinal:
 
     def create_cont_folds(self, 
                           y, 
-                          n_folds=5, 
-                          n_groups=5, 
-                          seed=1):
+                          n_folds, 
+                          n_groups, 
+                          seed):
         '''
         Function to create continuous folds.
         Inputs:
@@ -476,7 +476,7 @@ class ModelOptimizerFinal:
         '''
         # create StratifiedKFold like for classification
         skf = StratifiedKFold(n_splits=n_folds, shuffle=True, random_state=seed)
-
+        
         # create groups in y with pd.qcut: quantile-based discretization 
         y_grouped = pd.qcut(y, n_groups, labels=False)
 
