@@ -1,5 +1,6 @@
-# File for helper functions and classes
+#### File for helper functions and classes ####
 
+### packages
 import sklearn
 import pandas as pd
 import numpy as np
@@ -13,6 +14,24 @@ import json
 from sklearn.model_selection import StratifiedKFold, KFold, RandomizedSearchCV 
 import random
 import time
+from scipy.stats import ks_2samp
+
+### functions
+def perform_ks_test(data1, data2):
+    
+    # Perform the Kolmogorov-Smirnov test
+    statistic, p_value = ks_2samp(data1, data2)
+
+    # Print the results
+    print("K-S Statistic:", statistic)
+    print("P-value:", p_value)
+
+    # Interpret the results
+    alpha = 0.05
+    if p_value > alpha:
+        print("Same Distributions: Fail to reject the null hypothesis. Data1 and Data2 may come from the same distribution.")
+    else:
+        print("Different Distributions: Reject the null hypothesis. Data1 and Data2 likely come from different distributions.")
 
 
 def plot_data_3D(df, axes=['X1', 'X2', 'X3']):
@@ -80,7 +99,7 @@ def create_cont_folds(y,
     # create fold numbers    
     fold_nums = np.zeros(len(y))
     #split(X, y[, groups]): Generate indices to split data into training and test set
-    for fold_no, (t, v) in enumerate(skf.split(y_grouped, y_grouped)): #@Nadja: unabhängig von n_folds? n_folds = fol_no, test_data_size = N/n_folds
+    for fold_no, (t, v) in enumerate(skf.split(y_grouped, y_grouped)): 
         fold_nums[v] = fold_no
 
     cv_splits = []
@@ -164,9 +183,9 @@ def run_kfold_visualizer(labels, k, seeds, n_groups=10, stratified=False):
                         fold_idxs=cv_splits, 
                         seed_num=seed, stratified=stratified)
 
-# Now some classes
+### classes
 class FriedmanDataset:
-    # nur friedman ? oder auch anwendbar für andere datasets?
+    # Freidman dataset see: https://scikit-learn.org/stable/modules/generated/sklearn.datasets.make_friedman1.html
     def __init__(self, n_samples=1000, n_features=5, noise=0.0, random_state=42):
         self.features, self.y = self.generate_friedman1(n_samples, n_features, noise, random_state)
         self.df = self.to_dataframe(self.features, self.y)
