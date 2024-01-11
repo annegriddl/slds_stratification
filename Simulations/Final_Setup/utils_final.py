@@ -15,6 +15,30 @@ import random
 from sklearn.ensemble import RandomForestRegressor
 import time
 import xgboost as xgb
+import math
+import os
+
+import itertools
+
+def generate_hyperparameter_combinations_dict(**hyperparameters):
+    """
+    Generate all possible combinations of hyperparameters.
+
+    Parameters:
+    **hyperparameters: Variable keyword arguments where the key is the hyperparameter name and the value is an iterable of options.
+
+    Returns:
+    List of dictionaries, where each dictionary represents a combination of hyperparameters.
+    """
+    hyperparameter_names = hyperparameters.keys()
+    all_hyperparameter_combinations = list(itertools.product(*hyperparameters.values()))
+
+    all_hyperparameter_dicts = []
+    for combination in all_hyperparameter_combinations:
+        hyperparameter_dict = dict(zip(hyperparameter_names, combination))
+        all_hyperparameter_dicts.append(hyperparameter_dict)
+
+    return all_hyperparameter_dicts
 
 
 # Now some classes
@@ -85,10 +109,11 @@ class ModelOptimizerFinal:
         param_grid: the parameter grid to be used for the optimization
         random_state: the random state to be used
     '''
-    def __init__(self, param_grid, random_state, model_name):
+    def __init__(self, param_grid, model_name, path_to_seeds):
         self.param_grid = param_grid
-        self.random_state = random_state
         self.model_name = model_name
+        self.path_to_seeds = path_to_seeds
+        
 
 
     def optimize(self, 
@@ -120,7 +145,7 @@ class ModelOptimizerFinal:
         noise = params['FD_noise']
         transformation = params['transformation']
         n_folds= params['n_folds']
-        n_groups = params['n_groups']
+        group_size = params['group_size']
         scoring = params['scoring']
         n_jobs = params['n_jobs']
         n_iter = params['n_iter']
@@ -137,26 +162,37 @@ class ModelOptimizerFinal:
             
 
         #######################################################################################
-        # TODO: liste schreiben und zahlen rausstrecihen
+        # TODO: abchecken ob es richtig funktioniert.
         if not isinstance(random_states, list):
-            random.seed(self.random_state)
-            random_states = random.sample(range(1, 10000), n_repetitions)
-
+            if not os.path.exists(self.path_to_seeds):   
+                print("cant find path")
+                open(self.path_to_seeds, "w+").close()
+                print("File created: ", self.path_to_seeds)
+                random_states = [x for x in range(n_repetitions)]
+                seeds_available = [x for x in range(100000)][n_repetitions:]
+            else:
+                # Read the content of the JSON file
+                try:
+                    with open(self.path_to_seeds, 'r') as file:
+                        seeds_available = json.load(file)
+                except json.JSONDecodeError:
+                    print("Error decoding JSON. The file might be empty or not properly formatted.")
+    
+                random_states = seeds_available[:n_repetitions]
+                seeds_available = seeds_available[n_repetitions:]
+            with open(self.path_to_seeds, 'w') as file:
+                json.dump(seeds_available, file, indent=4)
         else:
             random_states = random_states[:n_repetitions]
         #######################################################################################
+        n_groups = int(n_train/group_size)
 
-        print("RandomizesdSearchCV with params n_folds =",
-            n_folds, ", ngroups: ", n_groups, ", scoring: ",scoring, ", n_jobs: ",n_jobs,
-            ", n_iter: ", n_iter, " and save to  ", json_file, "\n")
+        print(f"RandomizesdSearchCV with params n_folds = {n_folds}, group_size = {group_size}, n_groups = {n_groups}, scoring = {scoring}, n_jobs = {n_jobs}, n_iter = {n_iter} and save to {json_file}")
         
-        all_results = {}
-        all_results_stratified = {}
-
         initialization = {
-            'model_info': params,
-            'seed': self.random_state
+            'model_info': params
         }
+
         for repetition in range(n_repetitions):
             if data == 'friedman':
                 X_train, y_train = self.generate_friedman1(n_samples=n_train,
@@ -192,7 +228,7 @@ class ModelOptimizerFinal:
             ##########################################################  
 
             # Perform optimization with unstratified cross-validation
-            unstratified_results, unstratified_params, unstratified_running_time = self._perform_optimization(X_train, 
+            unstratified_results, unstratified_iteration, unstratified_params, unstratified_running_time = self._perform_optimization(X_train, 
                                                             y_train, 
                                                             X_test,
                                                             y_test,
@@ -203,10 +239,10 @@ class ModelOptimizerFinal:
                                                             n_iter, 
                                                             random_states[repetition],
                                                             stratified=False)
-            all_results.update({f'Repetition {repetition}': unstratified_results})
+            
 
             # Perform optimization with stratified cross-validation
-            stratified_results, stratified_params, stratified_running_time = self._perform_optimization(X_train, 
+            stratified_results, stratified_iteration, stratified_params, stratified_running_time = self._perform_optimization(X_train, 
                                                             y_train, 
                                                             X_test,
                                                             y_test,
@@ -217,7 +253,6 @@ class ModelOptimizerFinal:
                                                             n_iter, 
                                                             random_states[repetition],
                                                             stratified=True)
-            all_results_stratified.update({f'Repetition {repetition}': stratified_results}) # @Anne: check ich nicht ganz, was das macht
 
             if unstratified_params == stratified_params:
                 hyperparameters_same = True
@@ -229,27 +264,20 @@ class ModelOptimizerFinal:
                 'repetition': repetition,
                 'random_state': random_states[repetition],
                 'hyperparameters_same': hyperparameters_same,
-                'unstratified_params':unstratified_params,
-                'stratified_params': stratified_params,
                 'unstratified_results': unstratified_results,
                 'stratified_results': stratified_results,
                 'unstratified_running_time': round(unstratified_running_time,2), 
-                'stratified_running_time': round(stratified_running_time, 2)
+                'stratified_running_time': round(stratified_running_time, 2),
+                'unstratified_iteration': unstratified_iteration,
+                'stratified_iteration': stratified_iteration
             }
 
             initialization.update(results)
-            # Load existing data or create an empty list
-            with open(json_file, 'r') as file:
-                existing_data = json.load(file)
 
-            # Append the new results dictionary to the existing data
-            existing_data.append(initialization)
-
-            # Write the updated data back to the JSON file
-            with open(json_file, 'w') as file:
-                json.dump(existing_data, file, indent=4, default=self._convert_numpy_types)
-
-        return all_results, all_results_stratified
+            self.save_results(initialization, json_file)
+            
+            print(f"Repetition {repetition} finished. Results saved to {json_file}.")
+        
     
     def save_results(self, results, path):
         '''
@@ -260,6 +288,11 @@ class ModelOptimizerFinal:
         Outputs:
             None (it saves the results to the JSON file)
         '''
+
+        if not os.path.exists(path):   
+            open(path, "w+").close()
+            print("File created: ", path)
+    
         # Load existing data or create an empty list
         with open(path, 'r') as file:
             existing_data = json.load(file)
@@ -293,6 +326,7 @@ class ModelOptimizerFinal:
             evaluation_results: the evaluation results in a dictionary
             best_params: the best parameters in a dictionary
         '''
+        # Create cross-validation splits
         if stratified:
             cv_splits = self.create_cont_folds(y=y_train, n_folds=cv, n_groups=n_groups, seed=random_state)
             output_text = 'Stratified Split Cross-validation'
@@ -300,6 +334,7 @@ class ModelOptimizerFinal:
             cv_splits = cv
             output_text = 'Random Split Cross-validation'
         
+        # Initialize the model
         try:
             if self.model_name == "rf":
                 model = RandomForestRegressor(n_estimators=700,
@@ -308,8 +343,9 @@ class ModelOptimizerFinal:
                 model = xgb.XGBRegressor(random_state=random_state)
         except:
             raise ValueError("Model not implemented. Only 'rf' and 'xgb' are implemented.")
-        start_time = time.time()
         
+        # Perform the optimization
+        start_time = time.time()
         random_search = RandomizedSearchCV(estimator=model,
                                            param_distributions=self.param_grid,
                                            n_iter=n_iter,
@@ -317,9 +353,11 @@ class ModelOptimizerFinal:
                                            scoring=scoring,
                                            n_jobs=n_jobs,
                                            random_state=random_state)
+        
         random_search.fit(X_train, y_train)
         end_time = time.time()
         running_time = end_time - start_time
+        iteration_results = random_search.cv_results_
         print("Best Parameters:", random_search.best_params_)
 
         # Evaluate the model
@@ -327,7 +365,7 @@ class ModelOptimizerFinal:
         print("Evaluation Results of", output_text, ': ', evaluation_results)
         print('running_time: ', round(running_time/60, 2), ' min')
         
-        return evaluation_results, random_search.best_params_, running_time
+        return evaluation_results, iteration_results, random_search.best_params_, running_time
 
     def create_cont_folds(self, 
                           y, 
@@ -348,7 +386,7 @@ class ModelOptimizerFinal:
         skf = StratifiedKFold(n_splits=n_folds, shuffle=True, random_state=seed)
         
         # create groups in y with pd.qcut: quantile-based discretization 
-        y_grouped = pd.qcut(y, n_groups, labels=False)
+        y_grouped = pd.qcut(y, math.ceil(n_groups), labels=False)
 
         # create fold numbers    
         fold_nums = np.zeros(len(y))
@@ -376,8 +414,6 @@ class ModelOptimizerFinal:
             dictionary with the evaluation results (R2, MSE, MAE)
         '''
         model=model.best_estimator_
-        # @Anne: This somehow also does not work, do not know why.
-        #best_score = model.best_score_
 
         train_r2, test_r2 = round(model.score(X_train, y_train), 4), round(model.score(X_test, y_test), 4)
         y_train_pred, y_test_pred = model.predict(X_train), model.predict(X_test)
