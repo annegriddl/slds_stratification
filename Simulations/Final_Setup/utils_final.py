@@ -20,18 +20,18 @@ import os
 
 import itertools
 
-def generate_hyperparameter_combinations_dict(**hyperparameters):
+def generate_hyperparameter_combinations_dict(hyperparameter_options):
     """
     Generate all possible combinations of hyperparameters.
 
     Parameters:
-    **hyperparameters: Variable keyword arguments where the key is the hyperparameter name and the value is an iterable of options.
+    hyperparameter_options (dict): Dictionary where keys are hyperparameter names and values are lists of options.
 
     Returns:
     List of dictionaries, where each dictionary represents a combination of hyperparameters.
     """
-    hyperparameter_names = hyperparameters.keys()
-    all_hyperparameter_combinations = list(itertools.product(*hyperparameters.values()))
+    hyperparameter_names = hyperparameter_options.keys()
+    all_hyperparameter_combinations = list(itertools.product(*hyperparameter_options.values()))
 
     all_hyperparameter_dicts = []
     for combination in all_hyperparameter_combinations:
@@ -142,7 +142,7 @@ class ModelOptimizerFinal:
         n_train = params['n_train']
         n_test = params['n_test']
         n_features = params['n_features']
-        noise = params['FD_noise']
+        noise = params['noise']
         transformation = params['transformation']
         n_folds= params['n_folds']
         group_size = params['group_size']
@@ -159,19 +159,23 @@ class ModelOptimizerFinal:
                                                      noise=noise,
                                                      random_state=1718,
                                                      transformation=transformation)
-            
+            print("X_test, y_test generated")
 
         #######################################################################################
         # TODO: abchecken ob es richtig funktioniert.
         if not isinstance(random_states, list):
+            # if path does not exist, create file with empty list
+            print("Path to seeds: ", self.path_to_seeds)
             if not os.path.exists(self.path_to_seeds):   
                 print("cant find path")
-                open(self.path_to_seeds, "w+").close()
+                with open(self.path_to_seeds, 'w') as file:
+                    json.dump([], file, indent=4)
                 print("File created: ", self.path_to_seeds)
                 random_states = [x for x in range(n_repetitions)]
                 seeds_available = [x for x in range(100000)][n_repetitions:]
+                
+            # Else read the content of the JSON file
             else:
-                # Read the content of the JSON file
                 try:
                     with open(self.path_to_seeds, 'r') as file:
                         seeds_available = json.load(file)
@@ -184,6 +188,7 @@ class ModelOptimizerFinal:
                 json.dump(seeds_available, file, indent=4)
         else:
             random_states = random_states[:n_repetitions]
+       
         #######################################################################################
         n_groups = int(n_train/group_size)
 
@@ -290,7 +295,8 @@ class ModelOptimizerFinal:
         '''
 
         if not os.path.exists(path):   
-            open(path, "w+").close()
+            with open(path, 'w') as file:
+                json.dump([], file, indent=4)
             print("File created: ", path)
     
         # Load existing data or create an empty list
@@ -357,15 +363,40 @@ class ModelOptimizerFinal:
         random_search.fit(X_train, y_train)
         end_time = time.time()
         running_time = end_time - start_time
-        iteration_results = random_search.cv_results_
+        cv_results = random_search.cv_results_
         print("Best Parameters:", random_search.best_params_)
 
         # Evaluate the model
         evaluation_results = self.evaluate_rf(random_search, X_train, X_test, y_train, y_test)
+        if stratified: 
+            iteration_results = self.iteration_results(random_search, X_train, y_train, X_test, y_test, cv_results)  
+            print(iteration_results)
+            cv_results.update(iteration_results)
         print("Evaluation Results of", output_text, ': ', evaluation_results)
         print('running_time: ', round(running_time/60, 2), ' min')
         
-        return evaluation_results, iteration_results, random_search.best_params_, running_time
+        return evaluation_results, cv_results, random_search.best_params_, running_time
+
+    def iteration_results(self, model, X_train, y_train, X_test, y_test, results_cv):
+        mse_list = []
+        mae_list = []
+        r2_list = []
+        for index, params in enumerate(results_cv["params"]):
+            model = model.best_estimator_
+            print(params)
+            print(model)
+            model.set_params(**params)
+            print(model.get_params())
+            test_r2 = round(model.score(X_test, y_test), 4)
+            model.fit(X_train, y_train)
+            y_pred = model.predict(X_test)
+            test_mse = round(mean_squared_error(y_test, y_pred), 4)
+            test_mae = round(mean_absolute_error(y_test, y_pred), 4)
+            r2_list.append(test_r2)
+            mse_list.append(test_mse)
+            mae_list.append(test_mae)
+        return {'r2': r2_list, 'mse': mse_list, 'mae': mae_list}
+
 
     def create_cont_folds(self, 
                           y, 

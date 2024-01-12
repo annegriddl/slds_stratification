@@ -11,18 +11,30 @@ from sklearn.dummy import DummyRegressor
 import seaborn as sns
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
+import re
 import warnings
 warnings.filterwarnings('ignore')
 from utils_final import FriedmanDataset, ModelOptimizerFinal, generate_hyperparameter_combinations_dict
 import itertools
+import os
 
 ####### 1. Choose model ################
 
+#### TODO: Choose 'rf' for Random Forest Regressor
+####       Or 'xgb' for XGBoost Regressor
 model_name = 'rf'
+#### Ende #######################
+
 
 ####### 2. Initialize parameters #######
-json_file = "C:/Users/anneg/Documents/Documents/StatistikMaster/slds_stratification/Simulations/Final_Setup/test.json" # set path to save json-file 
-path_to_seeds = "C:/Users/anneg/Documents/Documents/StatistikMaster/slds_stratification/Simulations/Final_Setup/seeds_available.json" # set path to all available seeds 
+
+#### TODO: Set parameters for the experiment
+#json_file = os.path.join(os.path.dirname(os.path.realpath("test.ipynb")), "test.json") 
+#path_to_seeds = os.path.join(os.path.dirname(os.path.realpath("run_experiments.py")), "seeds_available.json") 
+#json_file = re.sub(r"\\", "/", json_file)
+#path_to_seeds = re.sub(r"\\", "/", path_to_seeds)
+json_file = "C:/Users/anneg/Documents/Documents/StatistikMaster/slds_stratification/Simulations/Final_Setup/test.json"
+path_to_seeds = "C:/Users/anneg/Documents/Documents/StatistikMaster/slds_stratification/Simulations/Final_Setup/seeds_available.json"
 n_features = 5
 n_folds = 5
 n_iter= 5
@@ -32,12 +44,14 @@ n_test= 100000
 scoring= 'neg_mean_squared_error'
 
 # Define hyperparameter options
-train_list = [200, 1000]
-#noise_list = [0, 5]
-noise_list = [0]
-transformation_list = ['identity', 'sqrt']
-#group_size_list = [5, 10]
-group_size_list = [10]
+hyperparameter_options = {'n_train': [200, 1000],
+                          'transformation': ['identity', 'sqrt'],
+                          'noise': [0],
+                          'group_size': [10]}
+#### Ende #######################
+
+# Generate hyperparameter combinations
+all_combinations = generate_hyperparameter_combinations_dict(hyperparameter_options)
 
 # Set param grid for RF
 rf_param_grid = {
@@ -49,13 +63,16 @@ rf_param_grid = {
 # Set param grid for XGBoost
 xgb_param_grid = {}
 
-all_combinations = generate_hyperparameter_combinations_dict(n_train=train_list, 
-                                                             noise=noise_list,
-                                                             transformation=transformation_list, 
-                                                             group_size=group_size_list)
-
 
 if __name__ == '__main__':
+    if not os.path.exists(path_to_seeds):   
+        print("cant find path")
+        with open(path_to_seeds, 'w') as file:
+            json.dump([x for x in range(100000)], file, indent=4)
+            print("File created: ", path_to_seeds)
+            #random_states = [x for x in range(n_repetitions)]
+            #seeds_available = [x for x in range(100000)][n_repetitions:]
+
     for hyperparameter_dict in all_combinations:
 
         # Save Parameters in a dictionary
@@ -63,7 +80,7 @@ if __name__ == '__main__':
           'n_train': hyperparameter_dict['n_train'],
           'n_test': n_test,
           'n_features': n_features,
-          'FD_noise': hyperparameter_dict['noise'],
+          'noise': hyperparameter_dict['noise'],
           'transformation': hyperparameter_dict['transformation'],
           'group_size': hyperparameter_dict['group_size'],
           'n_folds': n_folds,
