@@ -40,64 +40,6 @@ def generate_hyperparameter_combinations_dict(hyperparameter_options):
     return all_hyperparameter_dicts
 
 
-# Now some classes
-class FriedmanDataset:
-    # nur friedman ? oder auch anwendbar für andere datasets?
-    def __init__(self, n_samples=1000, n_features=5, noise=0.0, random_state=42):
-        self.features, self.y = self.generate_friedman1(n_samples, n_features, noise, random_state)
-        self.df = self.to_dataframe(self.features, self.y)
-
-    def generate_friedman1(self, n_samples, n_features, noise, random_state):
-        '''
-        Function to generate dataset according to Friedman1.
-        Inputs:
-            n_samples: number of data points
-            n_features: number of features (have to be at least 5)
-            noise: The standard deviation of the gaussian noise applied to the output.
-            random_state: to repreoduce dataset
-        Outputs:
-            features: array
-            y: array
-
-        '''
-        features, y = make_friedman1(n_samples=n_samples, 
-                                    n_features=n_features, 
-                                    noise=noise, 
-                                    random_state=random_state)
-        return features, y
-
-    def to_dataframe(self, features, y):
-        ''' 
-        Function to convert arrays to combined dataframe of X and y. (could also add normalization?)
-        Inputs: 
-            features: first output from generate_friedman1
-            y: second output from generate_friedman1
-        Output:
-            combined dataframe
-        '''
-        features_df = pd.DataFrame(features, columns=[f'X{i}' for i in range(1, features.shape[1] + 1)])
-        y_df = pd.DataFrame(y, columns=['y'])
-        return pd.concat([features_df, y_df], axis=1)
-    
-    def transform(self, transformation='log'):
-        '''
-        Function to transform the target variable.
-        Inputs:
-            transformation: the transformation to be applied
-        Outputs:
-            None (it transforms the target variable of the dataframe and of y itself)
-        '''
-        if transformation == 'identity':
-            pass
-        elif transformation == 'log':
-            self.df['y'] = np.log(self.df['y'])
-            self.y = self.df['y'].values  
-        elif transformation == 'sqrt':
-            self.df['y'] = np.sqrt(self.df['y'])
-            self.y = self.df['y'].values  
-        else:
-            raise ValueError('Transformation not implemented.')
-
 
 
 class ModelOptimizer:
@@ -163,18 +105,6 @@ class ModelOptimizer:
         #print(f"RandomizesdSearchCV with parameters of experiment n_folds = {n_folds}, group_size = {group_size}, n_groups = {n_groups}, scoring = {scoring}, n_jobs = {n_jobs}, n_iter = {n_iter} and save to {json_file}")
 
         
-        ### Create testing data with seed 1718 (use same seed in all experiments)
-        if data == 'friedman':
-            # maybe implement accessing and generating the data nicer
-            X_test, y_test = self.generate_friedman1(n_samples=n_test,
-                                                     n_features=n_features,
-                                                     noise=noise,
-                                                     random_state= self.global_seed_testing_data,
-                                                     transformation=transformation)
-            self.y_test_min = y_test.min()
-            #print("Created testing data with seed: ", self.global_seed_testing_data)
-
-        
         ### set seeds for all repetitions
         #######################################################################################
         # TODO: abchecken ob es richtig funktioniert. @Anne: verseth ich nicht 100%, habs mal auskommentiert, weil seeds wurden ja eignetlich schon erzeugt oder?
@@ -216,42 +146,8 @@ class ModelOptimizer:
         #### Run Experiments for each repetition independently 
         for repetition in range(n_repetitions):
             start_time_repetition = time.time()
-            # create training data with seed from random_states
-            # check if generated data is negative -> then shift it to positive
             if data == 'friedman':
-                X_train, y_train = self.generate_friedman1(n_samples=n_train,
-                                                        n_features=n_features,
-                                                        noise=noise,
-                                                        random_state=random_states[repetition],
-                                                        transformation=transformation)
-            y_test_min
-              
-            ##########################################################
-            # TODO: weniger rechenintensiv (Funktion oben umschreiben) ->  check if generated data is negative -> then shift it to positive with min
-            # Check for NaN values in the data
-            if np.isnan(y_train).any() or np.isnan(y_test).any(): 
-                X_train, y_train = make_friedman1(n_samples=n_train,
-                                    n_features=n_features, 
-                                    noise=noise, 
-                                    random_state=random_states[repetition])
-                X_test, y_test = make_friedman1(n_samples=n_test,
-                                    n_features=n_features,
-                                    noise=noise,
-                                    random_state= self.global_seed_testing_data)
-                min_val = min(y_train.min(), y_test.min())
-                
-                # Logarithmus +1, für Square Root nicht
-                y_train = y_train + abs(min_val) + 1
-                y_test = y_test + abs(min_val) + 1
-                if transformation=='identity':
-                    pass
-                elif transformation == 'log':
-                    y_train = np.log(y_train)
-                    y_test = np.log(y_test)
-                elif transformation == 'sqrt':
-                    y_train = np.sqrt(y_train)
-                    y_test = np.sqrt(y_test)
-            ##########################################################  
+                 X_train, y_train, X_test, y_test = self.generate_data(n_samples_training=n_train, n_samples_test= n_test, noise = noise, n_features = n_features, random_state_trainning = random_states[repetition], transformation= transformation)
 
 
             # Perform optimization with unstratified cross-validation
@@ -518,36 +414,42 @@ class ModelOptimizer:
             return {key: self._convert_numpy_types(value) for key, value in obj.items()}
         else:
             return obj
-        
-    def generate_friedman1(self, n_samples, n_features, noise, random_state, transformation='identity'):
-        '''
-        Function to generate dataset according to Friedman1.
-        Inputs:
-            n_samples: number of data points
-            n_features: number of features (have to be at least 5)
-            noise: The standard deviation of the gaussian noise applied to the output.
-            random_state: to repreoduce dataset
-        Outputs:
-            features: array
-            y: array
 
+    
+    def generate_data(n_samples_training=100, n_samples_test= 10000, noise = 0, n_features = 10, random_state_trainning = 1, transformation='log'):
+        X_test, y_test = make_friedman1(n_samples=n_samples_test, n_features=n_features, noise=noise, random_state= self.global_seed_testing_data)
+        X_train, y_train = make_friedman1(n_samples=n_samples_training, n_features=n_features, noise=noise, random_state=random_state_trainning)
+        min_y_test = min(y_test)
+        min_y_train = min(y_train)
+        min_data = min(min_y_train, min_y_test)
+
+        if min_data < 0:
+            y_train = self.transform(y_train, transformation, shifting=abs(min_data))
+            y_test = self.transform(y_test, transformation='log', shifting=abs(min_data))
+            print(y_train)
+        return X_train, y_train, X_test, y_test
+
+
+    def transform(y, transformation='log', shifting=0):
         '''
-        features, y = make_friedman1(n_samples=n_samples, 
-                                    n_features=n_features, 
-                                    noise=noise, 
-                                    random_state=random_state)
-        if transformation=='identity':
+        Function to transform the target variable.
+        Inputs:
+            transformation: the transformation to be applied
+        Outputs:
+            None (it transforms the target variable of the dataframe and of y itself)
+        '''
+
+        if transformation == 'identity':
             pass
         elif transformation == 'log':
-            y = np.log(y)
-             
+            if shifting >0:
+                 shifting = shifting + 1.00000001
+            y = np.log(y + shifting)
         elif transformation == 'sqrt':
-            y = np.sqrt(y)
-             
+            y = np.sqrt(y + shifting)
         else:
             raise ValueError('Transformation not implemented.')
-
-        return features, y
+        return y
     
 
     

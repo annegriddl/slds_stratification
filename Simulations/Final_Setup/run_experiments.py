@@ -13,7 +13,8 @@ import matplotlib.pyplot as plt
 import re
 import warnings
 warnings.filterwarnings('ignore')
-from utils_final import FriedmanDataset, ModelOptimizer, generate_hyperparameter_combinations_dict
+#from utils_final_nadja import FriedmanDataset, ModelOptimizer, generate_hyperparameter_combinations_dict
+from utils_final_nadja import ModelOptimizer, generate_hyperparameter_combinations_dict
 import itertools
 import os
 

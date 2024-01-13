@@ -224,7 +224,6 @@ class ModelOptimizer:
                                                         noise=noise,
                                                         random_state=random_states[repetition],
                                                         transformation=transformation)
-            y_test_min
               
             ##########################################################
             # TODO: weniger rechenintensiv (Funktion oben umschreiben) ->  check if generated data is negative -> then shift it to positive with min
