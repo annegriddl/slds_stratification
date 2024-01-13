@@ -157,7 +157,7 @@ class ModelOptimizer:
 
 
             # Perform optimization with unstratified cross-validation
-            unstratified_results, unstratified_iteration, unstratified_params, unstratified_running_time, results_descreptives_folds = self._perform_optimization(X_train, 
+            unstratified_results, unstratified_iteration, unstratified_params, unstratified_running_time, unstratified_results_descreptives_folds = self._perform_optimization(X_train, 
                                                             y_train, 
                                                             X_test,
                                                             y_test,
@@ -171,7 +171,7 @@ class ModelOptimizer:
             
 
             # Perform optimization with stratified cross-validation
-            stratified_results, stratified_iteration, stratified_params, stratified_running_time, results_descreptives_folds, iteration_refit_test = self._perform_optimization(X_train, 
+            stratified_results, stratified_iteration, stratified_params, stratified_running_time, stratified_results_descreptives_folds, iteration_refit_test = self._perform_optimization(X_train, 
                                                             y_train, 
                                                             X_test,
                                                             y_test,
@@ -202,7 +202,8 @@ class ModelOptimizer:
                 'cv_unstratified_iterations': unstratified_iteration,
                 'cv_stratified_iterations': stratified_iteration, 
                 'cv_iteration_refit_test': iteration_refit_test,
-                'cv_folds_descreptives': results_descreptives_folds,
+                'cv_folds_descreptives_unstratified': unstratified_results_descreptives_folds,
+                'cv_folds_descreptives_stratified': stratified_results_descreptives_folds,
             }
 
             final_results.update(results)
