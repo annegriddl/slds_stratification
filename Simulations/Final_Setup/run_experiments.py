@@ -32,10 +32,10 @@ model_name = 'rf'
 ####### 2. Initialize experimental parameters #######################
 #### TODO: Set experimental parameters 
 # Here: fixed and not varied over experiments
-json_file = "./test.json"
-path_to_seeds = "./seeds_available.json"
+json_file = "./Simulations/Final_Setup/test_nadja.json"
+path_to_seeds = "./Simulations/Final_Setup/seeds_available_nadja.json"
 n_features = 5
-n_folds = 5
+n_folds = 4
 n_iter= 5
 n_jobs= -1
 n_repetitions = 2

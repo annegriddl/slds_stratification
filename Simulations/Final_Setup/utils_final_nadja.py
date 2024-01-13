@@ -16,6 +16,8 @@ import time
 import xgboost as xgb
 import math
 import os
+from scipy.stats import gaussian_kde
+from scipy.stats import ks_2samp
 
 import itertools
 
@@ -126,11 +128,15 @@ class ModelOptimizer:
                         seeds_available = json.load(file)
                 except json.JSONDecodeError:
                     print("Error decoding JSON. The file might be empty or not properly formatted.")
+                if self.checks:
+                    print(f"available seeds in {self.path_to_seeds}: {len(seeds_available)}")
                 random_states = seeds_available[:n_repetitions]
                 seeds_available = seeds_available[n_repetitions:]
-            with open(self.path_to_seeds, 'w') as file:
-                json.dump(seeds_available, file, indent=4)
-                print(f"Successfully loaded and deleted picked seeds from json file!:\n {random_states}")
+                with open(self.path_to_seeds, 'w') as file:
+                    json.dump(seeds_available, file, indent=4)
+                if self.checks:
+                    print(f"available seeds in {self.path_to_seeds}: {len(seeds_available)}") #@anne: warum len weniger, aber Zahlen immer noch in Liste?
+                print(f"Successfully loaded and deleted picked seeds from json file {self.path_to_seeds}!:\n {random_states}")
         else: # if random_states is list: use list as seeds #@Anne: hier auch nochmal checken, ob list
             random_states = random_states[:n_repetitions]
             print("Set seeds to: ", random_states, "for all iterations.\n")
@@ -147,11 +153,11 @@ class ModelOptimizer:
         for repetition in range(n_repetitions):
             start_time_repetition = time.time()
             if data == 'friedman':
-                 X_train, y_train, X_test, y_test = self.generate_data(n_samples_training=n_train, n_samples_test= n_test, noise = noise, n_features = n_features, random_state_trainning = random_states[repetition], transformation= transformation)
+                X_train, y_train, X_test, y_test = self.generate_data(n_samples_train=n_train, n_samples_test= n_test, noise = noise, n_features = n_features, random_state_trainning = random_states[repetition], transformation= transformation)
 
 
             # Perform optimization with unstratified cross-validation
-            unstratified_results, unstratified_iteration, unstratified_params, unstratified_running_time = self._perform_optimization(X_train, 
+            unstratified_results, unstratified_iteration, unstratified_params, unstratified_running_time, results_descreptives_folds = self._perform_optimization(X_train, 
                                                             y_train, 
                                                             X_test,
                                                             y_test,
@@ -165,7 +171,7 @@ class ModelOptimizer:
             
 
             # Perform optimization with stratified cross-validation
-            stratified_results, stratified_iteration, stratified_params, stratified_running_time = self._perform_optimization(X_train, 
+            stratified_results, stratified_iteration, stratified_params, stratified_running_time, results_descreptives_folds, iteration_refit_test = self._perform_optimization(X_train, 
                                                             y_train, 
                                                             X_test,
                                                             y_test,
@@ -181,7 +187,8 @@ class ModelOptimizer:
                 hyperparameters_same = True
             else:
                 hyperparameters_same = False
-            
+            end_time_repetition = time.time()
+                
             # Save results and parameters to a file
             results = {
                 'repetition': repetition,
@@ -189,27 +196,28 @@ class ModelOptimizer:
                 'hyperparameters_same': hyperparameters_same,
                 'unstratified_results': unstratified_results,
                 'stratified_results': stratified_results,
-                'unstratified_running_time': round(unstratified_running_time,4), 
-                'stratified_running_time': round(stratified_running_time, 4),
-                'unstratified_iteration': unstratified_iteration,
-                'stratified_iteration': stratified_iteration
+                'running_time_unstratified': round(unstratified_running_time,4), 
+                'running_time_stratified': round(stratified_running_time, 4),
+                'running_time_repetition': round((end_time_repetition - start_time_repetition)/60, 4),
+                'cv_unstratified_iterations': unstratified_iteration,
+                'cv_stratified_iterations': stratified_iteration, 
+                'cv_iteration_refit_test': iteration_refit_test,
+                'cv_folds_descreptives': results_descreptives_folds,
             }
 
             final_results.update(results)
-
             self.save_results(final_results, json_file)
+      
 
-            # for printing
+            # for printing durring run
             if self.checks:
                 print('seed for training data: ', random_states[repetition])
-
             if hyperparameters_same:
                 hype_same = 'the same'
             else:
                 hype_same = 'different'
-            ent_time_repetition = time.time()
 
-            print(f"Repetition {repetition+1} out of {n_repetitions} hyperparameter are {hype_same} and took {round((ent_time_repetition - start_time_repetition)/60, 4)} min")
+            print(f"Repetition {repetition+1} out of {n_repetitions} hyperparameter are {hype_same} and took {round((end_time_repetition - start_time_repetition)/60, 4)} min")
 
 
         
@@ -264,11 +272,18 @@ class ModelOptimizer:
         '''
         # Create cross-validation splits
         if stratified:
-            cv_splits = self.create_cont_folds(y=y_train, n_folds=cv, n_groups=n_groups, seed=random_state)
+            cv_splits = self.create_cont_folds(y=y_train, n_folds=cv, n_groups=n_groups, seed=random_state) #@anne:  do we shuffle ?
             output_text = 'Stratified Split Cross-validation'
+            results_descreptives_folds = self.analysis_folds(data = y_train, fold_idxs = cv_splits, seed_num= random_state, stratified=True, plot=False)
+            if self.checks:
+                print(f"{output_text} with seed {random_state}: {results_descreptives_folds}")
         else:
-            cv_splits = cv
+            #cv_splits = cv
+            cv_splits = list(KFold(cv, shuffle=True, random_state=random_state).split(y_train))
             output_text = 'Random Split Cross-validation'
+            results_descreptives_folds = self.analysis_folds(data = y_train, fold_idxs = cv_splits, seed_num= random_state, stratified=True, plot=False)
+            if self.checks:
+                print(f"{output_text} with seed {random_state}: {results_descreptives_folds}")
         
         # Initialize the model
         try:
@@ -300,15 +315,13 @@ class ModelOptimizer:
         # Evaluate the model
         evaluation_results = self.evaluate_rf(random_search, X_train, X_test, y_train, y_test)
 
-        # Evaluation on test set with all hyperparameter combinations of Random Search #@Anne: Interpretation richtig?
+        # Evaluation on test set with all hyperparameter combinations of Random Search; only do it once, here for stratified #@Anne: Interpretation richtig?
         if stratified: 
-            iteration_res = self.iteration_results(random_search, X_train, y_train, X_test, y_test, cv_results)  
-            #print(iteration_res)
-            cv_results.update(iteration_res)
-        #print("Evaluation Results of", output_text, ': ', evaluation_results)
-       
+            iteration_refit_test = self.iteration_results(random_search, X_train, y_train, X_test, y_test, cv_results)   
+            return evaluation_results, cv_results, random_search.best_params_, running_time, results_descreptives_folds, iteration_refit_test
+        else:
+            return evaluation_results, cv_results, random_search.best_params_, running_time, results_descreptives_folds
         
-        return evaluation_results, cv_results, random_search.best_params_, running_time
 
 
 
@@ -358,7 +371,7 @@ class ModelOptimizer:
         # create fold numbers    
         fold_nums = np.zeros(len(y))
         #split(X, y[, groups]): Generate indices to split data into training and test set
-        for fold_no, (t, v) in enumerate(skf.split(y_grouped, y_grouped)): #@Nadja: unabhängig von n_folds? n_folds = fol_no, test_data_size = N/n_folds
+        for fold_no, (t, v) in enumerate(skf.split(y_grouped, y_grouped)): 
             fold_nums[v] = fold_no
 
         cv_splits = []
@@ -370,6 +383,7 @@ class ModelOptimizer:
             cv_splits.append((train_indices, test_indices))
 
         return cv_splits
+
 
     def evaluate_rf(self, model, X_train, X_test, y_train, y_test):
         '''
@@ -416,9 +430,9 @@ class ModelOptimizer:
             return obj
 
     
-    def generate_data(n_samples_training=100, n_samples_test= 10000, noise = 0, n_features = 10, random_state_trainning = 1, transformation='log'):
+    def generate_data(self, n_samples_train, n_samples_test, noise = 0, n_features = 10, random_state_trainning = 1, transformation='log'):
         X_test, y_test = make_friedman1(n_samples=n_samples_test, n_features=n_features, noise=noise, random_state= self.global_seed_testing_data)
-        X_train, y_train = make_friedman1(n_samples=n_samples_training, n_features=n_features, noise=noise, random_state=random_state_trainning)
+        X_train, y_train = make_friedman1(n_samples=n_samples_train, n_features=n_features, noise=noise, random_state=random_state_trainning)
         min_y_test = min(y_test)
         min_y_train = min(y_train)
         min_data = min(min_y_train, min_y_test)
@@ -430,7 +444,7 @@ class ModelOptimizer:
         return X_train, y_train, X_test, y_test
 
 
-    def transform(y, transformation='log', shifting=0):
+    def transform(self, y, transformation='identity', shifting=0):
         '''
         Function to transform the target variable.
         Inputs:
@@ -452,4 +466,91 @@ class ModelOptimizer:
         return y
     
 
+
+
+
+    def analysis_folds(self, data, fold_idxs, seed_num, stratified=False, plot = False):
+        '''
+        Function to visualize the folds.
+        Inputs:
+            data: the target variable
+            fold_idxs: the number of folds
+            seed_num: the seed numbers as a list
+        Outputs:
+            results: a dictionary containing the outputs of perform_ks_test() and plot_intersection()
+        '''
+        ks_statistic_list = []
+        p_value_list = []
+        intersection_area_list = []
     
+
+        # for plotting title
+        if stratified:
+            stratified_title = "Stratified Split"
+        else:
+            stratified_title = "Random Split"
+
+        if plot:
+            fig, axs = plt.subplots(len(fold_idxs)//2, 2, figsize=(10,(len(fold_idxs)//2)*2))
+            fig.suptitle(stratified_title + " with seed: " + str(seed_num), fontsize=10)
+            for fold_id, (train_ids, val_ids) in enumerate(fold_idxs):
+                sns.histplot(data=data[train_ids],
+                            kde=True,
+                            stat="density",
+                            alpha=0.15,
+                            label="Train Set",
+                            bins=30,
+                            line_kws={"linewidth":1},
+                            ax=axs[fold_id%(len(fold_idxs)//2), fold_id//(len(fold_idxs)//2)])
+                sns.histplot(data=data[val_ids],
+                            kde=True,
+                            stat="density", 
+                            color="darkorange",
+                            alpha=0.15,
+                            label="Validation Set",
+                            bins=30,
+                            line_kws={"linewidth":1},
+                            ax=axs[fold_id%(len(fold_idxs)//2), fold_id//(len(fold_idxs)//2)])
+                axs[fold_id%(len(fold_idxs)//2), fold_id//(len(fold_idxs)//2)].legend()
+                axs[fold_id%(len(fold_idxs)//2), fold_id//(len(fold_idxs)//2)].set_title("Split " + str(fold_id+1))
+            plt.show()
+
+        for fold_id, (train_ids, val_ids) in enumerate(fold_idxs):
+            # Perform the Kolmogorov-Smirnov test and store the results in the dictionary
+            ks_statistic, p_value = self.perform_ks_test(data[train_ids], data[val_ids])
+
+            # Calculate the intersection and store the result in the dictionary
+            intersection_area = self.plot_intersection(data[train_ids], data[val_ids])
+            ks_statistic_list.append(ks_statistic)
+            p_value_list.append(p_value)
+            intersection_area_list.append(intersection_area)
+        results = {'ks_statistic': ks_statistic_list, 'p_value': p_value_list, 'intersection_area': intersection_area_list}
+        
+        mean_results = {}
+        for key, values in results.items():
+            mean_results[key] = np.mean(values)
+        return mean_results
+    
+
+    def perform_ks_test(slef, data1, data2):
+        # Perform the Kolmogorov-Smirnov test
+        statistic, p_value = ks_2samp(data1, data2)
+        return statistic, p_value
+    
+
+    def plot_intersection(self, data1, data2):
+        data_dict = {'data1': data1, 'data2': data2}
+        min_data = min(min(data) for data in data_dict.values())
+        max_data = max(max(data) for data in data_dict.values())
+        min_len = min([len(data) for data in data_dict.values()])
+        x = np.linspace(min_data, max_data, min_len)
+        ys = []
+        for label, data in data_dict.items():
+            kde_func = gaussian_kde(data)
+            y = kde_func(x)
+            ys.append(y)
+        y_intersection = np.amin(ys, axis=0)
+        area = np.trapz(y_intersection, x)
+        return area
+
+        
