@@ -10,31 +10,29 @@ import json
 from sklearn.dummy import DummyRegressor
 import seaborn as sns
 import matplotlib.pyplot as plt
-from mpl_toolkits.mplot3d import Axes3D
 import re
 import warnings
 warnings.filterwarnings('ignore')
-from utils_final import FriedmanDataset, ModelOptimizerFinal, generate_hyperparameter_combinations_dict
+from utils_final import FriedmanDataset, ModelOptimizer, generate_hyperparameter_combinations_dict
 import itertools
 import os
 
-####### 1. Choose model ################
 
+
+
+####### 1. Choose model ################################
 #### TODO: Choose 'rf' for Random Forest Regressor
 ####       Or 'xgb' for XGBoost Regressor
 model_name = 'rf'
-#### Ende #######################
+#### END ##############################################
 
 
-####### 2. Initialize parameters #######
 
-#### TODO: Set parameters for the experiment
-#json_file = os.path.join(os.path.dirname(os.path.realpath("test.ipynb")), "test.json") 
-#path_to_seeds = os.path.join(os.path.dirname(os.path.realpath("run_experiments.py")), "seeds_available.json") 
-#json_file = re.sub(r"\\", "/", json_file)
-#path_to_seeds = re.sub(r"\\", "/", path_to_seeds)
-json_file = "C:/Users/anneg/Documents/Documents/StatistikMaster/slds_stratification/Simulations/Final_Setup/test.json"
-path_to_seeds = "C:/Users/anneg/Documents/Documents/StatistikMaster/slds_stratification/Simulations/Final_Setup/seeds_available.json"
+####### 2. Initialize experimental parameters #######################
+#### TODO: Set experimental parameters 
+# Here: fixed and not varied over experiments
+json_file = "./test.json"
+path_to_seeds = "./seeds_available.json"
 n_features = 5
 n_folds = 5
 n_iter= 5
@@ -43,40 +41,52 @@ n_repetitions = 2
 n_test= 100000
 scoring= 'neg_mean_squared_error'
 
-# Define hyperparameter options
-hyperparameter_options = {'n_train': [200, 1000],
-                          'transformation': ['identity', 'sqrt'],
+# Here: varied over experiments #@Anne: eigenlich muss ich hier nur die parameter mit mehr als einem wert angeben, oder?
+hyperparameter_options = {'n_train': [200],
+                          'transformation': ['log', 'sqrt'],
                           'noise': [0],
                           'group_size': [10]}
-#### Ende #######################
+#### END ##############################################
 
-# Generate hyperparameter combinations
+
+
+
+
+
+
+######### 3. Run experiemnts (nothing to change here) ##############################
+# Generate grid for experimental parameter combinations over that we iterate later
 all_combinations = generate_hyperparameter_combinations_dict(hyperparameter_options)
+print('\n-----------------------------------')
+print('Number of hyperparameter combinations:', len(all_combinations))
+print('-----------------------------------\n')
 
-# Set param grid for RF
+# Set model hyperparameter grid for Random Search for RF
 rf_param_grid = {
     'min_samples_split': np.arange(2, 21),
     'min_samples_leaf': np.arange(1, 21),
     'max_features': np.arange(1, n_features + 1) #@nadja is that right?
 }
 
-# Set param grid for XGBoost
+# Set model hyperparameter grid for Random Search for XGBoost
 xgb_param_grid = {}
+
+
+
+
 
 
 if __name__ == '__main__':
     if not os.path.exists(path_to_seeds):   
         print("cant find path")
-        with open(path_to_seeds, 'w') as file:
-            json.dump([x for x in range(100000)], file, indent=4)
-            print("File created: ", path_to_seeds)
-            #random_states = [x for x in range(n_repetitions)]
-            #seeds_available = [x for x in range(100000)][n_repetitions:]
+        #with open(path_to_seeds, 'w') as file: #@Anne: würd auskommentieren, d.h. error und dann manuell wieder einkommentieren, um evlt. file Fehelr zu vermeiden
+            #json.dump([x for x in range(100000)], file, indent=4)
+            #print("File created: ", path_to_seeds)
 
+    tracker = 1
     for hyperparameter_dict in all_combinations:
-
         # Save Parameters in a dictionary
-        params = {'model': model_name,
+        params_experiment = {'model': model_name,
           'n_train': hyperparameter_dict['n_train'],
           'n_test': n_test,
           'n_features': n_features,
@@ -89,16 +99,21 @@ if __name__ == '__main__':
           'scoring': scoring, 
           'n_jobs': n_jobs,
           'json_file': json_file}
-        print(params)
+        print('EXPERIMENTAL PARPAMETER COMBINATION ', tracker, ' (out of ', len(all_combinations), '): \n', params_experiment)
 
-        if model_name == 'rf': param_grid = rf_param_grid
-        elif model_name == 'xgb': param_grid = xgb_param_grid
+        if model_name == 'rf': hyp_param_grid = rf_param_grid
+        elif model_name == 'xgb': hyp_param_grid = xgb_param_grid
         else: raise ValueError('Model name not found')
 
         # Initalize Model
-        modelOptimizer = ModelOptimizerFinal(param_grid=param_grid,
+        modelOptimizer = ModelOptimizer(hyp_param_grid=hyp_param_grid, #@Anne: unbenannt von ModelOptimizerFinal 
                                             model_name=model_name,
-                                            path_to_seeds=path_to_seeds)
-        modelOptimizer.optimize(params=params)
+                                            path_to_seeds=path_to_seeds, checks=False)
+        modelOptimizer.optimize(params_experiment=params_experiment)
+        print('End of hyperparameter combinaiton', tracker)
+        tracker += 1
+        print('\n-----------------------------------')
+        print()
+        
 
 

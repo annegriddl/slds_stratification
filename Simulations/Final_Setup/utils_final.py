@@ -6,7 +6,6 @@ import numpy as np
 from sklearn.datasets import make_friedman1
 import seaborn as sns
 import matplotlib.pyplot as plt
-from mpl_toolkits.mplot3d import Axes3D
 from sklearn.metrics import mean_squared_error, mean_absolute_error
 from sklearn.utils import shuffle
 import json
@@ -101,25 +100,29 @@ class FriedmanDataset:
 
 
 
-class ModelOptimizerFinal:
+class ModelOptimizer:
     '''
     Class to optimize the model.
     Inputs:
         model: the model to be optimized
-        param_grid: the parameter grid to be used for the optimization
+        hyp_param_grid: the parameter grid to be used for the optimization
         random_state: the random state to be used
     '''
-    def __init__(self, param_grid, model_name, path_to_seeds):
-        self.param_grid = param_grid
+    def __init__(self, hyp_param_grid, model_name, path_to_seeds, checks):
+        self.hyp_param_grid = hyp_param_grid
         self.model_name = model_name
         self.path_to_seeds = path_to_seeds
+        self.checks = checks
+        #Create testing data with seed 1718 (use same seed in all experiments)
+        self.global_seed_testing_data = 1718 # static, don't change this over experiments!!!
+        self.n_estimators = 500 # static, don't change this over experiments !!!
         
 
 
     def optimize(self, 
-                 params,
+                 params_experiment,
                  data='friedman',
-                 random_states=None):
+                 random_states=None): #@Anne: none, um offen zu halten ob json mit seeds oder mauell Zahl eingegeben ?
         '''
         Function to optimize the model.
         Inputs:
@@ -138,42 +141,54 @@ class ModelOptimizerFinal:
         '''
                                                      
         
-        # get parameters from params dictionary
-        n_train = params['n_train']
-        n_test = params['n_test']
-        n_features = params['n_features']
-        noise = params['noise']
-        transformation = params['transformation']
-        n_folds= params['n_folds']
-        group_size = params['group_size']
-        scoring = params['scoring']
-        n_jobs = params['n_jobs']
-        n_iter = params['n_iter']
-        n_repetitions = params['n_repetitions']
-        json_file = params['json_file']
+        ### get experimental parameters from entered params_experiment dictionary
+        n_train = params_experiment['n_train']
+        n_test = params_experiment['n_test']
+        n_features = params_experiment['n_features']
+        noise = params_experiment['noise']
+        transformation = params_experiment['transformation']
+        n_folds= params_experiment['n_folds']
+        group_size = params_experiment['group_size']
+        scoring = params_experiment['scoring'] #@Anne: warum nicht bold ? Als würde es nicht genutzt werden
+        n_jobs = params_experiment['n_jobs']
+        n_iter = params_experiment['n_iter']
+        n_repetitions = params_experiment['n_repetitions']
+        json_file = params_experiment['json_file']
 
+        # Calculate number of groups for stratified cross-validation
+        # Goal: same number of observations in each group independent of n_train #@Anne: richtig?    
+        n_groups = int(n_train/group_size)
+        if self.checks:
+            print("Number of groups: ", n_groups)
+        #print(f"RandomizesdSearchCV with parameters of experiment n_folds = {n_folds}, group_size = {group_size}, n_groups = {n_groups}, scoring = {scoring}, n_jobs = {n_jobs}, n_iter = {n_iter} and save to {json_file}")
+
+        
+        ### Create testing data with seed 1718 (use same seed in all experiments)
         if data == 'friedman':
             # maybe implement accessing and generating the data nicer
             X_test, y_test = self.generate_friedman1(n_samples=n_test,
                                                      n_features=n_features,
                                                      noise=noise,
-                                                     random_state=1718,
+                                                     random_state= self.global_seed_testing_data,
                                                      transformation=transformation)
-            print("X_test, y_test generated")
+            self.y_test_min = y_test.min()
+            #print("Created testing data with seed: ", self.global_seed_testing_data)
 
+        
+        ### set seeds for all repetitions
         #######################################################################################
-        # TODO: abchecken ob es richtig funktioniert.
-        if not isinstance(random_states, list):
-            # if path does not exist, create file with empty list
-            print("Path to seeds: ", self.path_to_seeds)
+        # TODO: abchecken ob es richtig funktioniert. @Anne: verseth ich nicht 100%, habs mal auskommentiert, weil seeds wurden ja eignetlich schon erzeugt oder?
+        if not isinstance(random_states, list):   # if random_states is None: load sedds form json_file
+            #print("\nLoad seeds from json: ", self.path_to_seeds)
+            #if path does not exist, create file with empty list -> @Anen: glaub besser error und dann manuell Liste erzeugen
             if not os.path.exists(self.path_to_seeds):   
-                print("cant find path")
-                with open(self.path_to_seeds, 'w') as file:
-                    json.dump([], file, indent=4)
-                print("File created: ", self.path_to_seeds)
-                random_states = [x for x in range(n_repetitions)]
-                seeds_available = [x for x in range(100000)][n_repetitions:]
-                
+                #print("cant find path")
+                #with open(self.path_to_seeds, 'w') as file:
+                #    json.dump([], file, indent=4)
+                #print("File created: ", self.path_to_seeds)
+                #random_states = [x for x in range(n_repetitions)]
+                #seeds_available = [x for x in range(100000)][n_repetitions:]
+                print("Can't find path to seeds! Current paht: ", self.path_to_seeds) #@anne: would need to include in try and except
             # Else read the content of the JSON file
             else:
                 try:
@@ -181,32 +196,38 @@ class ModelOptimizerFinal:
                         seeds_available = json.load(file)
                 except json.JSONDecodeError:
                     print("Error decoding JSON. The file might be empty or not properly formatted.")
-    
                 random_states = seeds_available[:n_repetitions]
                 seeds_available = seeds_available[n_repetitions:]
             with open(self.path_to_seeds, 'w') as file:
                 json.dump(seeds_available, file, indent=4)
-        else:
+                print(f"Successfully loaded and deleted picked seeds from json file!:\n {random_states}")
+        else: # if random_states is list: use list as seeds #@Anne: hier auch nochmal checken, ob list
             random_states = random_states[:n_repetitions]
-       
+            print("Set seeds to: ", random_states, "for all iterations.\n")
         #######################################################################################
-        n_groups = int(n_train/group_size)
 
-        print(f"RandomizesdSearchCV with params n_folds = {n_folds}, group_size = {group_size}, n_groups = {n_groups}, scoring = {scoring}, n_jobs = {n_jobs}, n_iter = {n_iter} and save to {json_file}")
-        
-        initialization = {
-            'model_info': params
+
+   
+        # initalize dictionary with final_results, which is saved to json_file for evaluation
+        final_results = {
+            'model_info': params_experiment
         }
 
+        #### Run Experiments for each repetition independently 
         for repetition in range(n_repetitions):
+            start_time_repetition = time.time()
+            # create training data with seed from random_states
+            # check if generated data is negative -> then shift it to positive
             if data == 'friedman':
                 X_train, y_train = self.generate_friedman1(n_samples=n_train,
                                                         n_features=n_features,
                                                         noise=noise,
                                                         random_state=random_states[repetition],
                                                         transformation=transformation)
+            y_test_min
+              
             ##########################################################
-            # TODO: weniger rechenintensiv (Funktion oben umschreiben)
+            # TODO: weniger rechenintensiv (Funktion oben umschreiben) ->  check if generated data is negative -> then shift it to positive with min
             # Check for NaN values in the data
             if np.isnan(y_train).any() or np.isnan(y_test).any(): 
                 X_train, y_train = make_friedman1(n_samples=n_train,
@@ -216,7 +237,7 @@ class ModelOptimizerFinal:
                 X_test, y_test = make_friedman1(n_samples=n_test,
                                     n_features=n_features,
                                     noise=noise,
-                                    random_state=1718)
+                                    random_state= self.global_seed_testing_data)
                 min_val = min(y_train.min(), y_test.min())
                 
                 # Logarithmus +1, für Square Root nicht
@@ -231,6 +252,7 @@ class ModelOptimizerFinal:
                     y_train = np.sqrt(y_train)
                     y_test = np.sqrt(y_test)
             ##########################################################  
+
 
             # Perform optimization with unstratified cross-validation
             unstratified_results, unstratified_iteration, unstratified_params, unstratified_running_time = self._perform_optimization(X_train, 
@@ -271,17 +293,29 @@ class ModelOptimizerFinal:
                 'hyperparameters_same': hyperparameters_same,
                 'unstratified_results': unstratified_results,
                 'stratified_results': stratified_results,
-                'unstratified_running_time': round(unstratified_running_time,2), 
-                'stratified_running_time': round(stratified_running_time, 2),
+                'unstratified_running_time': round(unstratified_running_time,4), 
+                'stratified_running_time': round(stratified_running_time, 4),
                 'unstratified_iteration': unstratified_iteration,
                 'stratified_iteration': stratified_iteration
             }
 
-            initialization.update(results)
+            final_results.update(results)
 
-            self.save_results(initialization, json_file)
-            
-            print(f"Repetition {repetition} finished. Results saved to {json_file}.")
+            self.save_results(final_results, json_file)
+
+            # for printing
+            if self.checks:
+                print('seed for training data: ', random_states[repetition])
+
+            if hyperparameters_same:
+                hype_same = 'the same'
+            else:
+                hype_same = 'different'
+            ent_time_repetition = time.time()
+
+            print(f"Repetition {repetition+1} out of {n_repetitions} hyperparameter are {hype_same} and took {round((ent_time_repetition - start_time_repetition)/60, 4)} min")
+
+
         
     
     def save_results(self, results, path):
@@ -294,10 +328,10 @@ class ModelOptimizerFinal:
             None (it saves the results to the JSON file)
         '''
 
-        if not os.path.exists(path):   
-            with open(path, 'w') as file:
-                json.dump([], file, indent=4)
-            print("File created: ", path)
+        if not os.path.exists(path):   #@Anne: hier vlt auch besser Fehlermedung anstatt neue Datei
+            #with open(path, 'w') as file:
+                #json.dump([], file, indent=4)
+            print("File not found, current path: ", path)
     
         # Load existing data or create an empty list
         with open(path, 'r') as file:
@@ -343,7 +377,7 @@ class ModelOptimizerFinal:
         # Initialize the model
         try:
             if self.model_name == "rf":
-                model = RandomForestRegressor(n_estimators=700,
+                model = RandomForestRegressor(n_estimators= self.n_estimators,
                                               random_state=random_state)
             elif self.model_name == "xgb":
                 model = xgb.XGBRegressor(random_state=random_state)
@@ -353,7 +387,7 @@ class ModelOptimizerFinal:
         # Perform the optimization
         start_time = time.time()
         random_search = RandomizedSearchCV(estimator=model,
-                                           param_distributions=self.param_grid,
+                                           param_distributions=self.hyp_param_grid,
                                            n_iter=n_iter,
                                            cv=cv_splits,
                                            scoring=scoring,
@@ -364,34 +398,40 @@ class ModelOptimizerFinal:
         end_time = time.time()
         running_time = end_time - start_time
         cv_results = random_search.cv_results_
-        print("Best Parameters:", random_search.best_params_)
+        #print(f'Runing time Random Search of {output_text}: {round(running_time/60, 4)} min')
+        #print("Best Parameters:", random_search.best_params_)
 
         # Evaluate the model
         evaluation_results = self.evaluate_rf(random_search, X_train, X_test, y_train, y_test)
+
+        # Evaluation on test set with all hyperparameter combinations of Random Search #@Anne: Interpretation richtig?
         if stratified: 
-            iteration_results = self.iteration_results(random_search, X_train, y_train, X_test, y_test, cv_results)  
-            print(iteration_results)
-            cv_results.update(iteration_results)
-        print("Evaluation Results of", output_text, ': ', evaluation_results)
-        print('running_time: ', round(running_time/60, 2), ' min')
+            iteration_res = self.iteration_results(random_search, X_train, y_train, X_test, y_test, cv_results)  
+            #print(iteration_res)
+            cv_results.update(iteration_res)
+        #print("Evaluation Results of", output_text, ': ', evaluation_results)
+       
         
         return evaluation_results, cv_results, random_search.best_params_, running_time
 
-    def iteration_results(self, model, X_train, y_train, X_test, y_test, results_cv):
+
+
+
+    def iteration_results(self, RandomSearchObject, X_train, y_train, X_test, y_test, results_cv):
         mse_list = []
         mae_list = []
         r2_list = []
-        for index, params in enumerate(results_cv["params"]):
-            model = model.best_estimator_
-            print(params)
-            print(model)
-            model.set_params(**params)
-            print(model.get_params())
-            test_r2 = round(model.score(X_test, y_test), 4)
+        for index, params_experiment in enumerate(results_cv["params"]):
+            model = RandomSearchObject.best_estimator_ #@Anne: renamed model (input) to  RandomSearchObject, as two times model raised error for me; maybe double check
+            #print(params_experiment)
+            #print(model)
+            model.set_params(**params_experiment)
+            #print(model.get_params())
+            test_r2 = round(model.score(X_test, y_test), 8)
             model.fit(X_train, y_train)
             y_pred = model.predict(X_test)
-            test_mse = round(mean_squared_error(y_test, y_pred), 4)
-            test_mae = round(mean_absolute_error(y_test, y_pred), 4)
+            test_mse = round(mean_squared_error(y_test, y_pred), 8)
+            test_mae = round(mean_absolute_error(y_test, y_pred), 8)
             r2_list.append(test_r2)
             mse_list.append(test_mse)
             mae_list.append(test_mae)
@@ -446,10 +486,10 @@ class ModelOptimizerFinal:
         '''
         model=model.best_estimator_
 
-        train_r2, test_r2 = round(model.score(X_train, y_train), 4), round(model.score(X_test, y_test), 4)
+        train_r2, test_r2 = round(model.score(X_train, y_train), 8), round(model.score(X_test, y_test), 8)
         y_train_pred, y_test_pred = model.predict(X_train), model.predict(X_test)
-        train_mse, test_mse = round(mean_squared_error(y_train, y_train_pred), 4), round(mean_squared_error(y_test, y_test_pred), 4)
-        train_mae, test_mae = round(mean_absolute_error(y_train, y_train_pred), 4), round(mean_absolute_error(y_test, y_test_pred), 4)
+        train_mse, test_mse = round(mean_squared_error(y_train, y_train_pred), 8), round(mean_squared_error(y_test, y_test_pred), 8)
+        train_mae, test_mae = round(mean_absolute_error(y_train, y_train_pred), 8), round(mean_absolute_error(y_test, y_test_pred), 8)
         return {'train r2': train_r2, 
                 'test r2': test_r2, 
                 'train mse': train_mse,
@@ -496,6 +536,46 @@ class ModelOptimizerFinal:
                                     n_features=n_features, 
                                     noise=noise, 
                                     random_state=random_state)
+        if transformation=='identity':
+            pass
+        elif transformation == 'log':
+            y = np.log(y)
+             
+        elif transformation == 'sqrt':
+            y = np.sqrt(y)
+             
+        else:
+            raise ValueError('Transformation not implemented.')
+
+        return features, y
+    
+
+    def generate_friedman1_shifted(self, n_samples, n_features, noise, random_state, transformation='identity'):
+        '''
+        Function to generate dataset according to Friedman1.
+        Inputs:
+            n_samples: number of data points
+            n_features: number of features (have to be at least 5)
+            noise: The standard deviation of the gaussian noise applied to the output.
+            random_state: to repreoduce dataset
+        Outputs:
+            features: array
+            y: array
+
+        '''
+        features, y = make_friedman1(n_samples=n_samples, 
+                                    n_features=n_features, 
+                                    noise=noise, 
+                                    random_state=random_state)
+        min_train = min(y)
+        self.y_test_min
+        min_val = min(min_train, self.y_test_min)
+
+        if min_val < 0:
+            y = y + abs(min_val) + 1
+
+        if 
+
         if transformation=='identity':
             pass
         elif transformation == 'log':
