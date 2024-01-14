@@ -93,7 +93,7 @@ class ModelOptimizer:
         transformation = params_experiment['transformation']
         n_folds= params_experiment['n_folds']
         group_size = params_experiment['group_size']
-        scoring = params_experiment['scoring'] #@Anne: warum nicht bold ? Als würde es nicht genutzt werden
+        scoring = params_experiment['scoring'] 
         n_jobs = params_experiment['n_jobs']
         n_iter = params_experiment['n_iter']
         n_repetitions = params_experiment['n_repetitions']
@@ -135,7 +135,7 @@ class ModelOptimizer:
                 with open(self.path_to_seeds, 'w') as file:
                     json.dump(seeds_available, file, indent=4)
                 if self.checks:
-                    print(f"available seeds in {self.path_to_seeds}: {len(seeds_available)}") #@anne: warum len weniger, aber Zahlen immer noch in Liste?
+                    print(f"available seeds in {self.path_to_seeds}: {len(seeds_available)}") 
                 print(f"Successfully loaded and deleted picked seeds from json file {self.path_to_seeds}!:\n {random_states}")
         else: # if random_states is list: use list as seeds #@Anne: hier auch nochmal checken, ob list
             random_states = random_states[:n_repetitions]
@@ -150,7 +150,7 @@ class ModelOptimizer:
         }
 
         #### Run Experiments for each repetition independently 
-        for repetition in range(n_repetitions):
+        for repetition in range(n_repetitions): #@Anne: Parallisierung hier whr einfügen
             start_time_repetition = time.time()
             if data == 'friedman':
                 X_train, y_train, X_test, y_test = self.generate_data(n_samples_train=n_train, n_samples_test= n_test, noise = noise, n_features = n_features, random_state_trainning = random_states[repetition], transformation= transformation)
@@ -171,6 +171,7 @@ class ModelOptimizer:
             
 
             # Perform optimization with stratified cross-validation
+            # note: here iteration_refit_test is additionally calculated as it's the same for stratified and unstratified (fit of same hyperparameters on the same data)
             stratified_results, stratified_iteration, stratified_params, stratified_running_time, stratified_results_descreptives_folds, iteration_refit_test = self._perform_optimization(X_train, 
                                                             y_train, 
                                                             X_test,
@@ -284,7 +285,7 @@ class ModelOptimizer:
             output_text = 'Random Split Cross-validation'
             results_descreptives_folds = self.analysis_folds(data = y_train, fold_idxs = cv_splits, seed_num= random_state, stratified=True, plot=False)
             if self.checks:
-                print(f"{output_text} with seed {random_state}: {results_descreptives_folds}")
+                print(f"\n{output_text} with seed {random_state}: {results_descreptives_folds}")
         
         # Initialize the model
         try:
@@ -308,10 +309,11 @@ class ModelOptimizer:
         
         random_search.fit(X_train, y_train)
         end_time = time.time()
-        running_time = end_time - start_time
+        running_time = round((end_time - start_time)/60, 4)
         cv_results = random_search.cv_results_
         #print(f'Runing time Random Search of {output_text}: {round(running_time/60, 4)} min')
         #print("Best Parameters:", random_search.best_params_)
+        #print(f"\n {random_state} {output_text}: Parameters Random Search {cv_results['params']}")
 
         # Evaluate the model
         evaluation_results = self.evaluate_rf(random_search, X_train, X_test, y_train, y_test)

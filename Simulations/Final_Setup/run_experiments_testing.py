@@ -32,21 +32,21 @@ model_name = 'rf'
 ####### 2. Initialize experimental parameters #######################
 #### TODO: Set experimental parameters 
 # Here: fixed and not varied over experiments
-json_file = "./Simulations/Final_Setup/results-run-20240114-2.json" # @Anne: maybe create here as well if it doesn't exist + file structure
-path_to_seeds = "./Simulations/Final_Setup/seeds-run-20240114-2.json"  # @Anne: we need function to create new seed file here + file structure
-n_features = 8
-n_folds = 5
-n_iter= 200
+json_file = "./Simulations/Final_Setup/test_nadja.json"
+path_to_seeds = "./Simulations/Final_Setup/seeds_available_nadja.json"
+n_features = 5
+n_folds = 4
+n_iter= 5
 n_jobs= -1
-n_repetitions = 50
+n_repetitions = 2
 n_test= 100000
 scoring= 'neg_mean_squared_error'
 
 # Here: varied over experiments #@Anne: eigenlich muss ich hier nur die parameter mit mehr als einem wert angeben, oder?
 hyperparameter_options = {'n_train': [200],
-                          'transformation': ['identity', 'log'],
-                          'noise': [0, 3],
-                          'group_size': [10]} #@Anne: macht das Sinn
+                          'transformation': ['log', 'sqrt'],
+                          'noise': [0],
+                          'group_size': [10]}
 #### END ##############################################
 
 
@@ -64,9 +64,9 @@ print('-----------------------------------\n')
 
 # Set model hyperparameter grid for Random Search for RF
 rf_param_grid = {
-    'min_samples_split': np.arange(2, 11), # @Anne: warum war hier 21; sollten wir mit n_trin skalieren ? Oder vlt. konstant halten und drauf achten, ober Untershciede ersichtlich
-    'min_samples_leaf': np.arange(1, 11), # @Anne: warum war hier 21; sollten wir mit n_trin skalieren ?
-    'max_features': np.arange(1, n_features + 1) 
+    'min_samples_split': np.arange(2, 21),
+    'min_samples_leaf': np.arange(1, 21),
+    'max_features': np.arange(1, n_features + 1) #@nadja is that right?
 }
 
 # Set model hyperparameter grid for Random Search for XGBoost
@@ -109,7 +109,7 @@ if __name__ == '__main__':
         # Initalize Model
         modelOptimizer = ModelOptimizer(hyp_param_grid=hyp_param_grid, #@Anne: unbenannt von ModelOptimizerFinal 
                                             model_name=model_name,
-                                            path_to_seeds=path_to_seeds, checks=False)
+                                            path_to_seeds=path_to_seeds, checks=True)
         modelOptimizer.optimize(params_experiment=params_experiment)
         print('End of hyperparameter combinaiton', tracker)
         tracker += 1
