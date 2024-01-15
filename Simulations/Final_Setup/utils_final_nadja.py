@@ -443,7 +443,7 @@ class ModelOptimizer:
         if min_data < 0:
             y_train = self.transform(y_train, transformation, shifting=abs(min_data))
             y_test = self.transform(y_test, transformation='log', shifting=abs(min_data))
-            print(y_train)
+            #print(y_train)
         return X_train, y_train, X_test, y_test
 
 
