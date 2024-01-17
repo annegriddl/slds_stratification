@@ -110,9 +110,12 @@ class ModelOptimizer:
         ### set seeds for all repetitions
         #######################################################################################
         # TODO: abchecken ob es richtig funktioniert. @Anne: verseth ich nicht 100%, habs mal auskommentiert, weil seeds wurden ja eignetlich schon erzeugt oder?
+            # @Nadja, ich würds drin lassen, wenn jemand anders das Skript verwendet, dann wird der die Seeds Liste automatisch erstellt und man muss das davor nicht selber machen.
+            # @Nadja: der checkt ja ob die file schon existiert und wenn sie schon vorhanden ist, dann wird ja keine neue erstellt. 
         if not isinstance(random_states, list):   # if random_states is None: load sedds form json_file
             #print("\nLoad seeds from json: ", self.path_to_seeds)
             #if path does not exist, create file with empty list -> @Anen: glaub besser error und dann manuell Liste erzeugen
+            #                                                       @Nadja: Aber warum? Wär so schon deutlich schöner.
             if not os.path.exists(self.path_to_seeds):   
                 #print("cant find path")
                 #with open(self.path_to_seeds, 'w') as file:
@@ -121,7 +124,7 @@ class ModelOptimizer:
                 #random_states = [x for x in range(n_repetitions)]
                 #seeds_available = [x for x in range(100000)][n_repetitions:]
                 print("Can't find path to seeds! Current paht: ", self.path_to_seeds) #@anne: would need to include in try and except
-            # Else read the content of the JSON file
+            # Else read the content of the JSON file                                    # @Nadja: try except können wir gerne machen.
             else:
                 try:
                     with open(self.path_to_seeds, 'r') as file:
@@ -152,8 +155,14 @@ class ModelOptimizer:
         #### Run Experiments for each repetition independently 
         for repetition in range(n_repetitions): #@Anne: Parallisierung hier whr einfügen
             start_time_repetition = time.time()
+            # @Nadja: Warum hast du verschiebung ins Positive gelöscht?
             if data == 'friedman':
-                X_train, y_train, X_test, y_test = self.generate_data(n_samples_train=n_train, n_samples_test= n_test, noise = noise, n_features = n_features, random_state_trainning = random_states[repetition], transformation= transformation)
+                X_train, y_train, X_test, y_test = self.generate_data(n_samples_train=n_train, 
+                                                                      n_samples_test= n_test, 
+                                                                      noise = noise, 
+                                                                      n_features = n_features, 
+                                                                      random_state_trainning = random_states[repetition], 
+                                                                      transformation= transformation)
 
 
             # Perform optimization with unstratified cross-validation
@@ -441,9 +450,13 @@ class ModelOptimizer:
         min_data = min(min_y_train, min_y_test)
 
         if min_data < 0:
-            y_train = self.transform(y_train, transformation, shifting=abs(min_data))
-            y_test = self.transform(y_test, transformation='log', shifting=abs(min_data))
-            #print(y_train)
+            shifting = abs(min_data)
+        else:
+            shifting = 0
+        
+        y_train = self.transform(y_train, transformation, shifting=shifting)
+        y_test = self.transform(y_test, transformation='log', shifting=shifting)
+        
         return X_train, y_train, X_test, y_test
 
 
@@ -457,10 +470,10 @@ class ModelOptimizer:
         '''
 
         if transformation == 'identity':
-            pass
+            return y
         elif transformation == 'log':
-            if shifting >0:
-                 shifting = shifting + 1.00000001
+            if shifting > 0:
+                shifting = shifting + 1.00000001
             y = np.log(y + shifting)
         elif transformation == 'sqrt':
             y = np.sqrt(y + shifting)
@@ -468,9 +481,6 @@ class ModelOptimizer:
             raise ValueError('Transformation not implemented.')
         return y
     
-
-
-
 
     def analysis_folds(self, data, fold_idxs, seed_num, stratified=False, plot = False):
         '''

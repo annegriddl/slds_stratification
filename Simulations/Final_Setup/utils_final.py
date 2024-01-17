@@ -179,15 +179,15 @@ class ModelOptimizer:
         #######################################################################################
         # TODO: abchecken ob es richtig funktioniert. @Anne: verseth ich nicht 100%, habs mal auskommentiert, weil seeds wurden ja eignetlich schon erzeugt oder?
         if not isinstance(random_states, list):   # if random_states is None: load sedds form json_file
-            #print("\nLoad seeds from json: ", self.path_to_seeds)
+            print("\nLoad seeds from json: ", self.path_to_seeds)
             #if path does not exist, create file with empty list -> @Anen: glaub besser error und dann manuell Liste erzeugen
             if not os.path.exists(self.path_to_seeds):   
-                #print("cant find path")
-                #with open(self.path_to_seeds, 'w') as file:
-                #    json.dump([], file, indent=4)
-                #print("File created: ", self.path_to_seeds)
-                #random_states = [x for x in range(n_repetitions)]
-                #seeds_available = [x for x in range(100000)][n_repetitions:]
+                print("cant find path")
+                with open(self.path_to_seeds, 'w') as file:
+                    json.dump([], file, indent=4)
+                print("File created: ", self.path_to_seeds)
+                random_states = [x for x in range(n_repetitions)]
+                seeds_available = [x for x in range(100000)][n_repetitions:]
                 print("Can't find path to seeds! Current paht: ", self.path_to_seeds) #@anne: would need to include in try and except
             # Else read the content of the JSON file
             else:
@@ -328,8 +328,8 @@ class ModelOptimizer:
         '''
 
         if not os.path.exists(path):   #@Anne: hier vlt auch besser Fehlermedung anstatt neue Datei
-            #with open(path, 'w') as file:
-                #json.dump([], file, indent=4)
+            with open(path, 'w') as file:
+                json.dump([], file, indent=4)
             print("File not found, current path: ", path)
     
         # Load existing data or create an empty list

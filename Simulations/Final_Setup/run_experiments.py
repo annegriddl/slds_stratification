@@ -14,7 +14,7 @@ import re
 import warnings
 warnings.filterwarnings('ignore')
 #from utils_final_nadja import FriedmanDataset, ModelOptimizer, generate_hyperparameter_combinations_dict
-from utils_final_nadja import ModelOptimizer, generate_hyperparameter_combinations_dict
+from utils_final import ModelOptimizer, generate_hyperparameter_combinations_dict
 import itertools
 import os
 
@@ -32,17 +32,17 @@ model_name = 'rf'
 ####### 2. Initialize experimental parameters #######################
 #### TODO: Set experimental parameters 
 # Here: fixed and not varied over experiments
-json_file = "./Simulations/Final_Setup/results-run-20240114-2.json" # @Anne: maybe create here as well if it doesn't exist + file structure
-path_to_seeds = "./Simulations/Final_Setup/seeds-run-20240114-2.json"  # @Anne: we need function to create new seed file here + file structure
+json_file =  "C:/Users/anneg/Documents/Documents/StatistikMaster/slds_stratification/Simulations/Final_Setup/test.json" # @Anne: maybe create here as well if it doesn't exist + file structure
+path_to_seeds = "C:/Users/anneg/Documents/Documents/StatistikMaster/slds_stratification/Simulations/Final_Setup/seeds_available_try.json"  # @Anne: we need function to create new seed file here + file structure
 n_features = 8
 n_folds = 5
-n_iter= 200
+n_iter= 5
 n_jobs= -1
-n_repetitions = 50
+n_repetitions = 20
 n_test= 100000
 scoring= 'neg_mean_squared_error'
 
-# Here: varied over experiments #@Anne: eigenlich muss ich hier nur die parameter mit mehr als einem wert angeben, oder?
+# Here: varied over experiments.
 hyperparameter_options = {'n_train': [200],
                           'transformation': ['identity', 'log'],
                           'noise': [0, 3],
@@ -81,6 +81,7 @@ if __name__ == '__main__':
     if not os.path.exists(path_to_seeds):   
         print("cant find path")
         #with open(path_to_seeds, 'w') as file: #@Anne: würd auskommentieren, d.h. error und dann manuell wieder einkommentieren, um evlt. file Fehelr zu vermeiden
+        # @Nadja: ja das können wir rausnehmen, haben wir in der optimizer class ja auch nochmal. Aber da würd ichs nicht rausnehmen, weiß nicht so genau welche file fehler du meinst.
             #json.dump([x for x in range(100000)], file, indent=4)
             #print("File created: ", path_to_seeds)
 
@@ -107,7 +108,7 @@ if __name__ == '__main__':
         else: raise ValueError('Model name not found')
 
         # Initalize Model
-        modelOptimizer = ModelOptimizer(hyp_param_grid=hyp_param_grid, #@Anne: unbenannt von ModelOptimizerFinal 
+        modelOptimizer = ModelOptimizer(hyp_param_grid=hyp_param_grid, #@Anne: unbenannt von ModelOptimizerFinal @Nadja: passt :)
                                             model_name=model_name,
                                             path_to_seeds=path_to_seeds, checks=False)
         modelOptimizer.optimize(params_experiment=params_experiment)
