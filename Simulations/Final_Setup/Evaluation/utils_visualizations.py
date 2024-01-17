@@ -69,7 +69,8 @@ def plot_boxplots(data200, data1000, title_left, title_right, metric='r2', order
     plt.show()
 
 def plot_differences_mean(data, title_variable):
-    data = data.iloc[:,-14:].mean()
+    print(data.columns)
+    data = data.iloc[:,-14:].mean() #@Nadja: which ones here?
     data
 
     # order data asc by index
