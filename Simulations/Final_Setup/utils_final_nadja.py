@@ -115,7 +115,7 @@ class ModelOptimizer:
             except json.JSONDecodeError:
                 print("Error decoding JSON. The file might be empty or not properly formatted.")
             except FileNotFoundError:
-                print("File not found. The file might not exist or the path is wrong.")
+                print("Seed file not found. The file might not exist or the path is wrong.")
             if self.checks:
                 print(f"available seeds in {self.path_to_seeds}: {len(seeds_available)}")
             random_states = seeds_available[:n_repetitions]

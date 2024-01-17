@@ -34,7 +34,7 @@ model_name = 'rf'
 # Here: fixed and not varied over experiments
 script_dir = os.path.dirname(os.path.abspath(__file__))
 json_file =  script_dir + "/results/test.json" 
-path_to_seeds = script_dir + "/seeds_available_try.json"  
+path_to_seeds = script_dir + "/seeds/json-test.json"  
 
 n_features = 8
 n_folds = 5
@@ -68,8 +68,6 @@ rf_param_grid = {
 
 # Set model hyperparameter grid for Random Search for XGBoost
 xgb_param_grid = {}
-
-
 
 if __name__ == '__main__':
     tracker = 1
