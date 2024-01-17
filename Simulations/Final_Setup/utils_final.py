@@ -199,6 +199,8 @@ class ModelOptimizer:
                 'cv_iteration_refit_test': iteration_refit_test,
                 'cv_folds_descreptives_unstratified': unstratified_results_descreptives_folds,
                 'cv_folds_descreptives_stratified': stratified_results_descreptives_folds,
+                'unstratified_best_params': unstratified_params,
+                'stratified_best_params': stratified_params,
             }
 
             final_results.update(results)
