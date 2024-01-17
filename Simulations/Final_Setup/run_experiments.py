@@ -14,7 +14,7 @@ import re
 import warnings
 warnings.filterwarnings('ignore')
 #from utils_final_nadja import FriedmanDataset, ModelOptimizer, generate_hyperparameter_combinations_dict
-from utils_final import ModelOptimizer, generate_hyperparameter_combinations_dict
+from utils_final_nadja import ModelOptimizer, generate_hyperparameter_combinations_dict
 import itertools
 import os
 
@@ -32,27 +32,24 @@ model_name = 'rf'
 ####### 2. Initialize experimental parameters #######################
 #### TODO: Set experimental parameters 
 # Here: fixed and not varied over experiments
-json_file =  "C:/Users/anneg/Documents/Documents/StatistikMaster/slds_stratification/Simulations/Final_Setup/test.json" # @Anne: maybe create here as well if it doesn't exist + file structure
-path_to_seeds = "C:/Users/anneg/Documents/Documents/StatistikMaster/slds_stratification/Simulations/Final_Setup/seeds_available_try.json"  # @Anne: we need function to create new seed file here + file structure
+script_dir = os.path.dirname(os.path.abspath(__file__))
+json_file =  script_dir + "/results/test.json" 
+path_to_seeds = script_dir + "/seeds_available_try.json"  
+
 n_features = 8
 n_folds = 5
 n_iter= 5
 n_jobs= -1
-n_repetitions = 20
+n_repetitions = 2
 n_test= 100000
 scoring= 'neg_mean_squared_error'
 
 # Here: varied over experiments.
 hyperparameter_options = {'n_train': [200],
-                          'transformation': ['identity', 'log'],
-                          'noise': [0, 3],
-                          'group_size': [10]} #@Anne: macht das Sinn
+                          'transformation': ['log'],
+                          'noise': [0],
+                          'group_size': [5, 10]} # Number of datapoints per group
 #### END ##############################################
-
-
-
-
-
 
 
 ######### 3. Run experiemnts (nothing to change here) ##############################
@@ -64,8 +61,8 @@ print('-----------------------------------\n')
 
 # Set model hyperparameter grid for Random Search for RF
 rf_param_grid = {
-    'min_samples_split': np.arange(2, 11), # @Anne: warum war hier 21; sollten wir mit n_trin skalieren ? Oder vlt. konstant halten und drauf achten, ober Untershciede ersichtlich
-    'min_samples_leaf': np.arange(1, 11), # @Anne: warum war hier 21; sollten wir mit n_trin skalieren ?
+    'min_samples_split': np.arange(2, 11), 
+    'min_samples_leaf': np.arange(1, 11),
     'max_features': np.arange(1, n_features + 1) 
 }
 
@@ -74,17 +71,7 @@ xgb_param_grid = {}
 
 
 
-
-
-
 if __name__ == '__main__':
-    if not os.path.exists(path_to_seeds):   
-        print("cant find path")
-        #with open(path_to_seeds, 'w') as file: #@Anne: würd auskommentieren, d.h. error und dann manuell wieder einkommentieren, um evlt. file Fehelr zu vermeiden
-        # @Nadja: ja das können wir rausnehmen, haben wir in der optimizer class ja auch nochmal. Aber da würd ichs nicht rausnehmen, weiß nicht so genau welche file fehler du meinst.
-            #json.dump([x for x in range(100000)], file, indent=4)
-            #print("File created: ", path_to_seeds)
-
     tracker = 1
     for hyperparameter_dict in all_combinations:
         # Save Parameters in a dictionary
@@ -108,7 +95,7 @@ if __name__ == '__main__':
         else: raise ValueError('Model name not found')
 
         # Initalize Model
-        modelOptimizer = ModelOptimizer(hyp_param_grid=hyp_param_grid, #@Anne: unbenannt von ModelOptimizerFinal @Nadja: passt :)
+        modelOptimizer = ModelOptimizer(hyp_param_grid=hyp_param_grid, 
                                             model_name=model_name,
                                             path_to_seeds=path_to_seeds, checks=False)
         modelOptimizer.optimize(params_experiment=params_experiment)

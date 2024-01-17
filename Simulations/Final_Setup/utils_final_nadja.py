@@ -66,7 +66,7 @@ class ModelOptimizer:
     def optimize(self, 
                  params_experiment,
                  data='friedman',
-                 random_states=None): #@Anne: none, um offen zu halten ob json mit seeds oder mauell Zahl eingegeben ?
+                 random_states=None): 
         '''
         Function to optimize the model.
         Inputs:
@@ -100,47 +100,32 @@ class ModelOptimizer:
         json_file = params_experiment['json_file']
 
         # Calculate number of groups for stratified cross-validation
-        # Goal: same number of observations in each group independent of n_train #@Anne: richtig?    
+        # Goal: same number of observations in each group independent of n_train    
         n_groups = int(n_train/group_size)
         if self.checks:
             print("Number of groups: ", n_groups)
-        #print(f"RandomizesdSearchCV with parameters of experiment n_folds = {n_folds}, group_size = {group_size}, n_groups = {n_groups}, scoring = {scoring}, n_jobs = {n_jobs}, n_iter = {n_iter} and save to {json_file}")
 
-        
         ### set seeds for all repetitions
         #######################################################################################
-        # TODO: abchecken ob es richtig funktioniert. @Anne: verseth ich nicht 100%, habs mal auskommentiert, weil seeds wurden ja eignetlich schon erzeugt oder?
-            # @Nadja, ich würds drin lassen, wenn jemand anders das Skript verwendet, dann wird der die Seeds Liste automatisch erstellt und man muss das davor nicht selber machen.
-            # @Nadja: der checkt ja ob die file schon existiert und wenn sie schon vorhanden ist, dann wird ja keine neue erstellt. 
-        if not isinstance(random_states, list):   # if random_states is None: load sedds form json_file
-            #print("\nLoad seeds from json: ", self.path_to_seeds)
-            #if path does not exist, create file with empty list -> @Anen: glaub besser error und dann manuell Liste erzeugen
-            #                                                       @Nadja: Aber warum? Wär so schon deutlich schöner.
-            if not os.path.exists(self.path_to_seeds):   
-                #print("cant find path")
-                #with open(self.path_to_seeds, 'w') as file:
-                #    json.dump([], file, indent=4)
-                #print("File created: ", self.path_to_seeds)
-                #random_states = [x for x in range(n_repetitions)]
-                #seeds_available = [x for x in range(100000)][n_repetitions:]
-                print("Can't find path to seeds! Current paht: ", self.path_to_seeds) #@anne: would need to include in try and except
-            # Else read the content of the JSON file                                    # @Nadja: try except können wir gerne machen.
-            else:
-                try:
-                    with open(self.path_to_seeds, 'r') as file:
-                        seeds_available = json.load(file)
-                except json.JSONDecodeError:
-                    print("Error decoding JSON. The file might be empty or not properly formatted.")
-                if self.checks:
-                    print(f"available seeds in {self.path_to_seeds}: {len(seeds_available)}")
-                random_states = seeds_available[:n_repetitions]
-                seeds_available = seeds_available[n_repetitions:]
-                with open(self.path_to_seeds, 'w') as file:
-                    json.dump(seeds_available, file, indent=4)
-                if self.checks:
-                    print(f"available seeds in {self.path_to_seeds}: {len(seeds_available)}") 
-                print(f"Successfully loaded and deleted picked seeds from json file {self.path_to_seeds}!:\n {random_states}")
-        else: # if random_states is list: use list as seeds #@Anne: hier auch nochmal checken, ob list
+        if not isinstance(random_states, list):   # if random_states is None: load seeds forom json_file
+            if self.checks: print("\nLoad seeds from json: ", self.path_to_seeds)   
+            try:
+                with open(self.path_to_seeds, 'r') as file:
+                    seeds_available = json.load(file)
+            except json.JSONDecodeError:
+                print("Error decoding JSON. The file might be empty or not properly formatted.")
+            except FileNotFoundError:
+                print("File not found. The file might not exist or the path is wrong.")
+            if self.checks:
+                print(f"available seeds in {self.path_to_seeds}: {len(seeds_available)}")
+            random_states = seeds_available[:n_repetitions]
+            seeds_available = seeds_available[n_repetitions:]
+            with open(self.path_to_seeds, 'w') as file:
+                json.dump(seeds_available, file, indent=4)
+            if self.checks:
+                print(f"available seeds in {self.path_to_seeds}: {len(seeds_available)}") 
+            print(f"Successfully loaded and deleted picked seeds from json file {self.path_to_seeds}!:\n {random_states}")
+        else: # if random_states is list: use list as seeds 
             random_states = random_states[:n_repetitions]
             print("Set seeds to: ", random_states, "for all iterations.\n")
         #######################################################################################
@@ -155,14 +140,14 @@ class ModelOptimizer:
         #### Run Experiments for each repetition independently 
         for repetition in range(n_repetitions): #@Anne: Parallisierung hier whr einfügen
             start_time_repetition = time.time()
-            # @Nadja: Warum hast du verschiebung ins Positive gelöscht?
+            
             if data == 'friedman':
                 X_train, y_train, X_test, y_test = self.generate_data(n_samples_train=n_train, 
                                                                       n_samples_test= n_test, 
                                                                       noise = noise, 
                                                                       n_features = n_features, 
-                                                                      random_state_trainning = random_states[repetition], 
-                                                                      transformation= transformation)
+                                                                      random_state_training = random_states[repetition], 
+                                                                      transformation = transformation)
 
 
             # Perform optimization with unstratified cross-validation
@@ -243,10 +228,10 @@ class ModelOptimizer:
             None (it saves the results to the JSON file)
         '''
 
-        if not os.path.exists(path):   #@Anne: hier vlt auch besser Fehlermedung anstatt neue Datei
-            #with open(path, 'w') as file:
-                #json.dump([], file, indent=4)
-            print("File not found, current path: ", path)
+        if not os.path.exists(path):  
+            with open(path, 'w') as file:
+                json.dump([], file, indent=4)
+            print("File not found, created new file: ", path)
     
         # Load existing data or create an empty list
         with open(path, 'r') as file:
@@ -283,9 +268,16 @@ class ModelOptimizer:
         '''
         # Create cross-validation splits
         if stratified:
-            cv_splits = self.create_cont_folds(y=y_train, n_folds=cv, n_groups=n_groups, seed=random_state) #@anne:  do we shuffle ?
+            cv_splits = self.create_cont_folds(y=y_train, 
+                                               n_folds=cv, 
+                                               n_groups=n_groups, 
+                                               seed=random_state) 
             output_text = 'Stratified Split Cross-validation'
-            results_descreptives_folds = self.analysis_folds(data = y_train, fold_idxs = cv_splits, seed_num= random_state, stratified=True, plot=False)
+            results_descreptives_folds = self.analysis_folds(data = y_train, 
+                                                             fold_idxs = cv_splits, 
+                                                             seed_num= random_state, 
+                                                             stratified=True, 
+                                                             plot=False)
             if self.checks:
                 print(f"{output_text} with seed {random_state}: {results_descreptives_folds}")
         else:
@@ -327,7 +319,7 @@ class ModelOptimizer:
         # Evaluate the model
         evaluation_results = self.evaluate_rf(random_search, X_train, X_test, y_train, y_test)
 
-        # Evaluation on test set with all hyperparameter combinations of Random Search; only do it once, here for stratified #@Anne: Interpretation richtig?
+        # Evaluation on test set with all hyperparameter combinations of Random Search; only do it once, here for stratified 
         if stratified: 
             iteration_refit_test = self.iteration_results(random_search, X_train, y_train, X_test, y_test, cv_results)   
             return evaluation_results, cv_results, random_search.best_params_, running_time, results_descreptives_folds, iteration_refit_test
@@ -343,13 +335,12 @@ class ModelOptimizer:
         mae_list = []
         r2_list = []
         for index, params_experiment in enumerate(results_cv["params"]):
-            model = RandomSearchObject.best_estimator_ #@Anne: renamed model (input) to  RandomSearchObject, as two times model raised error for me; maybe double check
-            #print(params_experiment)
-            #print(model)
+            model = RandomSearchObject.best_estimator_ 
+
             model.set_params(**params_experiment)
-            #print(model.get_params())
-            test_r2 = round(model.score(X_test, y_test), 8)
+
             model.fit(X_train, y_train)
+            test_r2 = round(model.score(X_test, y_test), 8)
             y_pred = model.predict(X_test)
             test_mse = round(mean_squared_error(y_test, y_pred), 8)
             test_mae = round(mean_absolute_error(y_test, y_pred), 8)
@@ -442,9 +433,9 @@ class ModelOptimizer:
             return obj
 
     
-    def generate_data(self, n_samples_train, n_samples_test, noise = 0, n_features = 10, random_state_trainning = 1, transformation='log'):
+    def generate_data(self, n_samples_train, n_samples_test, noise, n_features, random_state_training, transformation):
         X_test, y_test = make_friedman1(n_samples=n_samples_test, n_features=n_features, noise=noise, random_state= self.global_seed_testing_data)
-        X_train, y_train = make_friedman1(n_samples=n_samples_train, n_features=n_features, noise=noise, random_state=random_state_trainning)
+        X_train, y_train = make_friedman1(n_samples=n_samples_train, n_features=n_features, noise=noise, random_state=random_state_training)
         min_y_test = min(y_test)
         min_y_train = min(y_train)
         min_data = min(min_y_train, min_y_test)
@@ -455,7 +446,7 @@ class ModelOptimizer:
             shifting = 0
         
         y_train = self.transform(y_train, transformation, shifting=shifting)
-        y_test = self.transform(y_test, transformation='log', shifting=shifting)
+        y_test = self.transform(y_test, transformation, shifting=shifting)
         
         return X_train, y_train, X_test, y_test
 

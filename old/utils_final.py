@@ -122,7 +122,7 @@ class ModelOptimizer:
     def optimize(self, 
                  params_experiment,
                  data='friedman',
-                 random_states=None): #@Anne: none, um offen zu halten ob json mit seeds oder mauell Zahl eingegeben ?
+                 random_states=None): 
         '''
         Function to optimize the model.
         Inputs:
@@ -149,7 +149,7 @@ class ModelOptimizer:
         transformation = params_experiment['transformation']
         n_folds= params_experiment['n_folds']
         group_size = params_experiment['group_size']
-        scoring = params_experiment['scoring'] #@Anne: warum nicht bold ? Als würde es nicht genutzt werden
+        scoring = params_experiment['scoring'] 
         n_jobs = params_experiment['n_jobs']
         n_iter = params_experiment['n_iter']
         n_repetitions = params_experiment['n_repetitions']
