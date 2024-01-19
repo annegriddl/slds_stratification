@@ -115,8 +115,8 @@ def filter_and_boxplot(data, conditions, value1, value2):
     plot_boxplots(data_filtered_1, data_filtered_2, title_left= keys_with_none_value +':'+ str(value1), title_right = keys_with_none_value +':'+ str(value2), metric='r2')
 
     # plot difference seperatly
-    means1 = plot_differences_mean(data_filtered_1, title_variable=keys_with_none_value +':'+ str(value1))
-    means2 = plot_differences_mean(data_filtered_2, title_variable=keys_with_none_value +':'+ str(value2))
+    means1 = plot_differences_mean(data_filtered_1, title_variable=keys_with_none_value + str(value1))
+    means2 = plot_differences_mean(data_filtered_2, title_variable=keys_with_none_value + str(value2))
 
     # plot difference together
     fig, ax = plt.subplots(figsize=(6, 4))
