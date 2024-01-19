@@ -69,17 +69,20 @@ def plot_boxplots(data200, data1000, title_left, title_right, metric='r2', order
     plt.show()
 
 def plot_differences_mean(data, title_variable):
-    print(data.columns)
-    data = data.iloc[:,-14:].mean() #@Nadja: which ones here?
-    data
+    data = data.loc[:,['unstratified_results_train r2', 'unstratified_results_test r2',
+       'unstratified_results_train mse', 'unstratified_results_test mse',
+       'unstratified_results_train mae', 'unstratified_results_test mae',
+       'stratified_results_train r2', 'stratified_results_test r2',
+       'stratified_results_train mse', 'stratified_results_test mse',
+       'stratified_results_train mae', 'stratified_results_test mae']].mean()
 
     # order data asc by index
     data = data.sort_index()
-    index = ['mae test', 'mse test', 'r2 test', 'mae train', 'mse train', 'r2 train', 'running time']
+    index = ['mae test', 'mse test', 'r2 test', 'mae train', 'mse train', 'r2 train']
 
     means = pd.DataFrame({
-        'Unstratified': data.values[0:  7],
-        'Stratified': data.values[7: data.shape[0]]
+        'Unstratified': data.values[0:  6],
+        'Stratified': data.values[6: data.shape[0]]
     }, index=index)
     
     # add column with difference
