@@ -1,4 +1,3 @@
-# File for helper functions and classes
 
 import sklearn
 import pandas as pd
@@ -18,6 +17,7 @@ import math
 import os
 from scipy.stats import gaussian_kde
 from scipy.stats import ks_2samp
+from joblib import Parallel, delayed
 
 import itertools
 
@@ -138,20 +138,33 @@ class ModelOptimizer:
         }
 
         #### Run Experiments for each repetition independently 
-        for repetition in range(n_repetitions): #@Anne: Parallisierung hier whr einfügen
-            start_time_repetition = time.time()
+        results_list=Parallel(n_jobs=-1)(
+            delayed(self.run_experiments)(random_states, repetition, data, n_train, n_test, noise, n_features, transformation,
+                   n_folds, n_groups, scoring, n_jobs, n_iter)
+            for repetition in range(n_repetitions))
+        
+        for result in results_list:
+            final_results.update(result)
+            self.save_results(final_results, json_file)
+
+        parallel_execution_time = round((time.time() - start_time)/60, 4)                                    
+        print(f"\nParallel execution time: {parallel_execution_time} min")    
             
-            if data == 'friedman':
-                X_train, y_train, X_test, y_test = self.generate_data(n_samples_train=n_train, 
+        
+    def run_experiments(self, random_states, repetition, data, n_train, n_test, noise, n_features, transformation,
+                   n_folds, n_groups, scoring, n_jobs, n_iter):        
+   
+        if data == 'friedman':
+            X_train, y_train, X_test, y_test = self.generate_data(n_samples_train=n_train, 
                                                                       n_samples_test= n_test, 
                                                                       noise = noise, 
                                                                       n_features = n_features, 
                                                                       random_state_training = random_states[repetition], 
-                                                                      transformation = transformation)
+                                                                      transformation = transformation)    
 
 
-            # Perform optimization with unstratified cross-validation
-            unstratified_results, unstratified_iteration, unstratified_params, unstratified_running_time, unstratified_results_descriptives_folds = self._perform_optimization(X_train, 
+        # Perform optimization with unstratified cross-validation
+        unstratified_results, unstratified_iteration, unstratified_params, unstratified_running_time, unstratified_results_descriptives_folds = self._perform_optimization(X_train, 
                                                             y_train, 
                                                             X_test,
                                                             y_test,
@@ -164,9 +177,9 @@ class ModelOptimizer:
                                                             stratified=False)
             
 
-            # Perform optimization with stratified cross-validation
-            # note: here iteration_refit_test is additionally calculated as it's the same for stratified and unstratified (fit of same hyperparameters on the same data)
-            stratified_results, stratified_iteration, stratified_params, stratified_running_time, stratified_results_descriptives_folds, iteration_refit_test = self._perform_optimization(X_train, 
+        # Perform optimization with stratified cross-validation
+        # note: here iteration_refit_test is additionally calculated as it's the same for stratified and unstratified (fit of same hyperparameters on the same data)
+        stratified_results, stratified_iteration, stratified_params, stratified_running_time, stratified_results_descriptives_folds, iteration_refit_test = self._perform_optimization(X_train, 
                                                             y_train, 
                                                             X_test,
                                                             y_test,
@@ -178,14 +191,13 @@ class ModelOptimizer:
                                                             random_states[repetition],
                                                             stratified=True)
 
-            if unstratified_params == stratified_params:
-                hyperparameters_same = True
-            else:
-                hyperparameters_same = False
-            end_time_repetition = time.time()
+        if unstratified_params == stratified_params:
+            hyperparameters_same = True
+        else:
+            hyperparameters_same = False 
                 
-            # Save results and parameters to a file
-            results = {
+        # Save results and parameters to a file
+        results = {
                 'repetition': repetition,
                 'random_state': random_states[repetition],
                 'hyperparameters_same': hyperparameters_same,
@@ -198,23 +210,15 @@ class ModelOptimizer:
                 'cv_folds_descriptives_stratified': stratified_results_descriptives_folds,
                 'unstratified_best_params': unstratified_params,
                 'stratified_best_params': stratified_params,
-            }
+        }
+        if self.checks:
+            print('seed for training data: ', random_states[repetition])
+        if hyperparameters_same: hype_same = 'the same'
+        else: hype_same = 'different'
+        print(f"Repetition {repetition+1}: Hyperparameters are {hype_same}")
 
-            final_results.update(results)
-            self.save_results(final_results, json_file)
-      
-
-            # for printing durring run
-            if self.checks:
-                print('seed for training data: ', random_states[repetition])
-            if hyperparameters_same:
-                hype_same = 'the same'
-            else:
-                hype_same = 'different'
-
-            print(f"Repetition {repetition+1} out of {n_repetitions}: Hyperparameters are {hype_same} and took {round((end_time_repetition - start_time_repetition)/60, 4)} min")
-        print("Execution time: ", round((time.time() - start_time)/60, 4), " min")
-
+        return results
+        
         
     
     def save_results(self, results, path):
@@ -304,16 +308,13 @@ class ModelOptimizer:
                                            n_iter=n_iter,
                                            cv=cv_splits,
                                            scoring=scoring,
-                                           n_jobs=n_jobs,
+                                           #n_jobs=n_jobs,
                                            random_state=random_state)
         
         random_search.fit(X_train, y_train)
         end_time = time.time()
         running_time = round((end_time - start_time)/60, 4)
         cv_results = random_search.cv_results_
-        #print(f'Runing time Random Search of {output_text}: {round(running_time/60, 4)} min')
-        #print("Best Parameters:", random_search.best_params_)
-        #print(f"\n {random_state} {output_text}: Parameters Random Search {cv_results['params']}")
 
         # Evaluate the model
         evaluation_results = self.evaluate_rf(random_search, X_train, X_test, y_train, y_test)

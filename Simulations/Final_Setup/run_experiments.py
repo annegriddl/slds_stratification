@@ -1,24 +1,14 @@
-import pandas as pd
 import numpy as np
-from sklearn.model_selection import cross_val_score, train_test_split, RandomizedSearchCV, KFold, StratifiedKFold
-from sklearn.ensemble import RandomForestRegressor
-from sklearn.metrics import mean_squared_error, mean_absolute_error
-from sklearn.datasets import make_friedman1
-from sklearn.model_selection import StratifiedKFold
-from sklearn.utils import shuffle
-import json
-from sklearn.dummy import DummyRegressor
-import seaborn as sns
-import matplotlib.pyplot as plt
-import re
 import warnings
 warnings.filterwarnings('ignore')
-#from utils_final_nadja import FriedmanDataset, ModelOptimizer, generate_hyperparameter_combinations_dict
-from utils_final_nadja import ModelOptimizer, generate_hyperparameter_combinations_dict
-import itertools
 import os
+import time
 
-
+parallel_repetitions = False
+if parallel_repetitions:
+    from utils_parallel import ModelOptimizer, generate_hyperparameter_combinations_dict
+else:
+    from utils_final import ModelOptimizer, generate_hyperparameter_combinations_dict
 
 
 ####### 1. Choose model ################################
@@ -33,7 +23,7 @@ model_name = 'rf'
 #### TODO: Set experimental parameters 
 # Here: fixed and not varied over experiments
 script_dir = os.path.dirname(os.path.abspath(__file__))
-json_file =  script_dir + "/results/test.json" 
+json_file =  script_dir + "/results/test-parallel.json" 
 path_to_seeds = script_dir + "/seeds/json-test.json"  
 
 n_features = 8
@@ -71,6 +61,7 @@ xgb_param_grid = {}
 
 if __name__ == '__main__':
     tracker = 1
+    start_time = time.time()
     for hyperparameter_dict in all_combinations:
         # Save Parameters in a dictionary
         params_experiment = {'model': model_name,
@@ -97,10 +88,13 @@ if __name__ == '__main__':
                                             model_name=model_name,
                                             path_to_seeds=path_to_seeds, checks=False)
         modelOptimizer.optimize(params_experiment=params_experiment)
-        print('End of hyperparameter combinaiton', tracker)
+        print('End of hyperparameter combination', tracker)
         tracker += 1
         print('\n-----------------------------------')
         print()
+    if parallel_repetitions: run = "parallel repetitions"    
+    else: run = "parallel Random Search"
+    print(f"Total execution time of {run}: {round((time.time() - start_time)/60, 4)} min")
         
 
 
