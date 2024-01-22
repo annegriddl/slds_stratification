@@ -35,7 +35,7 @@ def plot_boxplots(data200, data1000, title_left, title_right, metric='r2', order
     df_melted200 = pd.melt(data200, value_vars=order, var_name='Metric', value_name='Value')
     df_melted1000 = pd.melt(data1000, value_vars=order, var_name='Metric', value_name='Value')
 
-    fig, axes = plt.subplots(1, 2, figsize=(12, 8), sharey=False)
+    fig, axes = plt.subplots(1, 2, figsize=(6, 4), sharey=False)
 
     for i in range(2):
         if i == 0:
@@ -65,43 +65,86 @@ def plot_boxplots(data200, data1000, title_left, title_right, metric='r2', order
         xtickNames = plt.setp(ax, xticklabels=['Test Unstratified', 'Test Stratified'])
         plt.setp(xtickNames, rotation=0)
         ax.set_title(title)
-
     plt.show()
 
-def plot_differences_mean(data, title_variable):
-    data = data.loc[:,['unstratified_results_train r2', 'unstratified_results_test r2',
+'''
+def plot_differences_mean(data, title_variable, plot = True):
+    evaluation_metrics = data.loc[:,['unstratified_results_train r2', 'unstratified_results_test r2',
        'unstratified_results_train mse', 'unstratified_results_test mse',
        'unstratified_results_train mae', 'unstratified_results_test mae',
        'stratified_results_train r2', 'stratified_results_test r2',
        'stratified_results_train mse', 'stratified_results_test mse',
-       'stratified_results_train mae', 'stratified_results_test mae']].mean()
+       'stratified_results_train mae', 'stratified_results_test mae']]
+    data = evaluation_metrics.mean()
+
+    data_stats = {
+    'mean': evaluation_metrics.mean(),
+    'sd': evaluation_metrics.std()}
+    data_stats = pd.DataFrame(data_stats)
+    print(data_stats)
+    print(data_stats.index)
 
     # order data asc by index
-    data = data.sort_index()
+    data_stats = data_stats.sort_index()
+    #print(data)
     index = ['mae test', 'mse test', 'r2 test', 'mae train', 'mse train', 'r2 train']
-
+    print(data_stats.shape)
+  
     means = pd.DataFrame({
-        'Unstratified': data.values[0:  6],
-        'Stratified': data.values[6: data.shape[0]]
+        'Stratified': data_stats.values[0:  6],
+        'Unstratified': data_stats.values[6: data.shape[0]]
     }, index=index)
     
     # add column with difference
     means['difference'] = means['Stratified'] - means['Unstratified']
-    
-    # plot barplot difference
-    means['difference'].plot.barh()
-    plt.xlabel('Difference')
-    plt.ylabel('Evaluation metric')
-    plt.title('Difference between stratified and unstratified sampling: ' + title_variable)
-    plt.tight_layout()
-    plt.savefig('./plots/difference_stratified_unstratified' + title_variable+ '.png', dpi=300, bbox_inches='tight')
-    plt.show()
-    return means
+    means['sd'] =  means['difference'].std()
 
+    # plot barplot difference
+    if plot == True:
+        means['difference'].plot.barh()
+        plt.xlabel('Difference')
+        plt.ylabel('Evaluation metric')
+        plt.title('Difference between stratified and unstratified sampling: ' + title_variable)
+        plt.tight_layout()
+        plt.savefig('./plots/difference_stratified_unstratified' + title_variable+ '.png', dpi=300, bbox_inches='tight')
+        plt.show()
+    return means
+''' 
+
+def differences_eval(data):
+    data_diff = pd.DataFrame()
+    data_diff['diff_train_r2'] = data['stratified_results_train r2'] - data['unstratified_results_train r2']
+    data_diff['diff_test_r2'] = data['stratified_results_test r2'] - data['unstratified_results_test r2']
+    data_diff['diff_train_mse'] = data['stratified_results_train mse'] - data['unstratified_results_train mse']
+    data_diff['diff_test_mse'] = data['stratified_results_test mse'] - data['unstratified_results_test mse']
+    data_diff['diff_train_mae'] = data['stratified_results_train mae'] - data['unstratified_results_train mae']
+    data_diff['diff_test_mae'] = data['stratified_results_test mae'] - data['unstratified_results_test mae']
+
+    #print(data_diff)
+    #print(data_diff.shape)
+
+    data_stats = {
+        'mean_diff': data_diff.mean(),
+        'sd_diff': data_diff.std()
+        } 
+    data_stats = pd.DataFrame(data_stats)
+    #print(data_stats)
+    #print(data_stats.index)
+    ''' 
+    if plot == True:
+        data_stats['mean_diff'].plot.barh()
+        plt.xlabel('Difference')
+        plt.ylabel('Evaluation metric')
+        plt.title('Difference between stratified and unstratified sampling: ' + title_variable)
+        plt.tight_layout()
+        plt.savefig('./plots/difference_stratified_unstratified' + title_variable+ '.png', dpi=300, bbox_inches='tight')
+        plt.show()
+    '''
+    return data_stats
 
 
 def filter_and_boxplot(data, conditions, value1, value2):
-    # write query for whole data
+    # write query for whole data: filter over all hyperparameters
     query_string = ' and '.join([f"{key} == {repr(value)}" for key, value in conditions.items() if value is not None])
     data_filtered = data.query(query_string)
 
@@ -109,21 +152,23 @@ def filter_and_boxplot(data, conditions, value1, value2):
     keys_with_none_value = [key for key, value in conditions.items() if value is None][0]
     data_filtered_1 = data_filtered[(data_filtered[keys_with_none_value] == value1)]
     data_filtered_2 = data_filtered[(data_filtered[keys_with_none_value] == value2)]
+    print(data_filtered_1.shape)
+    print(data_filtered_2.shape)
 
 
     # plot boxplots
-    plot_boxplots(data_filtered_1, data_filtered_2, title_left= keys_with_none_value +':'+ str(value1), title_right = keys_with_none_value +':'+ str(value2), metric='r2')
+    plot_boxplots(data_filtered_1, data_filtered_2, title_left= keys_with_none_value +':'+ str(value1), title_right = keys_with_none_value +':'+ str(value2), metric='mse')
 
     # plot difference seperatly
-    means1 = plot_differences_mean(data_filtered_1, title_variable=keys_with_none_value + str(value1))
-    means2 = plot_differences_mean(data_filtered_2, title_variable=keys_with_none_value + str(value2))
+    means1 = differences_eval(data_filtered_1)
+    means2 = differences_eval(data_filtered_2)
 
     # plot difference together
     fig, ax = plt.subplots(figsize=(6, 4))
     bar_width = 0.35
     y_positions = np.arange(len(means1))     # Create positions for bars on the y-axis
-    ax.barh(y_positions - bar_width/2, means1['difference'], bar_width, label=str(value1), color='b') # Plotting bars for the 'difference' column in the first data frame
-    ax.barh(y_positions + bar_width/2, means2['difference'], bar_width, label=str(value2), color='g') # Plotting bars for the 'difference' column in the second data frame
+    ax.barh(y_positions - bar_width/2, means1['mean_diff'], bar_width, label=str(value1), color='b') # Plotting bars for the 'difference' column in the first data frame
+    ax.barh(y_positions + bar_width/2, means2['mean_diff'], bar_width, label=str(value2), color='g') # Plotting bars for the 'difference' column in the second data frame #@Nadja: xerr=means2['sd_diff']
 
     # Adding labels, title, and legend
     ax.set_xlabel('Difference Values', fontsize=15)
