@@ -311,10 +311,7 @@ class ModelOptimizer:
         end_time = time.time()
         running_time = round((end_time - start_time)/60, 4)
         cv_results = random_search.cv_results_
-        #print(f'Runing time Random Search of {output_text}: {round(running_time/60, 4)} min')
-        #print("Best Parameters:", random_search.best_params_)
-        #print(f"\n {random_state} {output_text}: Parameters Random Search {cv_results['params']}")
-
+        
         # Evaluate the model
         evaluation_results = self.evaluate_rf(random_search, X_train, X_test, y_train, y_test)
 

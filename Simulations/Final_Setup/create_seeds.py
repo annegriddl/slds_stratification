@@ -2,7 +2,7 @@ import os
 import json
 
 script_dir = os.path.dirname(os.path.abspath(__file__))
-filename = "./seeds/json-test.json"
+filename = "./seeds/seeds_final_xgb.json"
 path_to_seeds = script_dir + "/" + filename
 overwrite = False
 

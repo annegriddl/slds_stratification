@@ -14,30 +14,36 @@ else:
 ####### 1. Choose model ################################
 #### TODO: Choose 'rf' for Random Forest Regressor
 ####       Or 'xgb' for XGBoost Regressor
-model_name = 'rf'
+model_name = 'xgb'
 #### END ##############################################
 
+run = len(os.listdir(os.path.dirname(os.path.abspath(__file__)) + "/results/" + model_name + "/")) + 1
+print(run)
+
+results_file = f"results_{model_name}{run}.json"
+seed_file = f"seeds_final_{model_name}.json"
 
 
 ####### 2. Initialize experimental parameters #######################
 #### TODO: Set experimental parameters 
 # Here: fixed and not varied over experiments
+
 script_dir = os.path.dirname(os.path.abspath(__file__))
-json_file =  script_dir + "/results/test-parallel.json" 
-path_to_seeds = script_dir + "/seeds/json-test.json"  
+json_file =  f"{script_dir}/results/{model_name}/{results_file}" 
+path_to_seeds = f"{script_dir}/seeds/{seed_file}"
 
 n_features = 8
 n_folds = 5
-n_iter= 5
+n_iter= 200
 n_jobs= -1
-n_repetitions = 2
+n_repetitions = 10
 n_test= 100000
 scoring= 'neg_mean_squared_error'
 
 # Here: varied over experiments.
-hyperparameter_options = {'n_train': [200],
-                          'transformation': ['log'],
-                          'noise': [0],
+hyperparameter_options = {'n_train': [200, 1000],
+                          'transformation': ['identity', 'log', 'sqrt'],
+                          'noise': [0, 3],
                           'group_size': [5, 10]} # Number of datapoints per group
 #### END ##############################################
 
@@ -89,7 +95,7 @@ if __name__ == '__main__':
         if model_name == 'rf': hyp_param_grid = rf_param_grid
         elif model_name == 'xgb': hyp_param_grid = xgb_param_grid
         else: raise ValueError('Model name not found')
-
+        print('Model name: ', model_name)
         # Initalize Model
         modelOptimizer = ModelOptimizer(hyp_param_grid=hyp_param_grid, 
                                             model_name=model_name,
