@@ -1,0 +1,3 @@
+Total execution times:
+parallel, 24 exp. params combos, 20 repetitions:
+parallel, 24 exp. params combos, 10 repetitions: 1072.359 min

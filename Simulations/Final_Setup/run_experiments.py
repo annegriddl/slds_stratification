@@ -57,7 +57,14 @@ rf_param_grid = {
 }
 
 # Set model hyperparameter grid for Random Search for XGBoost
-xgb_param_grid = {}
+xgb_param_grid = {
+    'learning_rate': np.linspace(0.001, 0.4, num =10), #default 0.3
+    'max_depth':  [int(i) for i in np.logspace(np.log10(2), np.log10(20), num =20) ], # defualt 6
+    'subsample': [np.random.uniform(0.5,1) for i in range(10)], # default 1
+    'colsample_bytree': [np.random.uniform(0.5,1) for i in range(10)],# default 1
+    'gamma': np.logspace(0, np.log10(20), num =10), #default 0
+    'min_child_weight': np.arange(1, 10) #default 1
+}
 
 if __name__ == '__main__':
     tracker = 1
