@@ -4,7 +4,7 @@ warnings.filterwarnings('ignore')
 import os
 import time
 
-parallel_repetitions = False
+parallel_repetitions = True
 if parallel_repetitions:
     from utils_parallel import ModelOptimizer, generate_hyperparameter_combinations_dict
 else:
@@ -35,7 +35,7 @@ path_to_seeds = f"{script_dir}/seeds/{seed_file}"
 n_features = 8
 n_folds = 5
 n_iter= 200
-n_jobs= -1
+n_jobs= 1
 n_repetitions = 10
 n_test= 100000
 scoring= 'neg_mean_squared_error'

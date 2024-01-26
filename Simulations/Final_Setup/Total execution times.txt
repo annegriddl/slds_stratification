@@ -6,4 +6,4 @@ rf2: parallel repetitions, 24 exp. params combos, 10 repetitions: 1072.359 min  
 XGBoost
 test: parallel random search, 2 exp. params combos, 2 repetitions: 0.1442 min       (**Local**)
 xgb1: parallel random search, 24 exp. params combos, 10 repetitions: 163.5287 min   (**Local**)
-xgb2: parallel repetitions, 24 exp. params combos, 10 repetitions:                  (**Local**)
+xgb2: parallel repetitions, 24 exp. params combos, 10 repetitions: 151.4019 min     (**Local**)
