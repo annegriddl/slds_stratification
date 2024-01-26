@@ -2,6 +2,8 @@ Total execution times:
 Random Forest
 rf1: parallel repetitions, 24 exp. params combos, 20 repetitions:                   (**Remote Computer**)
 rf2: parallel repetitions, 24 exp. params combos, 10 repetitions: 1072.359 min      (**Remote Computer**)
+rf3: parallel repetitions, 24 exp. params combos, 20 repetitions: 1584.4622 min
+
 
 XGBoost
 test: parallel random search, 2 exp. params combos, 2 repetitions: 0.1442 min       (**Local**)

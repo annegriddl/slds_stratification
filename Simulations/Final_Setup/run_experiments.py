@@ -35,7 +35,8 @@ path_to_seeds = f"{script_dir}/seeds/{seed_file}"
 n_features = 8
 n_folds = 5
 n_iter= 200
-n_jobs= 1
+if parallel_repetitions: n_jobs= 1
+else: n_jobs= -1
 n_repetitions = 10
 n_test= 100000
 scoring= 'neg_mean_squared_error'
@@ -65,7 +66,7 @@ rf_param_grid = {
 # Set model hyperparameter grid for Random Search for XGBoost
 xgb_param_grid = {
     'learning_rate': np.linspace(0.001, 0.4, num =10), #default 0.3
-    'max_depth':  [int(i) for i in np.logspace(np.log10(2), np.log10(20), num =20) ], # defualt 6
+    'max_depth':  [int(i) for i in np.logspace(np.log10(2), np.log10(20), num =20)], # defualt 6
     'subsample': [np.random.uniform(0.5,1) for i in range(10)], # default 1
     'colsample_bytree': [np.random.uniform(0.5,1) for i in range(10)],# default 1
     'gamma': np.logspace(0, np.log10(20), num =10), #default 0
@@ -98,8 +99,9 @@ if __name__ == '__main__':
         print('Model name: ', model_name)
         # Initalize Model
         modelOptimizer = ModelOptimizer(hyp_param_grid=hyp_param_grid, 
-                                            model_name=model_name,
-                                            path_to_seeds=path_to_seeds, checks=False)
+                                        model_name=model_name,
+                                        path_to_seeds=path_to_seeds, 
+                                        checks=False)
         modelOptimizer.optimize(params_experiment=params_experiment)
         print('End of hyperparameter combination', tracker)
         tracker += 1
