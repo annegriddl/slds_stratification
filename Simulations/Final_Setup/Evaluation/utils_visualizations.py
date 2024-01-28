@@ -142,22 +142,25 @@ def differences_eval(data):
     '''
     return data_stats
 
-
-def filter_and_boxplot(data, conditions, value1, value2):
+def filter_data(data, conditions, value1, value2):
     # write query for whole data: filter over all hyperparameters
     query_string = ' and '.join([f"{key} == {repr(value)}" for key, value in conditions.items() if value is not None])
     data_filtered = data.query(query_string)
 
     # comparison boxplots by one variable
-    keys_with_none_value = [key for key, value in conditions.items() if value is None][0]
-    data_filtered_1 = data_filtered[(data_filtered[keys_with_none_value] == value1)]
-    data_filtered_2 = data_filtered[(data_filtered[keys_with_none_value] == value2)]
-    print(data_filtered_1.shape)
-    print(data_filtered_2.shape)
+    filtered_parameter = [key for key, value in conditions.items() if value is None][0]
+    data_filtered_1 = data_filtered[(data_filtered[filtered_parameter] == value1)]
+    data_filtered_2 = data_filtered[(data_filtered[filtered_parameter] == value2)]
+    print('data_filtered_1 shape:', data_filtered_1.shape)
+    print('data_filtered_2 shape:', data_filtered_2.shape)
+    return data_filtered_1, data_filtered_2, value1, value2, filtered_parameter
 
+def plots_per_condition(data, conditions, value1, value2):
+    # filter data
+    data_filtered_1, data_filtered_2, value1, value2, filtered_parameter = filter_data(data, conditions, value1, value2)
 
     # plot boxplots
-    plot_boxplots(data_filtered_1, data_filtered_2, title_left= keys_with_none_value +':'+ str(value1), title_right = keys_with_none_value +':'+ str(value2), metric='mse')
+    plot_boxplots(data_filtered_1, data_filtered_2, title_left= filtered_parameter +':'+ str(value1), title_right = filtered_parameter +':'+ str(value2), metric='mse')
 
     # plot difference seperatly
     means1 = differences_eval(data_filtered_1)
@@ -176,10 +179,57 @@ def filter_and_boxplot(data, conditions, value1, value2):
     ax.set_title('Grouped Horizontal Bar Plot for Difference', fontsize=18)
     ax.set_yticks(y_positions)
     ax.set_yticklabels(means1.index)
-    ax.legend(title=keys_with_none_value)
+    ax.legend(title=filtered_parameter)
 
     # Display the plot
     plt.tight_layout()
     plt.show()
 
     return means1, means2
+
+
+def plot_combined_boxplots(data_x, data_y, title, path):
+    # check data format
+    data_x = np.array(data_x).flatten()
+    data_y = np.array(data_y).flatten()
+    # plot boxplots
+    _, ax = plt.subplots(figsize=(7, 3))
+    ax.boxplot([data_x, data_y], vert=False, labels=['stratified', 'unstratified'])
+    ax.set_title(title)
+    plt.tight_layout()
+    plt.savefig(path)
+    plt.show()
+
+
+def descreptives(data, path_plots):
+    statistics = ['ks_statistic', 'p_value', 'intersection_area']
+    mean_stratified_list = []
+    sd_stratified_list = []
+    mean_unstratified_list = []
+    sd_unstratified_list = []
+
+    for s in statistics:
+        # filter stratified and unstratified descreptives columns
+        s_stratified = '_stratified_' + s
+        s_unstratified = '_unstratified_' + s
+        s_stratified = [col for col in data.columns if s_stratified in col]
+        s_unstratified = [col for col in data.columns if s_unstratified in col]
+
+        plot_combined_boxplots(data_x= data[s_stratified], data_y = data[s_unstratified], title= s, path=path_plots + '_' + s)
+        
+        # values for stratified
+        mean_stratified = data[s_stratified].mean()[0]
+        sd_stratified = data[s_stratified].std()[0]
+        mean_stratified_list.append(mean_stratified)
+        mean_stratified_list.append(sd_stratified)
+
+        # values for unstratified
+        mean_unstrtified = data[s_unstratified].mean()[0]
+        sd_unstratified = data[s_unstratified].std()[0]
+        mean_unstratified_list.append(mean_unstrtified)
+        sd_unstratified_list.append(sd_unstratified)
+    df_result = pd.DataFrame({'mean_strtified': mean_stratified_list, 'sd_stratified': mean_stratified_list, 
+                              'mean_unstratified': mean_unstratified_list, 'sd_unstratified_list': sd_unstratified_list}, 
+                              index= statistics)
+    
+    return df_result
