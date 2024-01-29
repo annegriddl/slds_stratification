@@ -37,7 +37,7 @@ n_folds = 5
 n_iter= 200
 if parallel_repetitions: n_jobs= 1
 else: n_jobs= -1
-n_repetitions = 10
+n_repetitions = 20
 n_test= 100000
 scoring= 'neg_mean_squared_error'
 
