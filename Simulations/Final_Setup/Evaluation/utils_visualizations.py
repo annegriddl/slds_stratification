@@ -155,6 +155,7 @@ def filter_data(data, conditions, value1, value2):
     print('data_filtered_2 shape:', data_filtered_2.shape)
     return data_filtered_1, data_filtered_2, value1, value2, filtered_parameter
 
+
 def plots_per_condition(data, conditions, value1, value2):
     # filter data
     data_filtered_1, data_filtered_2, value1, value2, filtered_parameter = filter_data(data, conditions, value1, value2)
@@ -233,3 +234,36 @@ def descreptives(data, path_plots):
                               index= statistics)
     
     return df_result
+
+
+def plots_per_condition(data, conditions, value1, value2):
+    # filter data
+    data_filtered_1, data_filtered_2, value1, value2, filtered_parameter = filter_data(data, conditions, value1, value2)
+
+    # plot boxplots
+    plot_boxplots(data_filtered_1, data_filtered_2, title_left= filtered_parameter +':'+ str(value1), title_right = filtered_parameter +':'+ str(value2), metric='mse')
+
+    # plot difference seperatly
+    means1 = differences_eval(data_filtered_1)
+    means2 = differences_eval(data_filtered_2)
+
+    # plot difference together
+    fig, ax = plt.subplots(figsize=(6, 4))
+    bar_width = 0.35
+    y_positions = np.arange(len(means1))     # Create positions for bars on the y-axis
+    ax.barh(y_positions - bar_width/2, means1['mean_diff'], bar_width, label=str(value1), color='b') # Plotting bars for the 'difference' column in the first data frame
+    ax.barh(y_positions + bar_width/2, means2['mean_diff'], bar_width, label=str(value2), color='g') # Plotting bars for the 'difference' column in the second data frame #@Nadja: xerr=means2['sd_diff']
+
+    # Adding labels, title, and legend
+    ax.set_xlabel('Difference Values', fontsize=15)
+    ax.set_ylabel('Metrics', fontsize=15)
+    ax.set_title('Grouped Horizontal Bar Plot for Difference', fontsize=18)
+    ax.set_yticks(y_positions)
+    ax.set_yticklabels(means1.index)
+    ax.legend(title=filtered_parameter)
+
+    # Display the plot
+    plt.tight_layout()
+    plt.show()
+
+    return means1, means2
