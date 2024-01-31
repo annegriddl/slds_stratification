@@ -4,6 +4,7 @@ rf1: parallel repetitions, 24 exp. params combos, 20 repetitions:               
 rf2: parallel repetitions, 24 exp. params combos, 10 repetitions: 1072.359 min      (**Remote Computer**)
 rf3: parallel repetitions, 24 exp. params combos, 20 repetitions: 1584.4622 min
 rf4: parallel repetitions, 24 exp. params combos, 48 repetitions: 4212.355 min      (**Remote Computer**)
+rf5: parallel repetitions, 24 exp. params combos, 22 repetitions: 2447.9886 min
 
 XGBoost
 test: parallel random search, 2 exp. params combos, 2 repetitions: 0.1442 min       (**Local**)
