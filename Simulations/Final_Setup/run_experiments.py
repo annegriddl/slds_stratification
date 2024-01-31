@@ -4,7 +4,7 @@ warnings.filterwarnings('ignore')
 import os
 import time
 
-parallel_repetitions = True
+parallel_repetitions = False
 if parallel_repetitions:
     from utils_parallel import ModelOptimizer, generate_hyperparameter_combinations_dict
 else:
