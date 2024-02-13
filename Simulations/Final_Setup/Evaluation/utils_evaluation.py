@@ -270,3 +270,33 @@ def barplot_coloured_by_parameter(data, experimental_parameter, variable_y, titl
    ax.legend(legend_handles, legend_labels, title=experimental_parameter, bbox_to_anchor=(1, 1))
    
    plt.show()
+
+
+def  barplot_one_var(df, var, title):
+    df_sorted = df.sort_values(by=var)
+
+    if title == 'Random Forest':
+        color = 'darkgreen'
+    else:
+        color = 'green'
+
+    # Barplot
+    plt.figure(figsize=(10, 3))  # Adjust figure size as needed
+    plt.bar(df_sorted['parameter_combination_string'], df_sorted[var], color= color)
+    plt.xlabel('Experimental Parameter Combination')
+    plt.ylabel(var)
+    plt.title(title)
+    plt.xticks(df_sorted['parameter_combination_string'], rotation=90)  #
+    plt.grid(axis='y', linestyle='--', alpha=0.7)
+    plt.show()
+
+    # Boxplot
+    plt.figure(figsize=(10, 3))  # Adjust figure size as needed
+    sns.boxplot(x=var, data=df_sorted, color='darkgreen')
+    plt.title(title)
+    plt.grid(axis='y', linestyle='--', alpha=0.7)
+    plt.show()
+
+    # stats
+    stats = df_sorted[var].describe()
+    return stats

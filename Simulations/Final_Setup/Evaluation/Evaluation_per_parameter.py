@@ -91,17 +91,35 @@ for parameter_combination in parameter_combinatons:
     print('Number of experiments:', num_exp)
 
 
+    ###### 1. Analysis: Selected Best Hyperparameters ######
     ###  Investigate 'hyperparameters_same'
     hyp_same = filtered_data['hyperparameters_same'].value_counts()
     hyp_different_rel = hyp_same[0]/(hyp_same[0]+hyp_same[1])
     print('hyp_different:', hyp_same[0], '\nhyp_same:', hyp_same[1], '\nrelative difference:', hyp_different_rel)
 
+    ### Investigate hyperparameters of RandomSearch: hyperparameters_RS
+    if model_name == 'rf':
+        hyperparameters_RS = ['min_samples_split', 'min_samples_leaf', 'max_features']
+    elif model_name == 'xgb':
+        hyperparameters_RS = ['learning_rate', 'max_depth', 'min_child_weight', 'subsample', 'colsample_bytree', 'gamma']
+    else:
+        print('Model not implemented')
 
-    # Descreptives: 'ks_statistic', 'p_value', 'intersection_area'
-    val_train_descriptives = descreptives(filtered_data, path_evaluation_plots)
-    val_train_descriptives_list_name, val_train_descriptives_list_values = csv_to_list(val_train_descriptives, title = 'val_train_descriptives_')
+    for hypRS in hyperparameters_RS:
+        num_unique_stratified, counts_stratified, num_unique_unstratified, counts_unstratifed = grouped_bar_plot_hyperparameters(filtered_data['stratified_best_params_' + hypRS], 
+                                                                                                                                 filtered_data['unstratified_best_params_' + hypRS],
+                                                                                                                                   hypRS, path_evaluation_plots )
+        
+    ###### 2. Final Performance ######
+    ''' variables: 'unstratified_results_train r2', 'unstratified_results_test r2',
+       'unstratified_results_train mse', 'unstratified_results_test mse',
+       'unstratified_results_train mae', 'unstratified_results_test mae',
+       'stratified_results_train r2', 'stratified_results_test r2',
+       'stratified_results_train mse', 'stratified_results_test mse',
+       'stratified_results_train mae', 'stratified_results_test mae','''
 
 
+    ###### 3. Performance within cross-validation ######
     ### Mean MSE from RandomSearch
     RandomSearch_Mean_Val_MSE_unstratified = abs(np.mean(filtered_data['cv_unstratified_iterations_mean_test_score'].explode().tolist()))
     RandomSearch_Mean_Val_SD_unstratified = np.sqrt(np.var(filtered_data['cv_unstratified_iterations_std_test_score'].explode().tolist()))
@@ -116,21 +134,19 @@ for parameter_combination in parameter_combinatons:
     print(f"Difference: {RandomSearch_Mean_Val_MSE_diff}")
 
 
+
+    ###### 4. Generalisation error ######
     ### Error Estimation
     error_estimator_result = error_estimator(filtered_data, path_evaluation_plots)
     error_estimator_list_name, error_estimator_values = csv_to_list(error_estimator_result, title = '')
 
 
-    ### Investigate hyperparameters of RandomSearch: hyperparameters_RS
-    if model_name == 'rf':
-        hyperparameters_RS = ['min_samples_split', 'min_samples_leaf', 'max_features']
-    elif model_name == 'xgb':
-        hyperparameters_RS = ['learning_rate', 'max_depth', 'min_child_weight', 'subsample', 'colsample_bytree', 'gamma']
-    else:
-        print('Model not implemented')
 
-    for hypRS in hyperparameters_RS:
-        num_unique_stratified, counts_stratified, num_unique_unstratified, counts_unstratifed = grouped_bar_plot_hyperparameters(filtered_data['stratified_best_params_' + hypRS], filtered_data['unstratified_best_params_' + hypRS], hypRS, path_evaluation_plots )
+
+    ##### 5.Descreptives in cross-validation ######
+    # Descreptives: 'ks_statistic', 'p_value', 'intersection_area'
+    val_train_descriptives = descreptives(filtered_data, path_evaluation_plots)
+    val_train_descriptives_list_name, val_train_descriptives_list_values = csv_to_list(val_train_descriptives, title = 'val_train_descriptives_')
     ###########################################################################################################
 
 
