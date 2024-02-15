@@ -120,14 +120,14 @@ for parameter_combination in parameter_combinatons:
 
 
     ###### 3. Performance within cross-validation ######
-    ### Mean MSE from RandomSearch
+    ### Mean MSE from RandomSearch 
     RandomSearch_Mean_Val_MSE_unstratified = abs(np.mean(filtered_data['cv_unstratified_iterations_mean_test_score'].explode().tolist()))
     RandomSearch_Mean_Val_SD_unstratified = np.sqrt(np.var(filtered_data['cv_unstratified_iterations_std_test_score'].explode().tolist()))
 
     RandomSearch_Mean_Val_MSE_stratified = abs(np.mean(filtered_data['cv_stratified_iterations_mean_test_score'].explode().tolist()))
     RandomSearch_Mean_Val_SD_stratified = np.sqrt(np.var(filtered_data['cv_stratified_iterations_std_test_score'].explode().tolist()))
 
-    RandomSearch_Mean_Val_MSE_diff = RandomSearch_Mean_Val_MSE_stratified - RandomSearch_Mean_Val_MSE_unstratified
+    RandomSearch_Mean_Val_MSE_diff = RandomSearch_Mean_Val_MSE_stratified - RandomSearch_Mean_Val_MSE_unstratified #TODO: take mean at the end and make difference per fold
 
     print(f"Unstratified: Mean MSE RandomSearch {RandomSearch_Mean_Val_MSE_unstratified} with sd of  {RandomSearch_Mean_Val_SD_unstratified}")
     print(f"Stratified: Mean MSE RandomSearch {RandomSearch_Mean_Val_MSE_stratified} with sd of {RandomSearch_Mean_Val_SD_stratified}")
