@@ -13,7 +13,7 @@ warnings.filterwarnings("ignore")
 ###########################################################################################################
 ###### Load json files ######
 # set file path to json files (change model) -> get names of json files
-model_name = 'rf' # @param: needs to be changed to the model name
+model_name = 'xgb' # @param: needs to be changed to the model name
 json_path = "/Users/nadja/Documents/University/Master_Statistik/WS2023_24/SLDS/slds_stratification/Simulations/Final_Setup/results/" + model_name + "/"
 json_files = os.listdir(json_path)
 
@@ -135,7 +135,7 @@ for parameter_combination in parameter_combinatons:
 
 
 
-    ###### 4. Generalisation error ######
+    ###### 4. Error of Estimator ######
     ### Error Estimation
     error_estimator_result = error_estimator(filtered_data, path_evaluation_plots)
     error_estimator_list_name, error_estimator_values = csv_to_list(error_estimator_result, title = '')

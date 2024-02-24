@@ -146,8 +146,9 @@ def error_estimator(data, path):
     error_estimate_unstratified_list = []
 
     for i in range(len(data)):
+        # Note: cv_stratified_iterations_mean_test_score is negagtive MSE, wherase cv_iteration_refit_test_mse is absolute MSE
         # generalisation error: stratified
-        error_estimate_stratified = np.array(data['cv_iteration_refit_test_mse'])[i] + np.array(data['cv_stratified_iterations_mean_test_score'])[i]
+        error_estimate_stratified = np.array(data['cv_iteration_refit_test_mse'])[i] + np.array(data['cv_stratified_iterations_mean_test_score'])[i] 
         error_estimate_stratified_list.append(error_estimate_stratified)
         # generalisation error: unstratified
         error_estimate_unstratified = np.array(data['cv_iteration_refit_test_mse'])[i] + np.array(data['cv_unstratified_iterations_mean_test_score'])[i]
@@ -257,12 +258,14 @@ def colours_scheme(df, experimental_parameter):
     return colours, set_colours, legend_labels
 
 
-def barplot_coloured_by_parameter(data, experimental_parameter, variable_y, title):
+def barplot_coloured_by_parameter(data, experimental_parameter, variable_y, title, variable_y_title):
    colors , set_colours, legend_labels =  colours_scheme(data.sort_values(variable_y), experimental_parameter)
    
    plt.figure(figsize=(8, 3))
-   ax = sns.barplot(x="parameter_combination_string", y=variable_y, data=data, order=data.sort_values(variable_y)["parameter_combination_string"], palette=colors)
-   ax.set_xticklabels(ax.get_xticklabels(), rotation=40, ha="right")
+   ax = sns.barplot(x='parameter_combination_string', y=variable_y, data=data, order=data.sort_values(variable_y)["parameter_combination_string"], palette=colors)
+   ax.set_ylabel(variable_y_title)
+   ax.set_xlabel('Experimental Parameter Combination')
+   ax.set_xticklabels(ax.get_xticklabels(), rotation=90, ha="right")
    ax.set_title(title)
    
    # Add legend
@@ -272,7 +275,7 @@ def barplot_coloured_by_parameter(data, experimental_parameter, variable_y, titl
    plt.show()
 
 
-def  barplot_one_var(df, var, title):
+def  barplot_one_var(df, var, title, y_label):
     df_sorted = df.sort_values(by=var)
 
     if title == 'Random Forest':
@@ -284,7 +287,7 @@ def  barplot_one_var(df, var, title):
     plt.figure(figsize=(10, 3))  # Adjust figure size as needed
     plt.bar(df_sorted['parameter_combination_string'], df_sorted[var], color= color)
     plt.xlabel('Experimental Parameter Combination')
-    plt.ylabel(var)
+    plt.ylabel(y_label)
     plt.title(title)
     plt.xticks(df_sorted['parameter_combination_string'], rotation=90)  #
     plt.grid(axis='y', linestyle='--', alpha=0.7)
@@ -293,6 +296,7 @@ def  barplot_one_var(df, var, title):
     # Boxplot
     plt.figure(figsize=(10, 3))  # Adjust figure size as needed
     sns.boxplot(x=var, data=df_sorted, color='darkgreen')
+    plt.xlabel(y_label)
     plt.title(title)
     plt.grid(axis='y', linestyle='--', alpha=0.7)
     plt.show()
