@@ -12,3 +12,6 @@ xgb1: parallel random search, 24 exp. params combos, 10 repetitions: 163.5287 mi
 xgb2: parallel repetitions, 24 exp. params combos, 10 repetitions: 151.4019 min     (**Local**)
 xgb3: parallel repetitions, 24 exp. params combos, 50 repetitions: 1049.7299 min    (**Local**)
 xgb4: parallel repetitions, 24 exp. params combos, 20 repetitions: 1422.6278 min (über Nacht ausgegangen, rep 16 dauert 1070 mins)
+xgb5: parallel repetitions, 24 exp. params combos, 20 repetitions: ?
+xgb6: parallel repetitions, 24 exp. params combos, 50 repetitions: 235.6938 min     (**Remote Computer**)
+xgb7: parallel repetitions, 24 exp. params combos, 40 repetitions: 164.136 min	    (**Remote Computer**)
