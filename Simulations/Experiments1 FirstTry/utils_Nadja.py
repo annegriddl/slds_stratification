@@ -90,22 +90,23 @@ def fold_visualizer(data, fold_idxs, seed_num, stratified=False):
         sns.histplot(data=data[train_ids],
                      kde=True,
                      stat="density",
-                     alpha=0.15,
+                     color = "#F09C1B",
+                     alpha=0.4,
                      label="Train Set",
                      bins=30,
-                     line_kws={"linewidth":1},
+                     line_kws={"linewidth":2},
                      ax=axs[fold_id%(len(fold_idxs)//2), fold_id//(len(fold_idxs)//2)])
         sns.histplot(data=data[val_ids],
                      kde=True,
                      stat="density", 
-                     color="darkorange",
-                     alpha=0.15,
+                     color="#1BACF0",
+                     alpha=0.4,
                      label="Validation Set",
                      bins=30,
-                     line_kws={"linewidth":1},
+                     line_kws={"linewidth":2},
                      ax=axs[fold_id%(len(fold_idxs)//2), fold_id//(len(fold_idxs)//2)])
         axs[fold_id%(len(fold_idxs)//2), fold_id//(len(fold_idxs)//2)].legend()
-        axs[fold_id%(len(fold_idxs)//2), fold_id//(len(fold_idxs)//2)].set_title("Split " + str(fold_id+1))
+        #axs[fold_id%(len(fold_idxs)//2), fold_id//(len(fold_idxs)//2)].set_title("Split " + str(fold_id+1))
     plt.show()
     
 

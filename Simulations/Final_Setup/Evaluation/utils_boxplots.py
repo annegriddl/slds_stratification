@@ -24,7 +24,10 @@ def flatten_data(data_all):
 
 
 
-def plot_eval(value_vars , value_name, data, model_vars_title, transformation = 'None', model = 'None'):
+
+
+
+def plot_eval(value_vars , value_name, data, model_vars_title, transformation = 'None', model = 'None', figsize = (6, 3)):
         '''
         value_vars: list of strings, names of columns to be plotted for stratified and unstratified ['error_estimator_mean_stratified', 'error_estimator_mean_unstratified']. 
                         Important: stratified and unstratified must be written in the end after '_' otherwise automatic labeling won't work and you'll get an error
@@ -54,30 +57,32 @@ def plot_eval(value_vars , value_name, data, model_vars_title, transformation = 
         difference_sd =  descriptives_table[descriptives_table['Stratification']==  'stratified']['SD'].values - descriptives_table[descriptives_table['Stratification']==  'unstratified']['SD'].values
         differences = pd.DataFrame({'Expermintel Hyperparameter Combinaiton': keys.get_level_values('param_model').unique(), 
                                                 'Difference Mean': difference_mean, 
-                                                'Difference SD': difference_sd})
+                                                'Difference SD': difference_sd,
+                                                'Stratified': descriptives_table[descriptives_table['Stratification']==  'stratified']['Mean'].values,
+                                                'Unstratified': descriptives_table[descriptives_table['Stratification']==  'unstratified']['Mean'].values})
         differences_table_all = pd.concat([differences_table_all, differences])
 
-
         ### Plot
-        plt.figure(figsize=(6, 3))  # Set the figure size to 10 inches by 6 inches
+        plt.figure(figsize= figsize)  # Set the figure size to 10 inches by 6 inches
         if model == 'None' and transformation != 'None':
-                plt.title('Ordered and grouped boxplot: ' + transformation )
+                plt.title('Transformation ' + transformation, fontsize=14 )
         elif transformation == 'None' and model != 'None':
-                plt.title('Ordered and grouped boxplot: ' + model)
+                plt.title('Model: ' + model, fontsize=14)
         elif transformation != 'None' and model != 'None':
-                plt.title('Ordered and grouped boxplot: ' + transformation + ' & ' + model.upper())
+                plt.title('Transformation: ' + transformation, fontsize=14)
         else:
-                plt.title('Ordered and grouped boxplot')
+                plt.title('Ordered and grouped boxplot', fontsize=14)
         sns.boxplot(x= data_long['param_model'], 
                         y= data_long[value_name], 
-                        hue= data_long['Stratification'],  palette={value_vars[0]: '#990073', 
-                        value_vars[1]: 'darkgreen'}, 
+                        hue= data_long['Stratification'],  palette={value_vars[0]: 'royalblue', 
+                        value_vars[1]: 'orangered'}, 
                         showfliers=False, # hide outliers
                         order = list(mean_intersection['param_model']))  #showmeans=True, meanline=True
-        plt.xticks(rotation=90)  # rotate x labels by 90 degrees
-        plt.ylabel(value_name)
-        plt.xlabel('Hyperparameter Combination: '+ model_vars_title)
-        legend = plt.legend()
+        plt.yticks(fontsize=12)  
+        plt.xticks(rotation=90, fontsize=12)  # rotate x labels by 90 degrees
+        plt.ylabel(value_name, fontsize=12)
+        plt.xlabel('Experimental Parameter Combination: '+ model_vars_title,  fontsize=12)
+        legend = plt.legend( fontsize=12)
         for i, label in enumerate(legend.get_texts()):
                 if label.get_text() == value_vars[0]:
                         label.set_text('Stratified')
