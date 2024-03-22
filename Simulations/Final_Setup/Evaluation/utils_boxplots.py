@@ -66,24 +66,24 @@ def plot_eval(value_vars , value_name, data, model_vars_title, transformation = 
         ### Plot
         plt.figure(figsize= figsize)  # Set the figure size to 10 inches by 6 inches
         if model == 'None' and transformation != 'None':
-                plt.title('Transformation ' + transformation, fontsize=15)
+                plt.title('Transformation ' + transformation, fontsize=16)
         elif transformation == 'None' and model != 'None':
-                plt.title('Model: ' + model, fontsize=15)
+                plt.title('Model: ' + model, fontsize=16)
         elif transformation != 'None' and model != 'None':
-                plt.title('Transformation: ' + transformation, fontsize=15)
-        else:
-                plt.title('Ordered and grouped boxplot', fontsize=15)
+                plt.title('Transformation: ' + transformation, fontsize=16)
+        #else:
+                #plt.title('Ordered and grouped boxplot', fontsize=15)
         sns.boxplot(x= data_long['param_model'], 
                         y= data_long[value_name], 
                         hue= data_long['Stratification'],  palette={value_vars[0]: 'royalblue', 
                         value_vars[1]: 'orangered'}, 
                         showfliers=False, # hide outliers
                         order = list(mean_intersection['param_model']))  #showmeans=True, meanline=True
-        plt.yticks(fontsize=14)  
-        plt.xticks(rotation=90, fontsize=14)  # rotate x labels by 90 degrees
-        plt.ylabel(value_name, fontsize=14)
-        plt.xlabel('Experimental Parameter Combination: '+ model_vars_title,  fontsize=14)
-        legend = plt.legend( fontsize=14)
+        plt.yticks(fontsize=16)  
+        plt.xticks(rotation=90, fontsize=16)  # rotate x labels by 90 degrees
+        plt.ylabel(value_name, fontsize=16)
+        plt.xlabel('Experimental Parameter Combination: '+ model_vars_title,  fontsize=16)
+        legend = plt.legend( fontsize=16)
         for i, label in enumerate(legend.get_texts()):
                 if label.get_text() == value_vars[0]:
                         label.set_text('Stratified')
