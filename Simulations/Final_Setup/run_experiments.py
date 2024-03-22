@@ -1,22 +1,60 @@
+"""
+This script runs the experiments for the final setup. 
+Important to either have files seeds_final_rf.json and seeds_final_xgb.json in folder seeds/. Otherwise run create_seeds.py first.
+Important to specify in bash command line: 
+- Specify whether you want to perform parallel repetitions or parallel random search by setting the variable parallel_repetitions to True or False.
+  We recommend to set parallel_repetitions to True, as it is usually faster.
+- Choose the model by setting the variable model_name to 'rf' for Random Forest Regressor or 'xgb' for XGBoost Regressor.
+- Choose the number of repetitions by setting the variable n_repetitions.
+"""
+
+import sys
+try:
+    parallel_repetitions = sys.argv[1].lower() == 'true'
+except:
+    parallel_repetitions = True
+    print("No argument given for parallel_repetitions. Using default value True")
+
+try: 
+    model_name = sys.argv[2]
+except:
+    model_name = 'xgb'
+    print("No argument given for model_name. Using default value 'xgb'")
+
+try:
+    n_repetitions = int(sys.argv[3])
+except:
+    n_repetitions = 10
+    print("No argument given for n_repetitions. Using default value 10")
+    
+print("Value of parallel_repetitions:", parallel_repetitions)
+print("Model:", model_name)
+print("Number of repetitions:", n_repetitions)
+
 import numpy as np
 import warnings
 warnings.filterwarnings('ignore')
 import os
 import time
 
-parallel_repetitions = False
-if parallel_repetitions:
+# Import utils for parallel repetitions or parallel random search
+if parallel_repetitions == True:
     from utils_parallel import ModelOptimizer, generate_hyperparameter_combinations_dict
+    print("Performing parallel repetitions")
 else:
     from utils_final import ModelOptimizer, generate_hyperparameter_combinations_dict
+    print("Performing parallel random search")
 
+# Check if results folder already exists, if not create it
+if not os.path.exists(os.path.dirname(os.path.abspath(__file__)) + "/results/"):
+    os.makedirs(os.path.dirname(os.path.abspath(__file__)) + "/results/")
+    print("Folder for results created.")
 
-####### 1. Choose model ################################
-#### TODO: Choose 'rf' for Random Forest Regressor
-####       Or 'xgb' for XGBoost Regressor
-model_name = 'xgb'
-#### END ##############################################
+if not os.path.exists(os.path.dirname(os.path.abspath(__file__)) + "/results/" + model_name + "/"):
+    os.makedirs(os.path.dirname(os.path.abspath(__file__)) + "/results/" + model_name + "/")
+    print(f"Folder for results of {model_name} created.")
 
+# Specify name of output files
 run = len(os.listdir(os.path.dirname(os.path.abspath(__file__)) + "/results/" + model_name + "/")) + 1
 print(run)
 
@@ -25,7 +63,7 @@ seed_file = f"seeds_final_{model_name}.json"
 
 
 ####### 2. Initialize experimental parameters #######################
-#### TODO: Set experimental parameters 
+####  Set experimental parameters 
 # Here: fixed and not varied over experiments
 
 script_dir = os.path.dirname(os.path.abspath(__file__))
@@ -37,7 +75,6 @@ n_folds = 5
 n_iter= 200
 if parallel_repetitions: n_jobs= 1
 else: n_jobs= -1
-n_repetitions = 20
 n_test= 100000
 scoring= 'neg_mean_squared_error'
 
@@ -49,7 +86,7 @@ hyperparameter_options = {'n_train': [200, 1000],
 #### END ##############################################
 
 
-######### 3. Run experiemnts (nothing to change here) ##############################
+######### 3. Run experiemnts  ##############################
 # Generate grid for experimental parameter combinations over that we iterate later
 all_combinations = generate_hyperparameter_combinations_dict(hyperparameter_options)
 print('\n-----------------------------------')
@@ -102,6 +139,7 @@ if __name__ == '__main__':
                                         model_name=model_name,
                                         path_to_seeds=path_to_seeds, 
                                         checks=False)
+        # Train model (utils_final.py for parallel random search; utils_parallel.py for parallel repetitions)
         modelOptimizer.optimize(params_experiment=params_experiment)
         print('End of hyperparameter combination', tracker)
         tracker += 1

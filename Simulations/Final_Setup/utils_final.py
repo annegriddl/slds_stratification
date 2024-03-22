@@ -1,16 +1,20 @@
+"""
+This script uses parallelized Random Search for the class ModelOptimizer that performs the training process for a chosen model (random forest or XGBoost).
+It uses RandomizedSearchCV for training, and performs n repetitions (specified in ren_experiments.py) for each experimental parameter combination automatically.
+Each iteration of Random Search is furthermore refit on the train data to evaluate each hyperparameter combination on the test set.
+ModelOptimizer is run in run_experiments.py, then saves all result as a JSON file.
+"""
+
 # File for helper functions and classes
 
-import sklearn
 import pandas as pd
 import numpy as np
 from sklearn.datasets import make_friedman1
 import seaborn as sns
 import matplotlib.pyplot as plt
 from sklearn.metrics import mean_squared_error, mean_absolute_error
-from sklearn.utils import shuffle
 import json
 from sklearn.model_selection import StratifiedKFold, KFold, RandomizedSearchCV 
-import random
 from sklearn.ensemble import RandomForestRegressor
 import time
 import xgboost as xgb
@@ -48,9 +52,10 @@ class ModelOptimizer:
     '''
     Class to optimize the model.
     Inputs:
-        model: the model to be optimized
-        hyp_param_grid: the parameter grid to be used for the optimization
-        random_state: the random state to be used
+        hyp_param_grid: the hyperparameter grid for models
+        model_name: the model name (rf or xgb)
+        path_to_seeds: the path to the available seeds file
+        checks: whether to print checks or not
     '''
     def __init__(self, hyp_param_grid, model_name, path_to_seeds, checks):
         self.hyp_param_grid = hyp_param_grid
@@ -70,17 +75,11 @@ class ModelOptimizer:
         '''
         Function to optimize the model.
         Inputs:
-            X_train, X_test, y_train, y_test: the train and test data
-            cv: the number of folds
-            n_groups: the number of groups (based on quantiles)
-            scoring: the scoring to be used
-            n_jobs: the number of jobs to be used
-            n_iter: the number of iterations
-            ROOT_PATH: the root path to be used (results are stored in JSON file)
-            transformation: the transformation of target to be applied
+            params_experiment: the experimental parameters
+            data: the data to be used (default: friedman)
+            random_states: the random states to be used (default: None, then seeds are loaded from seed file)
         Outputs:
-            unstratified_results: the results of the unstratified cross-validation
-            stratified_results: the results of the stratified cross-validation
+            None
         Important: The results are stored in a JSON file. Initialize a new file with an empty list as content.
         '''
         start_time = time.time()                                             
@@ -222,7 +221,7 @@ class ModelOptimizer:
         Function to save the results to a JSON file.
         Inputs:
             results: the results to be saved
-            json_file: the JSON file to be used
+            path: the path where JSON file should be saved
         Outputs:
             None (it saves the results to the JSON file)
         '''
@@ -259,15 +258,25 @@ class ModelOptimizer:
         '''
         Function to perform the optimization.
         Inputs:
-            the same as in optimize function
-            stratified: whether to use stratified k-fold or not
+            X_train, y_train, X_test, y_test: the train and test data
+            cv: the number of folds
+            n_groups: the number of groups
+            scoring: the scoring metric
+            n_jobs: the number of jobs (parallel Random Search)
+            n_iter: the number of iterations
+            random_state: the random state
+            stratified: whether stratified or not
         Outputs:
-            evaluation_results: the evaluation results in a dictionary
-            best_params: the best parameters in a dictionary
+            evaluation_results: the evaluation results
+            cv_results: information about the cross-validation results in each iteration
+            best_params: the best parameters per repetition
+            running_time: the running time per repetition
+            results_descriptives_folds: the results of the analysis of the folds
+            iteration_refit_test: the evaluation results on the test set with all hyperparameter combinations of Random Search
         '''
         # Create cross-validation splits
         if stratified:
-            cv_splits = self.create_cont_folds(y=y_train, 
+            cv_splits = self.create_strat_folds(y=y_train, 
                                                n_folds=cv, 
                                                n_groups=n_groups, 
                                                seed=random_state) 
@@ -327,6 +336,15 @@ class ModelOptimizer:
 
 
     def iteration_results(self, RandomSearchObject, X_train, y_train, X_test, y_test, results_cv):
+        """
+        Function to evaluate the model on the test set with all hyperparameter combinations of Random Search.
+        Inputs:
+            RandomSearchObject: the trained RandomizedSearchCV object
+            X_train, X_test, y_train, y_test: the train and test data
+            results_cv: the cross-validation results which have information about hyperparamter combinations used
+        Outputs:
+            dictionary with the evaluation results (R2, MSE, MAE) for each hyperparameter combination
+        """
         mse_list = []
         mae_list = []
         r2_list = []
@@ -346,7 +364,7 @@ class ModelOptimizer:
         return {'r2': r2_list, 'mse': mse_list, 'mae': mae_list}
 
 
-    def create_cont_folds(self, 
+    def create_strat_folds(self, 
                           y, 
                           n_folds, 
                           n_groups, 
@@ -364,7 +382,7 @@ class ModelOptimizer:
         # create StratifiedKFold like for classification
         skf = StratifiedKFold(n_splits=n_folds, shuffle=True, random_state=seed)
         
-        # create groups in y with pd.qcut: quantile-based discretization 
+        # create groups in y with pd.qcut: group-based discretization 
         y_grouped = pd.qcut(y, math.ceil(n_groups), labels=False)
 
         # create fold numbers    
@@ -430,6 +448,22 @@ class ModelOptimizer:
 
     
     def generate_data(self, n_samples_train, n_samples_test, noise, n_features, random_state_training, transformation):
+        """
+        Function to generate the friedman 1 dataset.
+        Inputs:
+            n_samples_train (int): The number of samples to generate for the training set.
+            n_samples_test (int): The number of samples to generate for the test set.
+            noise (float): The standard deviation of the Gaussian noise added to the output.
+            n_features (int): The number of features of the dataset.
+            random_state_training (int): The random seed for generating the training set.
+            transformation (str): The type of transformation to apply to the target variable.
+
+        Returns:
+            X_train (array-like, shape (n_samples_train, n_features)): The input features for the training set.
+            y_train (array-like, shape (n_samples_train,)): The target variable for the training set.
+            X_test (array-like, shape (n_samples_test, n_features)): The input features for the test set.
+            y_test (array-like, shape (n_samples_test,)): The target variable for the test set.
+        """
         X_test, y_test = make_friedman1(n_samples=n_samples_test, n_features=n_features, noise=noise, random_state= self.global_seed_testing_data)
         X_train, y_train = make_friedman1(n_samples=n_samples_train, n_features=n_features, noise=noise, random_state=random_state_training)
         min_y_test = min(y_test)
@@ -476,6 +510,8 @@ class ModelOptimizer:
             data: the target variable
             fold_idxs: the number of folds
             seed_num: the seed numbers as a list
+            stratified: whether stratified k-fold or not
+            plot: whether to plot the folds or not
         Outputs:
             results: a dictionary containing the outputs of perform_ks_test() and plot_intersection()
         '''
@@ -533,12 +569,27 @@ class ModelOptimizer:
     
 
     def perform_ks_test(slef, data1, data2):
+        """
+        Function to perform the Kolmogorov-Smirnov test.
+        Inputs:
+            data1, data2: the two distributions to compare
+        Outputs:
+            statistic: the test statistic
+            p_value: the p-value
+        """
         # Perform the Kolmogorov-Smirnov test
         statistic, p_value = ks_2samp(data1, data2)
         return statistic, p_value
     
 
     def plot_intersection(self, data1, data2):
+        """
+        Function to calculate the intersection area between two distributions.
+        Inputs:
+            data1, data2: the two distributions to compare
+        Outputs:
+            area: the area of the intersection between the two distributions
+        """
         data_dict = {'data1': data1, 'data2': data2}
         min_data = min(min(data) for data in data_dict.values())
         max_data = max(max(data) for data in data_dict.values())
