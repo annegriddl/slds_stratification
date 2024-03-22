@@ -1,8 +1,8 @@
 # Stratified Sampling for Regression
-Author: Nadja Sauter and Anne Gritto         
+*Author: Nadja Sauter and Anne Gritto         
 Supervisor: Prof. Dr. Matthias Feurer and Dr. Giuseppe Casalicchio     
 Seminar: Statistical Learning and Data Science    
-Date: 22.03.2024     
+Date: 22.03.2024* 
 
 
 Stratification is typically applied in classification to sample proportionally to the respective
@@ -25,13 +25,23 @@ approach within cross-validation for hyperparameter tuning and model selection.
 
 ## Project Organization
 
-Hello and welcome to our research seminar. The following is supposed to guide you through our repository and explain how to reproduce the results of our experiments. Make sure to install all packages required in an environment with a Python version 3.12. To run the experiments, seed lists first need to be generated, if they do not already exists using the file ``create_seeds.py``. 
+Hello and welcome to our research seminar!  
+  
+The following is supposed to guide you through our repository and explain how to reproduce the results of our experiments. Make sure to install all packages required in an environment with a Python version 3.12. To run the experiments, seed lists first need to be generated, if they do not already exists using the file ``create_seeds.py``. 
 
-Then, the python script ``run_experiments.py`` can be executed which trains a model using both, unstratified and stratified cross-validation for 10 repetitions (default) and all 24 experimental parameter combinations. Make sure to specify the necessary parameters in the command line:
+Then, the python script ``run_experiments.py`` can be executed which trains the defined models using both, unstratified and stratified cross-validation for 10 repetitions (default) and all 24 experimental parameter combinations. Make sure to specify the necessary parameters in the command line:
 
 1. ``sys.argv[1]``: Whether to use parallelization      - True or False (default: True).
 2. ``sys.argv[2]``: Model - Random Forest or XGBoost    - rf / xgb     (default: xgb)
 3. ``sys.argv[3]``: Number of repetitions (integer, default: 10)
+
+For example:
+```bash
+python3 run_expeirments..py
+```
+
+A detailed explanation of our experiments and results can be found in our report.
+
 
 ```
     ├── attic              <- Old experiments that are not relevant
