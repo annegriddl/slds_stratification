@@ -37,7 +37,7 @@ Then, the python script ``run_experiments.py`` can be executed which trains the 
 
 For example:
 ```bash
-python3 run_expeirments..py
+python run_experiments.py True xgb 20
 ```
 
 A detailed explanation of our experiments and results can be found in our report.

@@ -101,3 +101,127 @@ def plot_eval(value_vars , value_name, data, model_vars_title, transformation = 
         differences.sort_values(by='Difference Mean', ascending=False, inplace=True)
         print(differences)
         return differences_table_all
+
+
+# for summary_evualation
+def colours_scheme(df, experimental_parameter):
+    colours = []
+    for value in df[experimental_parameter]:
+        if experimental_parameter == 'param_transformation':
+            # blue values
+            if value == 'log':
+                col = '#33E6FF'
+            elif value == 'sqrt':
+                col = '#0A7685'
+            elif value == 'identity':
+                col = '#2F52DF'
+            else:
+                raise ValueError('Error: No valid transformation')
+            colours.append(col)
+            set_colours = [ '#33E6FF', '#0A7685', '#2F52DF']
+            legend_labels = ['log', 'sqrt', 'identity']
+        elif experimental_parameter == 'param_n_train':
+            # green values
+            if value == 200:
+                col = '#2FDF54'
+            elif value == 1000:    
+                col = '#16892E'
+            else:
+                raise ValueError('Error: No valid n_train')
+            colours.append(col)
+            set_colours = ['#2FDF54', '#16892E']
+            legend_labels = ['200', '1000']
+        elif experimental_parameter == 'param_group_size':
+            # lila
+            if value == 5:
+                col = '#6D1689'
+            elif value == 10:
+                col = '#A21FCC'
+            else:
+                raise ValueError('Error: No valid group_size')
+            colours.append(col)
+            set_colours = ['#6D1689', '#A21FCC']
+            legend_labels = ['5', '10']
+        elif experimental_parameter == 'param_noise':
+            # orange
+            if value == 0:
+                col = '#E77A0D'
+            elif value == 3:
+                col = '#EAA560'
+            else:
+                raise ValueError('Error: No valid group_size')
+            colours.append(col)
+            set_colours = ['#E77A0D', '#EAA560']
+            legend_labels = ['0', '3']
+        else: #error
+            raise ValueError('Error: No valid experimental parameter')
+    return colours, set_colours, legend_labels
+
+
+def barplot_coloured_by_parameter(data, experimental_parameter, variable_y, title, variable_y_title):
+   colors , set_colours, legend_labels =  colours_scheme(data.sort_values(variable_y), experimental_parameter)
+   
+   plt.figure(figsize=(8, 3))
+   ax = sns.barplot(x='parameter_combination_string', y=variable_y, data=data, order=data.sort_values(variable_y)["parameter_combination_string"], palette=colors)
+   ax.set_ylabel(variable_y_title)
+   ax.set_xlabel('Experimental Parameter Combination')
+   ax.set_xticklabels(ax.get_xticklabels(), rotation=90, ha="right")
+   ax.set_title(title)
+   
+   # Add legend
+   legend_handles = [plt.Rectangle((0, 0), 1, 1, color=color) for color in  set_colours]
+   ax.legend(legend_handles, legend_labels, title=experimental_parameter, bbox_to_anchor=(1, 1))
+   
+   plt.show()
+
+
+def  barplot_one_var(df, var, title, y_label):
+    df_sorted = df.sort_values(by=var)
+
+    if title == 'Random Forest':
+        color = 'darkgreen'
+    else:
+        color = 'green'
+
+    # Barplot
+    plt.figure(figsize=(10, 3))  # Adjust figure size as needed
+    plt.bar(df_sorted['parameter_combination_string'], df_sorted[var], color= color)
+    plt.xlabel('Experimental Parameter Combination')
+    plt.ylabel(y_label)
+    plt.title(title)
+    plt.xticks(df_sorted['parameter_combination_string'], rotation=90)  #
+    plt.grid(axis='y', linestyle='--', alpha=0.7)
+    plt.show()
+
+    # Boxplot
+    plt.figure(figsize=(10, 3))  # Adjust figure size as needed
+    sns.boxplot(x=var, data=df_sorted, color='darkgreen')
+    plt.xlabel(y_label)
+    plt.title(title)
+    plt.grid(axis='y', linestyle='--', alpha=0.7)
+    plt.show()
+
+    # stats
+    stats = df_sorted[var].describe()
+    return stats
+
+
+def generate_hyperparameter_combinations_dict(hyperparameter_options):
+    """
+    Generate all possible combinations of hyperparameters.
+
+    Parameters:
+    hyperparameter_options (dict): Dictionary where keys are hyperparameter names and values are lists of options.
+
+    Returns:
+    List of dictionaries, where each dictionary represents a combination of hyperparameters.
+    """
+    hyperparameter_names = hyperparameter_options.keys()
+    all_hyperparameter_combinations = list(itertools.product(*hyperparameter_options.values()))
+
+    all_hyperparameter_dicts = []
+    for combination in all_hyperparameter_combinations:
+        hyperparameter_dict = dict(zip(hyperparameter_names, combination))
+        all_hyperparameter_dicts.append(hyperparameter_dict)
+
+    return all_hyperparameter_dicts
