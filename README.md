@@ -58,15 +58,19 @@ A detailed explanation of our experiments and results can be found in our report
     │  
     ├── .gitattributes     <- To track results saved in JSON format with Git LFS
     │
-    ├── .gitignore          
+    ├── .gitignore     
     │
-    ├── README.md   
+    ├── create_seeds.py    <- File to create two JSON files (for RF and XGB) with 100,000 seeds
+    │                         Make sure to run this file if the seed lists in seeds/ do not exist      
+    │
+    ├── environment.yml    <- YAML file for setting up environment
+    │
+    ├── README.md  
+    │
+    ├── report_slds.pdf    <- Report with explanation of experiments and results 
     │
     ├── requirements.txt   <- The requirements file for reproducing the analysis environment,
     │                         generated with `pip freeze > requirements.txt    
-    │
-    ├── create_seeds.py    <- File to create two JSON files (for RF and XGB) with 100,000 seeds
-    │                         Make sure to run this file if the seed lists in seeds/ do not exist
     │
     ├── run_experiments.py <- Main file to run experiments. 
     │                         Make sure to specify the parameters (see text above) when running the 
