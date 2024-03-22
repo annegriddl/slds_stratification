@@ -25,7 +25,13 @@ approach within cross-validation for hyperparameter tuning and model selection.
 
 ## Project Organization
 
-Hello and welcome to our research seminar. The following is supposed to guide you through our repository and explain how to reproduce the results of our experiments. The python script ``Simulations/Final_Setup/run_experiments.py`` can be run either in the Terminal with *python run_experiments.py* or in VS Code by clicking on the Play button after the environment had been set up (Python version 3.12) and the packages in ``requirements.txt`` had been installed. Two new JSON files will then be created in ``Simulations/Final_Setup``, one contains a list with all seeds that are still available, the other one stores the results. Once created, everything will be saved in those files. 
+Hello and welcome to our research seminar. The following is supposed to guide you through our repository and explain how to reproduce the results of our experiments. Make sure to install all packages required in an environment with a Python version 3.12. To run the experiments, seed lists first need to be generated, if they do not already exists using the file ``create_seeds.py``. 
+
+Then, the python script ``run_experiments.py`` can be executed which trains a model using both, unstratified and stratified cross-validation for 10 repetitions (default) and all 24 experimental parameter combinations. Make sure to specify the necessary parameters in the command line:
+
+1. ``sys.argv[1]``: Whether to use parallelization      - True or False (default: True).
+2. ``sys.argv[2]``: Model - Random Forest or XGBoost    - rf / xgb     (default: xgb)
+3. ``sys.argv[3]``: Number of repetitions (integer, default: 10)
 
 
     ├── attic              <- Old experiments that are not relevant
@@ -45,21 +51,19 @@ Hello and welcome to our research seminar. The following is supposed to guide yo
     │
     ├── README.md   
     │
-    ├── requirements.txt   <- The requirements file for reproducing the analysis environment, e.g.
+    ├── requirements.txt   <- The requirements file for reproducing the analysis environment,
     │                         generated with `pip freeze > requirements.txt    
     │
     ├── create_seeds.py    <- File to create two JSON files (for RF and XGB) with 100,000 seeds
     │                         Make sure to run this file if the seed lists in ``seeds/`` do not exist
     │
     ├── run_experiments.py <- Main file to run experiments. 
-    │                         Make sure to specify the following parameters when running the scipt in the command line:
-    │                            - sys.argv[1]: Whether to use parallelization - True / False (default: True)
-    │                            - sys.argv[2]: Model name                     - rf / xgb     (default: xgb)
-    │                            - sys.argv[3]: Number of repetitions (int)
+    │                         Make sure to specify the parameters (see text above) when running the 
+    │                         script in the command line.
+    │                         
+    ├── utils_final.py     <- Contains class to optimize the models with parallel Random Search
     │
-    ├── utils_final.py     <- Contains class to optimize the models with **parallel Random Search**
-    │
-    └── utils_parallel.py  <- Contains class to optimize the models with **parallel repetitions**
+    └── utils_parallel.py  <- Contains class to optimize the models with parallel repetitions
 
 ---
 
