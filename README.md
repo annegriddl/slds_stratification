@@ -33,7 +33,7 @@ Then, the python script ``run_experiments.py`` can be executed which trains a mo
 2. ``sys.argv[2]``: Model - Random Forest or XGBoost    - rf / xgb     (default: xgb)
 3. ``sys.argv[3]``: Number of repetitions (integer, default: 10)
 
-
+```
     ├── attic              <- Old experiments that are not relevant
     │
     ├── evaluation         <- Evaluation of final results
@@ -55,7 +55,7 @@ Then, the python script ``run_experiments.py`` can be executed which trains a mo
     │                         generated with `pip freeze > requirements.txt    
     │
     ├── create_seeds.py    <- File to create two JSON files (for RF and XGB) with 100,000 seeds
-    │                         Make sure to run this file if the seed lists in ``seeds/`` do not exist
+    │                         Make sure to run this file if the seed lists in seeds/ do not exist
     │
     ├── run_experiments.py <- Main file to run experiments. 
     │                         Make sure to specify the parameters (see text above) when running the 
@@ -64,7 +64,7 @@ Then, the python script ``run_experiments.py`` can be executed which trains a mo
     ├── utils_final.py     <- Contains class to optimize the models with parallel Random Search
     │
     └── utils_parallel.py  <- Contains class to optimize the models with parallel repetitions
-
+```
 ---
 
 
