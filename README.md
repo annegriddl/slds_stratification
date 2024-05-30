@@ -1,9 +1,4 @@
 # Stratified Sampling for Regression
-*Author: Nadja Sauter and Anne Gritto         
-Supervisor: Prof. Dr. Matthias Feurer and Dr. Giuseppe Casalicchio     
-Seminar: Statistical Learning and Data Science    
-Date: 22.03.2024* 
-
 
 Stratification is typically applied in classification to sample proportionally to the respective
 class sizes in order to preserve the original class proportion in resulting subsets. In this way,
@@ -20,7 +15,6 @@ performance of the models in our setting. However, the error of the Mean Squared
 estimation. The findings suggest that stratification could be particularly beneficial for
 smaller datasets. We think that stratification should be considered as an optional sampling
 approach within cross-validation for hyperparameter tuning and model selection.
-
 
 
 ## Project Organization
