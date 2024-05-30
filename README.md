@@ -41,6 +41,7 @@ python run_experiments.py True xgb 20
 ```
 
 A detailed explanation of our experiments and results can be found in our report.
+The results of the conducted simulations are stored on the [LRZ](https://syncandshare.lrz.de/getlink/fi9NpAtAbwiJzAtvJKUv3T/) platform.
 
 
 ## Contents of Repository
@@ -48,10 +49,6 @@ A detailed explanation of our experiments and results can be found in our report
     ├── attic              <- Old experiments that are not relevant
     │
     ├── evaluation         <- Evaluation of final results
-    │
-    ├── results            <- Results of runs for Random Forest and XGBoost used for evaluation
-    │   └── rf
-    │   └── xgb
     │
     ├── seeds              <- Seed lists for Random Forest and XGBoost to replicate results and 
     │                         to make sure to not use same seeds during experiments
