@@ -36,8 +36,6 @@ The results of the conducted simulations are stored on the [LRZ](https://syncand
 
 ## Contents of Repository
 ```
-    ├── attic              <- Old experiments that are not relevant
-    │
     ├── evaluation         <- Evaluation of final results
     │
     ├── seeds              <- Seed lists for Random Forest and XGBoost to replicate results and 
