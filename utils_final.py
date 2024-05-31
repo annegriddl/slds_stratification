@@ -137,7 +137,7 @@ class ModelOptimizer:
         }
 
         #### Run Experiments for each repetition independently 
-        for repetition in range(n_repetitions): #@Anne: Parallisierung hier whr einfügen
+        for repetition in range(n_repetitions): 
             start_time_repetition = time.time()
             
             if data == 'friedman':
