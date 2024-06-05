@@ -1,6 +1,7 @@
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
+import itertools
 
 def flatten_data(data_all):
     # Flatten the nested dictionaries
@@ -35,7 +36,7 @@ def plot_eval(value_vars , value_name, data, model_vars_title, transformation = 
         value_name: string, name of the value variable to be plotted. Basically name of value_vars that is plotted on the y-axis
         differences_table_all: pd.DataFrame, table of differences in mean and sd of stratified and unstratified , output of function with plots
         '''
-        plots_report_path = '/Users/nadja/Documents/University/Master_Statistik/WS2023_24/SLDS/slds_stratification/Simulations/Final_Setup/Evaluation/plots/report_plots'
+        plots_report_path = './plots/report_plots'
         differences_table_all = pd.DataFrame()
         # make data long
         data_long = data.melt(id_vars=['param_model'], 

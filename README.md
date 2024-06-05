@@ -1,26 +1,16 @@
-# Stratified Sampling for Regression
-*Author: Nadja Sauter and Anne Gritto         
-Supervisor: Prof. Dr. Matthias Feurer and Dr. Giuseppe Casalicchio     
-Seminar: Statistical Learning and Data Science    
-Date: 22.03.2024* 
+# Towards understanding the usefulness of stratified resampling in regression task
 
-
-Stratification is typically applied in classification to sample proportionally to the respective
-class sizes in order to preserve the original class proportion in resulting subsets. In this way,
-stratification can address issues arising from imbalanced and small datasets, overall leading
-to a better generalization performance of machine learning models. In our experiemnts we
-investigate the application of stratification in regression, focusing on its potential to improve
-hyperparameter optimization and the final performance of regression models. We apply a
-group-sized discretization of the target variable to create bins from which one can sample
-proportionally during the cross-validation of Random Search. The results indicate that
-our stratification approache compared to naive random sampling increases the overlap of
-the training and validation data within cross-validation, but does not improve the final
-performance of the models in our setting. However, the error of the Mean Squared Error
-(MSE) estimator and its variance are reduced through stratification, indicating a better
-estimation. The findings suggest that stratification could be particularly beneficial for
-smaller datasets. We think that stratification should be considered as an optional sampling
-approach within cross-validation for hyperparameter tuning and model selection.
-
+Stratification is commonly used in classification to sample proportionally to the respective
+class sizes, preserving the original class distribution in subsets. This approach addresses
+issues with imbalanced and small datasets, improving the estimation of the generalization
+performance of machine learning algorithms. This paper explores the use of stratification
+in regression, examining its impact on the estimation of the generalization performance
+and investigating its potential to enhance the hyperparameter optimization. We show that,
+compared to naive random sampling in cross-validation, our stratification approach better
+maintains the target distribution between training and validation data. Our stratification
+approach provides more reliable estimates of the generalization performance, as measured
+by the Mean Squared Error (MSE) of the performance estimate. Although this did not help
+in finding better hyperparameter configurations, it also did not cause any harm.
 
 
 ## Project Organization
@@ -41,17 +31,12 @@ python run_experiments.py True xgb 20
 ```
 
 A detailed explanation of our experiments and results can be found in our report.
+The results of the conducted simulations are stored on the [LRZ](https://syncandshare.lrz.de/getlink/fi9NpAtAbwiJzAtvJKUv3T/) platform.
 
 
 ## Contents of Repository
 ```
-    ├── attic              <- Old experiments that are not relevant
-    │
     ├── evaluation         <- Evaluation of final results
-    │
-    ├── results            <- Results of runs for Random Forest and XGBoost used for evaluation
-    │   └── rf
-    │   └── xgb
     │
     ├── seeds              <- Seed lists for Random Forest and XGBoost to replicate results and 
     │                         to make sure to not use same seeds during experiments
