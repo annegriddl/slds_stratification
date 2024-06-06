@@ -1,4 +1,4 @@
-# Towards understanding the usefulness of stratified resampling in regression task
+# Towards understanding the usefulness of stratified resampling in regression tasks
 
 Stratification is commonly used in classification to sample proportionally to the respective
 class sizes, preserving the original class distribution in subsets. This approach addresses
@@ -45,14 +45,16 @@ The results of the conducted simulations are stored on the [LRZ](https://syncand
     │
     ├── .gitignore     
     │
+    ├── LICENSE
+    │
+    ├── README.md          
+    │   
     ├── create_seeds.py    <- File to create two JSON files (for RF and XGB) with 100,000 seeds
     │                         Make sure to run this file if the seed lists in seeds/ do not exist      
     │
     ├── environment.yml    <- YAML file for setting up environment
     │
-    ├── README.md  
-    │
-    ├── report_slds.pdf    <- Report with explanation of experiments and results 
+    ├── report.pdf         <- Report with explanation of experiments and results 
     │
     ├── requirements.txt   <- The requirements file for reproducing the analysis environment,
     │                         generated with `pip freeze > requirements.txt    
